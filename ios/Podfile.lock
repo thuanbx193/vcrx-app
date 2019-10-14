@@ -93,12 +93,23 @@ PODS:
   - GoogleUtilities/UserDefaults (5.4.1):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
+  - libwebp (1.0.3):
+    - libwebp/demux (= 1.0.3)
+    - libwebp/mux (= 1.0.3)
+    - libwebp/webp (= 1.0.3)
+  - libwebp/demux (1.0.3):
+    - libwebp/webp
+  - libwebp/mux (1.0.3):
+    - libwebp/demux
+  - libwebp/webp (1.0.3)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - ObjectiveDropboxOfficial (3.9.4)
+  - RCTCallDetection (1.8.2):
+    - React
   - RCTRequired (0.61.1)
   - RCTTypeSafety (0.61.1):
     - FBLazyVector (= 0.61.1)
@@ -266,9 +277,22 @@ PODS:
     - React
   - react-native-calendar-events (1.7.3):
     - React
+  - react-native-fetch-blob (0.10.6):
+    - React-Core
   - react-native-keep-awake (4.0.0):
     - React
   - react-native-netinfo (4.1.5):
+    - React
+  - react-native-orientation (3.1.3):
+    - React
+  - react-native-pdf (5.1.6):
+    - React
+  - react-native-version-check (3.3.0):
+    - React
+  - react-native-video (5.0.2):
+    - React
+    - react-native-video/Video (= 5.0.2)
+  - react-native-video/Video (5.0.2):
     - React
   - react-native-webrtc (1.75.0):
     - React
@@ -328,8 +352,18 @@ PODS:
     - React-jsi (= 0.61.1)
     - ReactCommon/jscallinvoker (= 0.61.1)
     - ReactCommon/turbomodule/core (= 0.61.1)
+  - ReactNativePermissions (1.2.0):
+    - React
   - RNCAsyncStorage (1.3.4):
     - React
+  - RNDeviceInfo (4.0.1):
+    - React
+  - RNExitApp (1.1.0):
+    - React
+  - RNFastImage (7.0.2):
+    - React
+    - SDWebImage (~> 5.0)
+    - SDWebImageWebPCoder (~> 0.2.3)
   - RNGoogleSignin (2.0.0):
     - GoogleSignIn (~> 4.4.0)
     - React
@@ -340,8 +374,16 @@ PODS:
     - React
   - RNSVG (9.7.1):
     - React
+  - RNVectorIcons (6.6.0):
+    - React
   - RNWatch (0.2.0):
     - React
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
+  - SDWebImageWebPCoder (0.2.5):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -358,6 +400,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - ObjectiveDropboxOfficial (~> 3.9.4)
+  - RCTCallDetection (from `../node_modules/react-native-call-detection`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired/`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety/`)
   - React (from `../node_modules/react-native/`)
@@ -371,8 +414,13 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-calendar-events (from `../node_modules/react-native-calendar-events`)
+  - react-native-fetch-blob (from `../node_modules/react-native-fetch-blob`)
   - react-native-keep-awake (from `../node_modules/react-native-keep-awake`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-orientation (from `../node_modules/react-native-orientation`)
+  - react-native-pdf (from `../node_modules/react-native-pdf`)
+  - react-native-version-check (from `../node_modules/react-native-version-check`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webrtc (from `../node_modules/react-native-webrtc`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -385,15 +433,20 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNExitApp (from `../node_modules/react-native-exit-app`)
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGoogleSignin (from `../node_modules/react-native-google-signin`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - RNWatch (from `../node_modules/react-native-watch-connectivity`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Amplitude-iOS
     - boost-for-react-native
     - CocoaLumberjack
@@ -410,8 +463,11 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
+    - libwebp
     - nanopb
     - ObjectiveDropboxOfficial
+    - SDWebImage
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -426,6 +482,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  RCTCallDetection:
+    :path: "../node_modules/react-native-call-detection"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired/"
   RCTTypeSafety:
@@ -448,10 +506,20 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-background-timer"
   react-native-calendar-events:
     :path: "../node_modules/react-native-calendar-events"
+  react-native-fetch-blob:
+    :path: "../node_modules/react-native-fetch-blob"
   react-native-keep-awake:
     :path: "../node_modules/react-native-keep-awake"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-orientation:
+    :path: "../node_modules/react-native-orientation"
+  react-native-pdf:
+    :path: "../node_modules/react-native-pdf"
+  react-native-version-check:
+    :path: "../node_modules/react-native-version-check"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webrtc:
     :path: "../node_modules/react-native-webrtc"
   react-native-webview:
@@ -476,14 +544,24 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativePermissions:
+    :path: "../node_modules/react-native-permissions"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
+  RNExitApp:
+    :path: "../node_modules/react-native-exit-app"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNGoogleSignin:
     :path: "../node_modules/react-native-google-signin"
   RNSound:
     :path: "../node_modules/react-native-sound"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   RNWatch:
     :path: "../node_modules/react-native-watch-connectivity"
   Yoga:
@@ -512,8 +590,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 1e25823cbf46540b4284f6ef8e17b3a68ee12bbc
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+  libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectiveDropboxOfficial: a5afefc83f6467c42c45f2253f583f2ad1ffc701
+  RCTCallDetection: f755f9a6f55cfac0005f12428c5e130adef207e2
   RCTRequired: 53825815218847d3e9c7b6d92ad2d197a926d51e
   RCTTypeSafety: d886540c518e53064dfa081bf7693fd650699b92
   React: 5dea58967c421bd1fdf6b94c18b9ed0f5134683c
@@ -525,8 +605,13 @@ SPEC CHECKSUMS:
   React-jsinspector: 574d597112f9ea3d1b717f6fb62aef764c70dd6f
   react-native-background-timer: 0d34748e53a972507c66963490c775321a88f6f2
   react-native-calendar-events: 2fe35a9294af05de0ed819d3a1b5dac048d2c010
+  react-native-fetch-blob: 0cbdf9764c75d9438c162427395f4bc35a857d5a
   react-native-keep-awake: eba3137546b10003361b37c761f6c429b59814ae
   react-native-netinfo: 8d8db463bcc5db66a8ac5c48a7d86beb3b92f61a
+  react-native-orientation: d4a97266b06ec8d45d74e626656a730ebbebbb6f
+  react-native-pdf: 819bed123a80c138b3e531730c2f3686b9c6b93c
+  react-native-version-check: d0da8364a0be75dc76bd0ea08a4fcd3174d24d0b
+  react-native-video: 961749da457e73bf0b5565edfbaffc25abfb8974
   react-native-webrtc: c5e3d631179a933548a8e49bddbd8fad02586095
   react-native-webview: 4dbc1d2a4a6b9c5e9e723c62651917aa2b5e579e
   React-RCTActionSheet: af4d951113b1e068bb30611f91b984a7a73597ff
@@ -539,13 +624,20 @@ SPEC CHECKSUMS:
   React-RCTText: 81b62b4e7f11531a5154e4daa5617670d5a2d5de
   React-RCTVibration: 8be61459e3749d1fb02cf414edd05b3007622882
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
+  ReactNativePermissions: f0aec11433d43d45953c678b6982921d83ad94c8
   RNCAsyncStorage: 8e31405a9f12fbf42c2bb330e4560bfd79c18323
+  RNDeviceInfo: 12faae605ba42a1a5041c3c41a77834bc23f049d
+  RNExitApp: 7d81855142a4d11eb75f4f06fdebf5a950d7aef2
+  RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNGoogleSignin: d030c6c6591db24c3cee649f64c7babf0a1699a0
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
   RNSVG: aac12785382e8fd4f28d072fe640612e34914631
+  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RNWatch: 09738b339eceb66e4d80a2371633ca5fb380fa42
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
+  SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
-PODFILE CHECKSUM: 0ac392c47cc78d9db03eea7b58950184336d6cf4
+PODFILE CHECKSUM: 68800df3078f1219dbcc5fea858c74511777fd40
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.7.5

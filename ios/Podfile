@@ -67,6 +67,14 @@ target 'JitsiMeet' do
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
   pod 'RNWatch', :path => '../node_modules/react-native-watch-connectivity'
 
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+  pod 'react-native-pdf', :path => '../node_modules/react-native-pdf'
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+  pod 'RCTCallDetection', :path => '../node_modules/react-native-call-detection'
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+
   # Native pod dependencies
   #
 
