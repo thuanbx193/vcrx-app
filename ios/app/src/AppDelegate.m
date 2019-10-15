@@ -18,6 +18,8 @@
 #import "AppDelegate.h"
 #import "FIRUtilities.h"
 #import "Types.h"
+#import "Orientation.h"
+#import <React/RCTLinkingManager.h>
 
 @import Crashlytics;
 @import Fabric;
@@ -114,9 +116,11 @@
         }
     }
 
-    return [[JitsiMeet sharedInstance] application:app
-                                           openURL:openUrl
-                                           options:options];
+    return [RCTLinkingManager application:app openURL:url options:options];
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
 }
 
 @end

@@ -15,6 +15,9 @@ import {
     isWelcomePageAppEnabled,
     isWelcomePageUserEnabled
 } from '../welcome';
+import * as VCRX from '../../vcrx';
+import { Homepage } from '../../vcrx/homepage'; 
+
 
 /**
  * Object describing application route.
@@ -59,7 +62,7 @@ function _getMobileRoute(state): Promise<Route> {
     if (isRoomValid(state['features/base/conference'].room)) {
         route.component = Conference;
     } else if (isWelcomePageAppEnabled(state)) {
-        route.component = WelcomePage;
+        route.component = Homepage;
     } else {
         route.component = BlankPage;
     }

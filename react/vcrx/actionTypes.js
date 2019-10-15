@@ -1,0 +1,12 @@
+export const CHANGE_USER_INFO           = Symbol('CHANGE_USER_INFO');
+export const CHANGE_ROOM_INFO           = Symbol('CHANGE_ROOM_INFO');
+export const CHANGE_TABS_CHAT           = Symbol('CHANGE_TABS_CHAT');
+export const CHANGE_CHAT_INFO           = Symbol('CHANGE_CHAT_INFO');
+export const CHANGE_ASSESSMENT          = Symbol('CHANGE_ASSESSMENT');
+export const LOGOUT                     = Symbol('LOGOUT');
+export const SET_TIME_NOW               = Symbol('SET_TIME_NOW');
+export const SET_TIME_EXIT              = Symbol('SET_TIME_EXIT');
+export const CHANGE_LANGUAGE            = Symbol('CHANGE_LANGUAGE');
+export const SET_SOCKET                 = Symbol('SET_SOCKET');
+export const TIME_JOIN_CLASS            = Symbol('TIME_JOIN_CLASS');
+export const DATA_CHANGE_MIC            = Symbol('DATA_CHANGE_MIC');

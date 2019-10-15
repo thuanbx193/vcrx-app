@@ -65,6 +65,7 @@ import {
     sendLocalParticipant
 } from './functions';
 import logger from './logger';
+import { _addVcrxListeners } from './../../../vcrx/actionListenerVcrx';
 
 declare var APP: Object;
 
@@ -410,6 +411,8 @@ export function createConference() {
         dispatch(_conferenceWillJoin(conference));
 
         _addConferenceListeners(conference, dispatch);
+
+        _addVcrxListeners(conference, dispatch);
 
         sendLocalParticipant(state, conference);
 

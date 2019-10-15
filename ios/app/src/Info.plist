@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>org.jitsi.meet</string>
+			<string>vcrxconnect</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.jitsi.meet</string>
+				<string>vcrxconnect</string>
 			</array>
 		</dict>
 		<dict>
@@ -74,6 +74,10 @@
 	<array>
 		<string>org.jitsi.JitsiMeet.ios.conference</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -101,5 +105,9 @@
 	<false/>
 	<key>firebase_crashlytics_collection_enabled</key>
 	<string>false</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>appportal</string>
+	</array>
 </dict>
 </plist>

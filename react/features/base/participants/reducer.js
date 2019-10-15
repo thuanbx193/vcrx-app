@@ -181,6 +181,7 @@ function _participant(state: Object = {}, action) {
  */
 function _participantJoined({ participant }) {
     const {
+        audit,
         avatarID,
         avatarURL,
         botType,
@@ -211,6 +212,7 @@ function _participantJoined({ participant }) {
     }
 
     return {
+        audit: false,
         avatarID,
         avatarURL,
         botType,

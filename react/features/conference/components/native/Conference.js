@@ -38,6 +38,9 @@ import NavigationBar from './NavigationBar';
 import styles, { NAVBAR_GRADIENT_COLORS } from './styles';
 
 import type { AbstractProps } from '../AbstractConference';
+import {Room} from './../../../../vcrx/conference/room';
+import { exitClass } from '../../../../vcrx/actions';
+import { LOGOUT_BY_PRESS_BACK_BUTTON } from '../../../../vcrx/constants';
 
 /**
  * The type of the React {@code Component} props of {@link Conference}.
@@ -164,11 +167,7 @@ class Conference extends AbstractConference<Props, *> {
     render() {
         return (
             <Container style = { styles.conference }>
-                <StatusBar
-                    barStyle = 'light-content'
-                    hidden = { true }
-                    translucent = { true } />
-                { this._renderContent() }
+                <Room />
             </Container>
         );
     }
@@ -208,6 +207,7 @@ class Conference extends AbstractConference<Props, *> {
         p.catch(() => {
             this.props.dispatch(appNavigate(undefined));
         });
+        this.props.dispatch(exitClass(LOGOUT_BY_PRESS_BACK_BUTTON));
 
         return true;
     }

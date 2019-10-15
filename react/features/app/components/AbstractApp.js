@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react';
+import {Linking} from 'react-native';
 
 import { BaseApp } from '../../base/app';
 import { toURLString } from '../../base/util';
@@ -12,6 +13,9 @@ import '../../rejoin'; // Enable rejoin analytics
 
 import { appNavigate } from '../actions';
 import { getDefaultURL } from '../functions';
+import { joinRoomByLink, setTimeExitApp } from '../../../vcrx/actions';
+import { getAsyncStorage } from "../../../vcrx/apis";
+import { TIME_EXIT_APP } from "../../../vcrx/config";
 
 /**
  * The type of React {@code Component} props of {@link AbstractApp}.
@@ -45,6 +49,19 @@ export class AbstractApp extends BaseApp<Props, *> {
      */
     componentDidMount() {
         super.componentDidMount();
+        getAsyncStorage(TIME_EXIT_APP).then(res => {
+            let timeExit = JSON.parse(res);
+            this.state.store.dispatch(setTimeExitApp(timeExit));
+        })
+
+        Linking.getInitialURL().then((ev) => {
+            if (ev) {
+              this._handleOpenURL(ev);
+            }
+          }).catch(err => {
+              console.warn('An error occurred', err);
+        });
+        Linking.addEventListener('url', this._handleOpenURL);
 
         this._init.then(() => {
             // If a URL was explicitly specified to this React Component, then
@@ -75,6 +92,12 @@ export class AbstractApp extends BaseApp<Props, *> {
                 this._openURL(currentUrl || this._getDefaultURL());
             }
         });
+    }
+
+    _handleOpenURL = (event) => {
+        if (event.url.indexOf("://mobileportal/") != -1){
+            this._openURL(toURLString(event.url));
+        }
     }
 
     /**
@@ -115,6 +138,10 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @returns {void}
      */
     _openURL(url) {
-        this.state.store.dispatch(appNavigate(toURLString(url)));
+        if (url.indexOf("://mobileportal/") != -1){
+            this.state.store.dispatch(joinRoomByLink(url,true));
+        } else {
+            this.state.store.dispatch(appNavigate(toURLString(url)));
+        }
     }
 }

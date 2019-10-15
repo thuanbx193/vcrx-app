@@ -3,7 +3,7 @@
 import { parseURLParams } from '../config';
 import { toState } from '../redux';
 
-import { DEFAULT_SERVER_URL } from './constants';
+import { DEFAULT_SERVER_URL } from './../../../vcrx/config';
 
 /**
  * Returns the effective value of a configuration/preference/setting by applying
