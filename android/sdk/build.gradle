@@ -65,6 +65,15 @@ dependencies {
     implementation project(':react-native-svg')
     implementation project(':react-native-webrtc')
     implementation project(':react-native-webview')
+    // add sdk for vcrx
+    implementation project(':react-native-orientation')
+    implementation project(':react-native-pdf')
+    implementation project(':rn-fetch-blob')
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-video')
+    implementation project(':react-native-community-netinfo')
+    implementation project(':react-native-exit-app')
+    implementation project(':react-native-call-detection')
 
     testImplementation 'junit:junit:4.12'
 }

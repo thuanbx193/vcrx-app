@@ -199,6 +199,13 @@ class ReactInstanceManagerHolder {
                 new com.reactnativecommunity.webview.RNCWebViewPackage(),
                 new com.rnimmersive.RNImmersivePackage(),
                 new com.zmxv.RNSound.RNSoundPackage(),
+                new com.learnium.RNDeviceInfo.RNDeviceInfo(),
+                new com.github.yamill.orientation.OrientationPackage(),
+                new com.RNFetchBlob.RNFetchBlobPackage(),
+                new org.wonday.pdf.RCTPdfView(),
+                new com.brentvatne.react.ReactVideoPackage(),
+                new com.github.wumke.RNExitApp.RNExitAppPackage(),
+                new com.pritesh.calldetection.CallDetectionManager(application),
                 new ReactPackageAdapter() {
                     @Override
                     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
