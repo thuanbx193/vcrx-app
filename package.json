@@ -73,7 +73,7 @@
     "react-native-call-detection": "^1.8.2",
     "react-native-callstats": "3.61.0",
     "react-native-canvas": "^0.1.34",
-    "react-native-device-info": "^4.0.1",
+    "react-native-device-info": "^2.1.3",
     "react-native-dialog": "^5.6.0",
     "react-native-drawer": "^2.5.1",
     "react-native-exit-app": "^1.1.0",

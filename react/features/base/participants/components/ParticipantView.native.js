@@ -222,13 +222,19 @@ class ParticipantView extends Component<Props> {
                         waitForVideoStarted = { false }
                         zOrder = { this.props.zOrder }
                         zoomEnabled = { this.props.zoomEnabled } /> }
+                
 
                 { !renderVideo
                     && <View style = { styles.avatarContainer }>
                         <Avatar
                             participantId = { this.props.participantId }
                             size = { this.props.avatarSize } />
-                    </View> }
+                           
+                    </View>
+                }
+                { !videoTrack &&
+                    <Text style = {styles.title}>Giáo viên chưa bật Webcam</Text>
+                }
 
                 { useTint
 

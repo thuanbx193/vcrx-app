@@ -25,6 +25,16 @@ export default StyleSheet.create({
      * Make {@code Video} fill its container.
      */
     video: {
-        flex: 1
+        flex: 1,
+        zIndex: 1
+    },
+
+    title: {
+        zIndex: 0,
+        position: 'absolute',
+        top: '44%',
+        textAlign: 'center',
+        width:'100%',
+        height: '12%'
     }
 });

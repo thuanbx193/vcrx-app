@@ -49,7 +49,10 @@ export default createStyleSheet({
         marginLeft: height,
         marginTop: height,
         marginBottom: height,
-        borderRadius: 5
+        borderRadius: 5,
+        alignItems:'center',
+        justifyContent: 'center',
+        zIndex: 0
     },
     rightApp :{
         flex: 13,

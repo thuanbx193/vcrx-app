@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { RTCView } from 'react-native-webrtc';
 
 import { Pressable } from '../../../react';
+import {Text} from 'react-native';
+import { connect } from '../../../redux';
 
 import styles from './styles';
 import VideoTransform from './VideoTransform';
@@ -59,7 +61,7 @@ type Props = {
  * {@code HTMLVideoElement} and wraps around react-native-webrtc's
  * {@link RTCView}.
  */
-export default class Video extends Component<Props> {
+class Video extends Component<Props> {
     /**
      * React Component method that executes once component is mounted.
      *
@@ -81,7 +83,6 @@ export default class Video extends Component<Props> {
      */
     render() {
         const { onPress, stream, zoomEnabled } = this.props;
-
         if (stream) {
             // RTCView
             const style = styles.video;
@@ -122,6 +123,7 @@ export default class Video extends Component<Props> {
             return (
                 <Pressable onPress = { onPress }>
                     { rtcView }
+                    <Text style ={styles.title}>{this.props._languages.topica.vcrx.camera.loading}</Text>
                 </Pressable>
             );
         }
@@ -133,3 +135,11 @@ export default class Video extends Component<Props> {
         return null;
     }
 }
+
+function _mapStateToProps(state){
+    return{
+        _languages: state['vcrx'].languages
+    }
+}
+
+export default connect(_mapStateToProps)(Video)

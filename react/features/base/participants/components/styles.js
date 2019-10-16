@@ -43,5 +43,12 @@ export default {
         alignItems: 'stretch',
         flex: 1,
         justifyContent: 'center'
+    },
+
+    title: {
+        position: 'absolute',
+        bottom: '3%',
+        textAlign: 'center',
+        width: '100%'
     }
 };

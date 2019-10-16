@@ -104,8 +104,6 @@ class Room extends Component {
         }
     }
 
-
-
     renderLayout = () => {
         switch(this.props.indexLayout) {
             case 1:

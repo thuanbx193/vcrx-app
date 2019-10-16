@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, StyleSheet, View, ViewPropTypes, } from 'react-native';
+import { Linking, StyleSheet, View, ViewPropTypes, Platform} from 'react-native';
 // @ts-ignore
 import ParsedText from './ParsedText';
 import Communications from 'react-native-communications';
@@ -48,7 +48,9 @@ export default class MessageText extends React.Component {
                     }
                     else {
                         Linking.openURL(url);
-                        RNExitApp.exitApp();
+                        if(Platform.OS === 'android'){
+                            RNExitApp.exitApp();
+                        }
                     }
                 });
             }

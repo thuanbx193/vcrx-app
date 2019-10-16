@@ -23,6 +23,6 @@ export default createStyleSheet({
         top: 0,
         justifyContent: 'center',
         borderRadius: 5,
-        padding: 2,
+        padding: 2
     }
 });

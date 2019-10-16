@@ -218,6 +218,9 @@
                 "pronunciation": "Pronunciation",
                 "vocabulary": "Vocabulary",
                 "grammar": "Grammar"
+            },
+            "camera":{
+                "loading": "Teacher's Webcam is loading..."
             }
         }
     },

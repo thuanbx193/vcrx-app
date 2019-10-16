@@ -34,6 +34,7 @@ import { _SET_CALL_INTEGRATION_SUBSCRIPTIONS } from './actionTypes';
 
 import CallKit from './CallKit';
 import ConnectionService from './ConnectionService';
+import { exitClass } from '../../../vcrx';
 
 const CallIntegration = CallKit || ConnectionService;
 
@@ -295,7 +296,8 @@ function _onPerformEndCallAction({ callUUID }) {
         // another incoming call is received and the user selects "End &
         // Accept".
         delete conference.callUUID;
-        dispatch(appNavigate(undefined));
+        // dispatch(appNavigate(undefined));
+        dispatch(exitClass());
     }
 }
 

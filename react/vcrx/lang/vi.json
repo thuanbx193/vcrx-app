@@ -223,6 +223,9 @@
                 "pronunciation": "Phát âm",
                 "vocabulary": "Từ vựng",
                 "grammar": "Ngữ pháp"
+            },
+            "camera":{
+                "loading": "Đang tải Webcam giáo viên..."
             }
         }
     },
