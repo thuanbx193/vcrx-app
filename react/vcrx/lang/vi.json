@@ -225,7 +225,8 @@
                 "grammar": "Ngữ pháp"
             },
             "camera":{
-                "loading": "Đang tải Webcam giáo viên..."
+                "loading": "Đang tải Webcam giáo viên...",
+                "notify": "Giáo viên chưa bật Webcam"
             }
         }
     },

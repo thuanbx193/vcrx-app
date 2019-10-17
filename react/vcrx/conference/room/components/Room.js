@@ -45,7 +45,6 @@ class Room extends Component {
     startListenerTapped = () => {
         let callDetector = new CallDetectorManager((event, number) => {
             if(event === CALL_INCOMING){
-                this.props.dispatch(kickUser('local', PORTAL_LINKING.CALL));
                 callDetector.dispose();
             }
         },

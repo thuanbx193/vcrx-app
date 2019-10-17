@@ -233,7 +233,7 @@ class ParticipantView extends Component<Props> {
                     </View>
                 }
                 { !videoTrack &&
-                    <Text style = {styles.title}>Giáo viên chưa bật Webcam</Text>
+                    <Text style = {styles.title}>{this.props._languages.topica.vcrx.camera.notify}</Text>
                 }
 
                 { useTint
@@ -266,6 +266,7 @@ function _mapStateToProps(state, ownProps) {
     let participantName;
 
     return {
+        _languages: state['vcrx'].languages,
         _connectionStatus:
             connectionStatus
                 || JitsiParticipantConnectionStatus.ACTIVE,

@@ -220,7 +220,8 @@
                 "grammar": "Grammar"
             },
             "camera":{
-                "loading": "Teacher's Webcam is loading..."
+                "loading": "Teacher's Webcam is loading...",
+                "notify": "The teacher has not turned on the webcam"
             }
         }
     },
