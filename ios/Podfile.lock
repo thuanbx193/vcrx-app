@@ -294,6 +294,8 @@ PODS:
     - react-native-video/Video (= 5.0.2)
   - react-native-video/Video (5.0.2):
     - React
+  - react-native-view-shot (3.0.2):
+    - React
   - react-native-webrtc (1.75.0):
     - React
   - react-native-webview (7.4.1):
@@ -421,6 +423,7 @@ DEPENDENCIES:
   - react-native-pdf (from `../node_modules/react-native-pdf`)
   - react-native-version-check (from `../node_modules/react-native-version-check`)
   - react-native-video (from `../node_modules/react-native-video`)
+  - react-native-view-shot (from `../node_modules/react-native-view-shot`)
   - react-native-webrtc (from `../node_modules/react-native-webrtc`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -520,6 +523,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-version-check"
   react-native-video:
     :path: "../node_modules/react-native-video"
+  react-native-view-shot:
+    :path: "../node_modules/react-native-view-shot"
   react-native-webrtc:
     :path: "../node_modules/react-native-webrtc"
   react-native-webview:
@@ -612,6 +617,7 @@ SPEC CHECKSUMS:
   react-native-pdf: 819bed123a80c138b3e531730c2f3686b9c6b93c
   react-native-version-check: d0da8364a0be75dc76bd0ea08a4fcd3174d24d0b
   react-native-video: 961749da457e73bf0b5565edfbaffc25abfb8974
+  react-native-view-shot: a94dce9b44d7846edd1204ad6f0bd88f64c29cc0
   react-native-webrtc: c5e3d631179a933548a8e49bddbd8fad02586095
   react-native-webview: 4dbc1d2a4a6b9c5e9e723c62651917aa2b5e579e
   React-RCTActionSheet: af4d951113b1e068bb30611f91b984a7a73597ff
@@ -638,6 +644,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
-PODFILE CHECKSUM: 7e778be0351077f0990ff4f1a6a759a6cf1b8982
+PODFILE CHECKSUM: 5a52004f814789f6da36d71eea4c41f2065267f5
 
 COCOAPODS: 1.7.5

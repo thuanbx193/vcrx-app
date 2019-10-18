@@ -27,11 +27,12 @@ export const PERMISSION         = {
     disableWarning      : ['AUDIT']
 }
 
-export const LINK_PLAYSTORE_XSMART              = 'https://play.google.com/store/apps/details?id=org.topica.xsmart';
-export const LINK_APPSTORE_XMART                = 'https://itunes.apple.com/us/app/native-xsmart/id1439294937?ls=1&mt=8';
 export const LINK_PLAYSTORE_PORTAL              = 'https://play.google.com/store/apps/details?id=vn.topica.nativemobileportal';
 export const LINK_APPSTORE_PORTAL               = '';
 export const LINK_CONFIG                        = "https://vcrxapi.topica.vn/api/config/getconfig?key=";
+
+export const LINK_PLAYSTORE_VCRX                = "https://play.google.com/store/apps/details?id=org.topica.vcrx";
+export const LINK_APPSTORE_VCRX                 = "https://apps.apple.com/us/app/vcrx-connect/id1456449884";
 
 export var enableLog = false;
 

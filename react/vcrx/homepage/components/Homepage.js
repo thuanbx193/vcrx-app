@@ -15,7 +15,7 @@ import React, { Component }     from 'react';
 import {
     View, Text,TouchableHighlight,
     TextInput, Image, TouchableOpacity,
-    StatusBar
+    StatusBar, AppState
 }                               from 'react-native';
 import { connect }              from 'react-redux';
 import styles                   from './styles';
@@ -24,7 +24,8 @@ import {
     handleOpenPortal,
     setConfig,
     setCustomConfig,
-    setTimeExitApp
+    setTimeExitApp,
+    checkUpdateApp
 }                               from '../../actions';
 import {APP_VERSION, SET_CONFIG} from "../../constants";
 import Orientation              from 'react-native-orientation';
@@ -45,7 +46,8 @@ class HomePage extends Component<*> {
                 DOMAIN_API          : '',
                 DEFAULT_SERVER_URL  : '',
                 DOMAIN_SOCKET       : ''
-            }
+            },
+            appState: AppState.currentState
         };
     }
 
@@ -69,6 +71,18 @@ class HomePage extends Component<*> {
             })
         })
         Orientation.lockToPortrait();
+        AppState.addEventListener('change', this._handleAppStateChange);
+        this.props.dispatch(checkUpdateApp());
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    _handleAppStateChange = nextAppState => {
+        if(nextAppState == "active"){
+            this.props.dispatch(checkUpdateApp());
+        }
     }
 
     _openEnv = () => {

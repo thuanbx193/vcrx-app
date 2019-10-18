@@ -74,6 +74,7 @@ target 'JitsiMeet' do
   pod 'react-native-video', :path => '../node_modules/react-native-video'
   pod 'RCTCallDetection', :path => '../node_modules/react-native-call-detection'
   pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+  pod 'react-native-view-shot', :path => '../node_modules/react-native-view-shot'
   # pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
 

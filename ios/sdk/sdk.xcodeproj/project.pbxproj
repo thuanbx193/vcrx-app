@@ -59,6 +59,16 @@
 		DEFE535621FB2E8300011A3A /* ReactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFE535521FB2E8300011A3A /* ReactUtils.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8488011A2359ACA700A9938E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848801162359ACA700A9938E /* RNViewShot.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNViewShot;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		03F2ADC957FF109849B7FCA1 /* libPods-JitsiMeet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JitsiMeet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B412F161EDEC65D00B1A0A6 /* JitsiMeetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JitsiMeetView.h; sourceTree = "<group>"; };
@@ -87,6 +97,7 @@
 		6C31EDC920C06D530089C899 /* recordingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = recordingOff.mp3; path = ../../sounds/recordingOff.mp3; sourceTree = "<group>"; };
 		75635B0820751D6D00F29C9F /* joined.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = joined.wav; path = ../../sounds/joined.wav; sourceTree = "<group>"; };
 		75635B0920751D6D00F29C9F /* left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = left.wav; path = ../../sounds/left.wav; sourceTree = "<group>"; };
+		848801162359ACA700A9938E /* RNViewShot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNViewShot.xcodeproj; path = "../../../node_modules/react-native-view-shot/ios/RNViewShot.xcodeproj"; sourceTree = "<group>"; };
 		87FE6F3221E52437004A5DC7 /* incomingMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = incomingMessage.wav; path = ../../sounds/incomingMessage.wav; sourceTree = "<group>"; };
 		98E09B5C73D9036B4ED252FC /* Pods-JitsiMeet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiMeet.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-JitsiMeet/Pods-JitsiMeet.debug.xcconfig"; sourceTree = "<group>"; };
 		9C77CA3CC919B081F1A52982 /* Pods-JitsiMeet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiMeet.release.xcconfig"; path = "../Pods/Target Support Files/Pods-JitsiMeet/Pods-JitsiMeet.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +175,7 @@
 		0BD906DB1EC0C00300C8C18E = {
 			isa = PBXGroup;
 			children = (
+				848801152359AC7E00A9938E /* Libraries */,
 				9C3C6FA2341729836589B856 /* Frameworks */,
 				C5E72ADFC30ED96F9B35F076 /* Pods */,
 				0BD906E61EC0C00300C8C18E /* Products */,
@@ -222,6 +234,22 @@
 				0B93EF7D1EC9DDCD0030D24D /* RCTBridgeWrapper.m */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		848801152359AC7E00A9938E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				848801162359ACA700A9938E /* RNViewShot.xcodeproj */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		848801172359ACA700A9938E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8488011B2359ACA700A9938E /* libRNViewShot.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		9C3C6FA2341729836589B856 /* Frameworks */ = {
@@ -355,12 +383,28 @@
 			mainGroup = 0BD906DB1EC0C00300C8C18E;
 			productRefGroup = 0BD906E61EC0C00300C8C18E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 848801172359ACA700A9938E /* Products */;
+					ProjectRef = 848801162359ACA700A9938E /* RNViewShot.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0BD906E41EC0C00300C8C18E /* JitsiMeet */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8488011B2359ACA700A9938E /* libRNViewShot.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNViewShot.a;
+			remoteRef = 8488011A2359ACA700A9938E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0BD906E31EC0C00300C8C18E /* Resources */ = {

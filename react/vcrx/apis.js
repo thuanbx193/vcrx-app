@@ -332,3 +332,24 @@ export function setLogsCallApi(data) {
     });
 }
 
+export function checkUpdateAppAPI(currentVersion, systemName, customer){
+    return new Promise((resolve,reject) => {
+        fetch(DOMAIN_API + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(res => {
+            if(res.status == true){
+                resolve (res);
+            }else{
+                resolve ({});
+            }
+        }).catch(err=>{
+            reject({});
+        });
+    });
+}
