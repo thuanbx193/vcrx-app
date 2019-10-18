@@ -35,6 +35,8 @@ export default StyleSheet.create({
         top: '44%',
         textAlign: 'center',
         width:'100%',
-        height: '12%'
+        height: '12%',
+        fontSize: 12,
+        color: '#333333'
     }
 });

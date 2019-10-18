@@ -52,7 +52,8 @@ export const ICON = {
     IC_MIC_ENABLE: 'microphone',
     IC_MIC_DISABLE: 'microphone-slash',
     IC_RAISE_HAND: 'hand-paper-o',
-    IC_CLOSE: 'close'
+    IC_CLOSE: 'close',
+    IC_WEBCAM: 'camera'
 }
 
 export const ACTION_TOGGLE_MICRO = "toggleMicro";

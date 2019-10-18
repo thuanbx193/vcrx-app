@@ -38,7 +38,7 @@ class HomePage extends Component<*> {
     constructor(props) {
         super(props);
         this.state = {
-            text        : 'vcrxconnect://mobileportal/34/8280284/129/8395843/1571220000/HV - 19//MOBILE/vi',
+            text        : 'vcrxconnect://mobileportal/16/8280266/61/8413197/1571403600/HV - 1/MOBILE/en',
             toggle      : false,
             selected    : 3,    
             dataCustom: {   
