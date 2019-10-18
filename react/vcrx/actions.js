@@ -776,7 +776,7 @@ export function updateParticipant(conference){
     return function (dispatch,getState){
         let { userInfo }       = getState()['vcrx'];
         conference.sendCommand(
-            ACTION_UPDATE_P, {value: JSON.stringify({field: P_KEY.userInfo, data: {role: KEY_ROLE_MOBILE,id: userInfo.id, fullname: userInfo.firstname + " " +userInfo.lastname, device: `${Platform.OS} - ${DeviceInfo.getSystemName()}`}})});
+            ACTION_UPDATE_P, {value: JSON.stringify({field: P_KEY.userInfo, data: {role: KEY_ROLE_MOBILE,id: userInfo.id, fullname: userInfo.firstname + " " +userInfo.lastname, device: `${Platform.OS}`}})});
 
         if(userInfo.role == ROLE.audit) {
             conference.sendCommand(ACTION_UPDATE_P, { value: JSON.stringify({ field: P_KEY.audit, data: true })});

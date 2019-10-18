@@ -41,6 +41,7 @@ import type { AbstractProps } from '../AbstractConference';
 import {Room} from './../../../../vcrx/conference/room';
 import { exitClass } from '../../../../vcrx/actions';
 import { LOGOUT_BY_PRESS_BACK_BUTTON } from '../../../../vcrx/constants';
+import Orientation from 'react-native-orientation';
 
 /**
  * The type of the React {@code Component} props of {@link Conference}.
@@ -132,6 +133,10 @@ class Conference extends AbstractConference<Props, *> {
         this._onClick = this._onClick.bind(this);
         this._onHardwareBackPress = this._onHardwareBackPress.bind(this);
         this._setToolboxVisible = this._setToolboxVisible.bind(this);
+    }
+
+    componentWillMount(){
+        Orientation.lockToLandscape();
     }
 
     /**

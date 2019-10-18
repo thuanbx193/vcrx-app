@@ -97,7 +97,7 @@ export const ROLE = {
     mobile      : 'MOBILE',
     student     : 'STUDENT'
 }
-export const APP_VERSION        = ' 4.2.10.0';
+export const APP_VERSION        = ' 4.2.10';
 
 export const LOGOUT_BY_PRESS_LOGOUT_BUTTON  = 1;
 export const LOGOUT_BY_KICKOUT              = 2;

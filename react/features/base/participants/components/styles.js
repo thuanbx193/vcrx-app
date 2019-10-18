@@ -47,7 +47,7 @@ export default {
 
     title: {
         position: 'absolute',
-        bottom: '3%',
+        bottom: '4%',
         textAlign: 'center',
         width: '100%'
     }

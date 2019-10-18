@@ -22,7 +22,6 @@ import io                       from "socket.io-client/dist/socket.io.js";
 import NetInfo                  from "@react-native-community/netinfo";
 import CallDetectorManager      from 'react-native-call-detection'
 import VideoWarmUp              from '../../video-warmup/components/VideoWarmUp';
-import Orientation              from 'react-native-orientation';
 import { DOMAIN_SOCKET }        from '../../../config';
 import {
     PORTAL_LINKING,
@@ -74,7 +73,6 @@ class Room extends Component {
     }
 
     componentDidMount() {
-        Orientation.lockToLandscape();
         AppState.addEventListener('change', this._handleAppStateChange);
         this.props.dispatch(setSocket(this.socket));
         Permissions.check('microphone').then(response => {

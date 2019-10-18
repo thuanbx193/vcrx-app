@@ -1,5 +1,5 @@
-export const DOMAIN_API                      = "https://vcrxapitester.topica.vn";
-export const DEFAULT_SERVER_URL              = "https://vcrxnvntester.topica.vn";
+export const DOMAIN_API                      = "https://vcrxapi.topica.vn";
+export const DEFAULT_SERVER_URL              = "https://vcrxnvn.topica.vn";
 export const DOMAIN_SOCKET                    = "https://html5lms.topicanative.edu.vn/";
 export const DOMAIN_LOGS                    = "https://vcrxlogstester.topica.vn";
 

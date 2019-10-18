@@ -205,7 +205,7 @@ class ReactInstanceManagerHolder {
                 new org.wonday.pdf.RCTPdfView(),
                 new com.brentvatne.react.ReactVideoPackage(),
                 new com.github.wumke.RNExitApp.RNExitAppPackage(),
-                new com.pritesh.calldetection.CallDetectionManager(application),
+                new com.pritesh.calldetection.CallDetectionManager(activity.getApplication()),
                 new ReactPackageAdapter() {
                     @Override
                     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
