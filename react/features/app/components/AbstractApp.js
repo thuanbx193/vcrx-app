@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import {Linking} from 'react-native';
+import {Linking, Alert} from 'react-native';
 
 import { BaseApp } from '../../base/app';
 import { toURLString } from '../../base/util';
@@ -14,8 +14,11 @@ import '../../rejoin'; // Enable rejoin analytics
 import { appNavigate } from '../actions';
 import { getDefaultURL } from '../functions';
 import { joinRoomByLink, setTimeExitApp } from '../../../vcrx/actions';
-import { getAsyncStorage } from "../../../vcrx/apis";
-import { TIME_EXIT_APP } from "../../../vcrx/config";
+import { SYSTEM } from '../../../vcrx/constants';
+import { getAsyncStorage, checkUpdateAppAPI } from "../../../vcrx/apis";
+import { checkUpdateApp } from "../../../vcrx/actions";
+import { TIME_EXIT_APP, LINK_APPSTORE_VCRX, LINK_PLAYSTORE_VCRX } from "../../../vcrx/config";
+import DeviceInfo from 'react-native-device-info';
 
 /**
  * The type of React {@code Component} props of {@link AbstractApp}.
@@ -137,11 +140,38 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @protected
      * @returns {void}
      */
-    _openURL(url) {
-        if (url.indexOf("://mobileportal/") != -1){
-            this.state.store.dispatch(joinRoomByLink(url,true));
-        } else {
+    _openURL (url) {
+        let {languages} = this.state.store.getState()['vcrx'];
+        let systemName = DeviceInfo.getSystemName();
+        let currentVersion = DeviceInfo.getVersion();
+        let URI = systemName == "Android" ? LINK_PLAYSTORE_VCRX: LINK_APPSTORE_VCRX;
+        checkUpdateAppAPI(currentVersion, systemName, SYSTEM).then((response)=>{
+            if(response.hasOwnProperty('result') && response.result){
+                url = '';
+                Alert.alert(
+                    languages.topica.lms.login.title,
+                    languages.topica.lms.login.notify + languages.topica.lms.login.please,
+                    [
+                        {text: languages.topica.lms.login.confirm_update, onPress: () => {Linking.canOpenURL(URI)
+                        .then((supported) => {
+                        if (!supported) {
+                            console.log("Can't handle url: " + URI);
+                        } else {
+                            return Linking.openURL(URI);
+                        }
+                        })
+                        .catch((err) => console.error('An error occurred', err));},}
+                    ],
+                    { cancelable: false }
+                );
+            }
+            if (url.indexOf("://mobileportal/") != -1){
+                this.state.store.dispatch(joinRoomByLink(url,true));
+            } else {
+                this.state.store.dispatch(appNavigate(toURLString(url)));
+            }
+        }).catch(e => {
             this.state.store.dispatch(appNavigate(toURLString(url)));
-        }
+        })
     }
 }
