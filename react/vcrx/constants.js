@@ -12,7 +12,6 @@ export const ACTION_UPDATE_P            = "ACTION_UPDATE_P";
 export const ACTION_SEND_ASSESSMENT     = "send-assessment";
 export const ACTION_START_ROOM          = "startRoom";
 export const ACTION_UPLOAD              = "update-material";
-export const ACTION_CAPTURE             = "capture-room";
 
 export const ACTION_LOG_RAISE_HAND  = "RAISE_HAND";
 

@@ -9,8 +9,7 @@ import {
     ACTION_SEND_ASSESSMENT,
     ACTION_START_ROOM,
     PORTAL_LINKING,
-    ACTION_UPLOAD,
-    ACTION_CAPTURE
+    ACTION_UPLOAD
 }                                   from './constants';
 import {
     participantUpdated,
@@ -26,8 +25,7 @@ import {
     handleSetMessage,
     handleUploadMaterial,
     changeAssessment,
-    updateChatUsers,
-    captureRoom
+    updateChatUsers
 } from './actions';
 import { JitsiConferenceEvents }    from './../features/base/lib-jitsi-meet';
 const Entities = require('html-entities').XmlEntities;
@@ -112,10 +110,5 @@ export function _addVcrxListeners(conference, dispatch) {
         ACTION_UPLOAD,
         (data) => {
             dispatch(handleUploadMaterial(data));
-        });
-    conference.addCommandListener(
-        ACTION_CAPTURE,
-        (data) => {
-            dispatch(captureRoom());
         });
 }

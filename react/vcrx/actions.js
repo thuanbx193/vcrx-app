@@ -106,10 +106,7 @@ import {
 }                                   from "./apis";
 import RNExitApp                    from 'react-native-exit-app';
 import DeviceInfo                   from 'react-native-device-info';
-import {
-    captureScreen,
-    releaseCapture
-}                                   from "react-native-view-shot";
+
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
 
@@ -1110,18 +1107,4 @@ export function checkUpdateApp(){
             }
         })
     }
-}
-
-export function captureRoom(){
-    captureScreen({
-        format: "jpg",
-        quality: 0.8,
-        result: 'base64'
-    }).then(
-        uri => {
-            console.log("Image saved to", uri);
-            releaseCapture(uri);
-        },
-        error => console.error("Oops, snapshot failed", error)
-    );
 }
