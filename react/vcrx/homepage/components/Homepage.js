@@ -72,7 +72,6 @@ class HomePage extends Component<*> {
         })
         Orientation.lockToPortrait();
         AppState.addEventListener('change', this._handleAppStateChange);
-        // this.props.dispatch(checkUpdateApp());
     }
 
     componentWillUnmount() {
@@ -81,7 +80,7 @@ class HomePage extends Component<*> {
 
     _handleAppStateChange = nextAppState => {
         if(nextAppState == "active"){
-            // this.props.dispatch(checkUpdateApp());
+            this.props.dispatch(checkUpdateApp());
         }
     }
 

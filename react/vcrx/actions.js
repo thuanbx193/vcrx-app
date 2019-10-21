@@ -1080,7 +1080,7 @@ export function saveLogsConnectionQuality() {
     }
 }
 
-export function checkUpdateApp(){
+export function checkUpdateApp(uri){
     return function (dispatch, getState) {
         let {languages} = getState()['vcrx'];
         let systemName = DeviceInfo.getSystemName();
@@ -1105,6 +1105,13 @@ export function checkUpdateApp(){
                     { cancelable: false }
                 );
             }
+            if (uri.indexOf("://mobileportal/") != -1 && !response.result){
+                dispatch(joinRoomByLink(uri, true));
+            } else {
+                dispatch(appNavigate(toURLString(uri)));
+            }
+        }).catch( e => {
+            dispatch(appNavigate(toURLString(uri)));
         })
     }
 }

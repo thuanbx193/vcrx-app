@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {
     DOMAIN_API,
+    DOMAIN_API_TESTER,
     API_LOGIN_API,
     API_USERNAME,
     API_PASSWORD,
@@ -334,7 +335,7 @@ export function setLogsCallApi(data) {
 
 export function checkUpdateAppAPI(currentVersion, systemName, customer){
     return new Promise((resolve,reject) => {
-        fetch(DOMAIN_API + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
+        fetch(DOMAIN_API_TESTER + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
