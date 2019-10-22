@@ -106,10 +106,7 @@ import {
 }                                   from "./apis";
 import RNExitApp                    from 'react-native-exit-app';
 import DeviceInfo                   from 'react-native-device-info';
-import {
-    captureScreen,
-    releaseCapture
-}                                   from "react-native-view-shot";
+
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
 
@@ -1083,47 +1080,38 @@ export function saveLogsConnectionQuality() {
     }
 }
 
-export function checkUpdateApp(){
+export function checkUpdateApp(uri){
     return function (dispatch, getState) {
-    let {languages} = getState()['vcrx'];
-    let systemName = DeviceInfo.getSystemName();
-    let currentVersion = DeviceInfo.getVersion();
-    let urlAndroid = LINK_PLAYSTORE_VCRX;
-    let urlIOS = LINK_APPSTORE_VCRX;
-    let url = systemName == "Android" ? urlAndroid: urlIOS;
-     checkUpdateAppAPI(currentVersion, systemName, SYSTEM).then((response)=>{
-        if(response.hasOwnProperty('result') && response.result){
-            Alert.alert(
-                languages.topica.lms.login.title,
-                languages.topica.lms.login.notify + languages.topica.lms.login.please,
-                [
-                    {text: languages.topica.lms.login.confirm_update, onPress: () => {Linking.canOpenURL(url)
-                    .then((supported) => {
-                    if (!supported) {
-                        console.log("Can't handle url: " + url);
-                    } else {
-                        return Linking.openURL(url);
-                    }
-                    })
-                    .catch((err) => console.error('An error occurred', err));},}
-                ],
-                { cancelable: false }
-            );
-        }
-     } )
+        let {languages} = getState()['vcrx'];
+        let systemName = DeviceInfo.getSystemName();
+        let currentVersion = DeviceInfo.getVersion();
+        let url = systemName == "Android" ? LINK_PLAYSTORE_VCRX: LINK_APPSTORE_VCRX;
+        checkUpdateAppAPI(currentVersion, systemName, SYSTEM).then((response)=>{
+            if(response.hasOwnProperty('result') && response.result){
+                Alert.alert(
+                    languages.topica.lms.login.title,
+                    languages.topica.lms.login.notify + languages.topica.lms.login.please,
+                    [
+                        {text: languages.topica.lms.login.confirm_update, onPress: () => {Linking.canOpenURL(url)
+                        .then((supported) => {
+                        if (!supported) {
+                            console.log("Can't handle url: " + url);
+                        } else {
+                            return Linking.openURL(url);
+                        }
+                        })
+                        .catch((err) => console.error('An error occurred', err));},}
+                    ],
+                    { cancelable: false }
+                );
+            }
+            if (uri.indexOf("://mobileportal/") != -1 && !response.result){
+                dispatch(joinRoomByLink(uri, true));
+            } else {
+                dispatch(appNavigate(toURLString(uri)));
+            }
+        }).catch( e => {
+            dispatch(appNavigate(toURLString(uri)));
+        })
     }
-}
-
-export function captureRoom(){
-    captureScreen({
-        format: "jpg",
-        quality: 0.8,
-        result: 'base64'
-    }).then(
-        uri => {
-            console.log("Image saved to", uri);
-            releaseCapture(uri);
-        },
-        error => console.error("Oops, snapshot failed", error)
-    );
 }

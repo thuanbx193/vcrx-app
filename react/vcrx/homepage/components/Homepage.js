@@ -38,7 +38,7 @@ class HomePage extends Component<*> {
     constructor(props) {
         super(props);
         this.state = {
-            text        : 'vcrxconnect://mobileportal/34/8280284/129/8395843/1571220000/HV - 19//MOBILE/vi',
+            text        : '',
             toggle      : false,
             selected    : 3,    
             dataCustom: {   
@@ -72,7 +72,6 @@ class HomePage extends Component<*> {
         })
         Orientation.lockToPortrait();
         AppState.addEventListener('change', this._handleAppStateChange);
-        this.props.dispatch(checkUpdateApp());
     }
 
     componentWillUnmount() {

@@ -49,6 +49,8 @@ export default {
         position: 'absolute',
         bottom: '4%',
         textAlign: 'center',
-        width: '100%'
+        width: '100%',
+        fontSize: 12,
+        color: '#333333'
     }
 };

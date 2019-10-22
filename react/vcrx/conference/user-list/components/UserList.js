@@ -18,7 +18,7 @@ import {
 } from "../../../constants";
 import {MEDIA_TYPE}         from "../../../../features/base/media/constants";
 import {
-    getTrackByMediaTypeAndParticipant
+    getTrackByMediaTypeAndParticipant,
 }                           from '../../../../features/base/tracks';
 import {Base64}             from 'js-base64';
 import {getParticipants} from "../../../../features/base/participants";
@@ -96,22 +96,22 @@ class UserList  extends Component {
         if(name[0] == KEY_ROLE_MOBILE && audit) icon = ICON.IC_AUDIT;
         let displayName = name[0] !== KEY_ROLE_MOBILE ? name.slice(1,3).join("-") : Base64.decode(name.slice(1,3).join("-"));
         let role = name[0];
+        if(role === KEY_ROLE_TEACHER){
+            var videoTrack = getTrackByMediaTypeAndParticipant(this.props._track, MEDIA_TYPE.VIDEO, id);
+        }
         return (
             <View key = {user.index} style = {styles.wrapperItemUser}>
                 <View style={styles.roleIcon}>
                     <FontAwesome name={icon} size = {14} sty    le={styles.roleIcon}/>
                 </View>
                 <Text numberOfLines={1} style={local ? styles.userListOwn: styles.userList} >{displayName}</Text>
-                {
-                    (role == KEY_ROLE_MOBILE || role == KEY_ROLE_STUDENT) && raiseHand &&
+                { (role == KEY_ROLE_MOBILE || role == KEY_ROLE_STUDENT) && raiseHand &&
                     <FontAwesome name= {ICON.IC_RAISE_HAND} size={14} color={'#0084ff'} style={styles.raiseHand}/>
                 }
-                <FontAwesome 
-                    color = {color}
-                    name={iconName}
-                    size = {14}
-                    onPress = {this._onToggleAudio(local)}
-                    style = {styles.icAudio}/>
+                { (videoTrack && role === KEY_ROLE_TEACHER && !videoTrack.muted) &&
+                    <FontAwesome name= {ICON.IC_WEBCAM} size={14} color={'#DD0000'} style={styles.raiseHand}/>
+                }
+                <FontAwesome color = {color} name={iconName} size = {14} onPress = {this._onToggleAudio(local)} style = {styles.icAudio}/>
             </View>
         )
     }
@@ -140,7 +140,7 @@ export function _mapStateToProps(state) {
         _languages          : state['vcrx'].languages,
         _track              : state['features/base/tracks'],
         dataMic             : state['vcrx'].dataMic,
-        idRoom                : state['vcrx'].roomInfo.idRoom
+        idRoom              : state['vcrx'].roomInfo.idRoom
     };
 }
 export default translate(connect(_mapStateToProps)(UserList));
