@@ -41,7 +41,6 @@ export var enableLog = false;
 export function setEnableLog(value) {
     enableLog = value;
 }
-
 export function getEnableLog() {
     return enableLog;
 }
