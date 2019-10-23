@@ -256,19 +256,18 @@ export function configAPI(key){
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then(function(response) {
+        }).then((response) => {
             if(response.status == 200){
-                return response.json();
+                resolve(response.json());
             }else{
-                return {};
+                resolve({mess : "no"});
             }
-        }).then(function(response){
-            resolve(response);
         }).catch(err=>{
-            reject({});
+            reject(err);
         });
     });
 }
+
 export function setLogsInfo(data) {
     return new Promise(function( resolve, reject){
         fetch( DOMAIN_LOGS + '/v1/infologs', {

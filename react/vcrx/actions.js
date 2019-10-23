@@ -65,7 +65,8 @@ import {
     SET_SOCKET,
     TIME_JOIN_CLASS,
     DATA_CHANGE_MIC,
-    SET_TIME_EXIT
+    SET_TIME_EXIT,
+    GET_LIST_DOMAIN
 }                                   from './actionTypes';
 import { Base64 }                   from 'js-base64';
 import { appNavigate }              from './../features/app';
@@ -203,20 +204,30 @@ export function setTimeExitApp(timeExit) {
     };
 }
 
+export function getListDomain(listdomain){
+    return {
+        type        : GET_LIST_DOMAIN,
+        listdomain
+    }; 
+}
+
 export function setConfig(config, index = 3) {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         configAPI(config).then(res => {
+            dispatch(getListDomain(res.result.value));
             if(res.status){
                 let domains = res.result.value.split(',');
                 const params = {
                     DOMAIN_API: domains[1],
                     DEFAULT_SERVER_URL: domains[0],
-                    DOMAIN_SOCKET: domains[2],
-                    DOMAIN_LOGS: domains[3],
+                    DOMAIN_SOCKET: domains[3],
+                    DOMAIN_LOGS: domains[2],
                     select: index
                 };
                 AsyncStorage.setItem(SET_CONFIG, JSON.stringify(params));
             }
+        }).catch(err => {
+            console.log("err", err);
         });
     }
 }

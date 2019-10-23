@@ -10,7 +10,8 @@ import {
     SET_SOCKET,
     TIME_JOIN_CLASS,
     DATA_CHANGE_MIC,
-    SET_TIME_EXIT
+    SET_TIME_EXIT,
+    GET_LIST_DOMAIN
 }                                   from './actionTypes';
 var languagesDefault = require('./lang/vi.json');
 let d = new Date();
@@ -130,6 +131,11 @@ ReducerRegistry.register('vcrx', (state = stateDefault, action) => {
             return {
                 ...state,
                 timeExit: action.timeExit
+            };
+        case GET_LIST_DOMAIN:
+            return {
+                ...state,
+                listdomain: action.listdomain
             };
         default:
             return state;

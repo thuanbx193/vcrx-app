@@ -38,7 +38,8 @@ class Room extends Component {
         this.state = {
             netType: ''
         }
-        this.socket = io(DOMAIN_SOCKET, { jsonp: false });
+        let domains = this.props.listdomain.split(',');
+        this.socket = io(domains[3], { jsonp: false });
     }
 
     startListenerTapped = () => {
@@ -135,7 +136,8 @@ function _mapStateToProps(state) {
         indexLayout        : state['vcrx'].roomInfo.indexLayout,
         _chatVisible       : state['vcrx'].chatInfo.chatVisible,
         _userId            : state['vcrx'].userInfo.id,
-        _roomId            : state['vcrx'].roomInfo.idRoom
+        _roomId            : state['vcrx'].roomInfo.idRoom,
+        listdomain         : state['vcrx'].listdomain  
     };
 }
 

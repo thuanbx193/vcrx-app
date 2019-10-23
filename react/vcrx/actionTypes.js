@@ -10,3 +10,4 @@ export const CHANGE_LANGUAGE            = Symbol('CHANGE_LANGUAGE');
 export const SET_SOCKET                 = Symbol('SET_SOCKET');
 export const TIME_JOIN_CLASS            = Symbol('TIME_JOIN_CLASS');
 export const DATA_CHANGE_MIC            = Symbol('DATA_CHANGE_MIC');
+export const GET_LIST_DOMAIN            = Symbol('GET_LIST_DOMAIN');
