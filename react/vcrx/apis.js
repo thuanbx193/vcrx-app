@@ -14,12 +14,11 @@ import {
     DOMAIN_LOGS,
     API_ADD_LOG_ACTION,
     API_ADD_LOG_ERROR,
-    API_ADD_LOG_VCRX_CONNECT,
     LINK_CONFIG,
-    API_GET_USER_INFO, API_ADD_LOG_ERROR_V4,
+    API_GET_USER_INFO,
     getEnableLog
 } from './config';
-import {TOKEN_LOG, SET_CONFIG, SYSTEM, TYPE_SYSTEM, SYSTEM_LOG, LOG_CALL} from "./constants";
+import {TOKEN_LOG, SET_CONFIG, SYSTEM_LOG, LOG_CALL} from "./constants";
 import DeviceInfo from "react-native-device-info";
 
 //Base api get

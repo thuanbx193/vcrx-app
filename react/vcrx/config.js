@@ -30,7 +30,7 @@ export const PERMISSION         = {
 }
 
 export const LINK_PLAYSTORE_PORTAL              = 'https://play.google.com/store/apps/details?id=vn.topica.nativemobileportal';
-export const LINK_APPSTORE_PORTAL               = '';
+export const LINK_APPSTORE_PORTAL               = 'https://apps.apple.com/us/app/native-mobile-portal/id1439563361';
 export const LINK_CONFIG                        = "https://vcrxapi.topica.vn/api/config/getconfig?key=";
 
 export const LINK_PLAYSTORE_VCRX                = "https://play.google.com/store/apps/details?id=org.topica.vcrx";
@@ -41,7 +41,6 @@ export var enableLog = false;
 export function setEnableLog(value) {
     enableLog = value;
 }
-
 export function getEnableLog() {
     return enableLog;
 }
