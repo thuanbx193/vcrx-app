@@ -28,10 +28,12 @@ import {
     setTimeExitApp,
     checkUpdateApp
 }                               from '../../actions';
-import {APP_VERSION, SET_CONFIG} from "../../constants";
+import {
+    APP_VERSION, SET_CONFIG, NVNP, SELECTED_NVNP
+}                               from "../../constants";
 import Orientation              from 'react-native-orientation';
 import Dialog                   from "react-native-dialog";
-import {getAsyncStorage} from "../../apis";
+import {getAsyncStorage}        from "../../apis";
 import {
     setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS
 }                               from "../../config";
@@ -80,7 +82,7 @@ class HomePage extends Component<*> {
                 };
                 this.setState({dataCustom : params });
             } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
-               this.props.dispatch(setConfig("NVNP", 3));
+               this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
             }
         });
         AppState.addEventListener('change', this._handleAppStateChange);
