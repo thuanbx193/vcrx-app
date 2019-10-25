@@ -1057,6 +1057,9 @@ export function updateChatUsers(user){
 export function saveLogsConnectionQuality() {
     return (dispatch, getState) => {
         let participants = getState()['features/base/participants'];
+        let role         = getState()['vcrx'].userInfo.role === ROLE.mobile ? ROLE.hv : ROLE.audit;
+        let date         = new Date(parseInt(getState()['vcrx'].roomInfo.timeAvailable)*1000);
+        let hour         = date.getHours();
         let { userInfo, roomInfo } = getState()['vcrx'];
         if(participants.length > 1) {
             let connectionStats = getState()["features/base/conference"].conference.connectionQuality.getStats();
@@ -1073,7 +1076,9 @@ export function saveLogsConnectionQuality() {
                     packetLoss,
                     jvbRTT,
                     resolution,
-                    transport
+                    transport,
+                    role,
+                    hour
                 }
                 dispatch(saveLogInfo(data, CONNECTION_QUALITY));
             }
