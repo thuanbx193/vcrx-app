@@ -696,6 +696,7 @@ export function joinRoomByLink(uri,isDeep){
                             "appVersion"       : DeviceInfo.getVersion(),
                             "systemVersion"    : DeviceInfo.getSystemVersion(),
                             "deviceName"       : DeviceInfo.getDeviceName(),
+                            "model"            : DeviceInfo.getModel(),
                             "deviceId"         : DeviceInfo.getDeviceId(),
                             "pin"              : batteryLevel,
                             "carrier"          : DeviceInfo.getCarrier(),
