@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import {Linking} from 'react-native';
+import {Linking, Alert} from 'react-native';
 
 import { BaseApp } from '../../base/app';
 import { toURLString } from '../../base/util';
@@ -15,6 +15,7 @@ import { appNavigate } from '../actions';
 import { getDefaultURL } from '../functions';
 import { joinRoomByLink, setTimeExitApp } from '../../../vcrx/actions';
 import { getAsyncStorage } from "../../../vcrx/apis";
+import { checkUpdateApp } from "../../../vcrx/actions";
 import { TIME_EXIT_APP } from "../../../vcrx/config";
 
 /**
@@ -137,11 +138,7 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @protected
      * @returns {void}
      */
-    _openURL(url) {
-        if (url.indexOf("://mobileportal/") != -1){
-            this.state.store.dispatch(joinRoomByLink(url,true));
-        } else {
-            this.state.store.dispatch(appNavigate(toURLString(url)));
-        }
+    _openURL (url) {
+        this.state.store.dispatch(checkUpdateApp(url));
     }
 }

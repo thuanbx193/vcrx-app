@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {
     DOMAIN_API,
+    DOMAIN_API_TESTER,
     API_LOGIN_API,
     API_USERNAME,
     API_PASSWORD,
@@ -13,12 +14,11 @@ import {
     DOMAIN_LOGS,
     API_ADD_LOG_ACTION,
     API_ADD_LOG_ERROR,
-    API_ADD_LOG_VCRX_CONNECT,
     LINK_CONFIG,
-    API_GET_USER_INFO, API_ADD_LOG_ERROR_V4,
+    API_GET_USER_INFO,
     getEnableLog
 } from './config';
-import {TOKEN_LOG, SET_CONFIG, SYSTEM, TYPE_SYSTEM, SYSTEM_LOG, LOG_CALL} from "./constants";
+import {TOKEN_LOG, SET_CONFIG, SYSTEM_LOG, LOG_CALL} from "./constants";
 import DeviceInfo from "react-native-device-info";
 
 //Base api get
@@ -333,7 +333,7 @@ export function setLogsCallApi(data) {
 
 export function checkUpdateAppAPI(currentVersion, systemName, customer){
     return new Promise((resolve,reject) => {
-        fetch(DOMAIN_API + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
+        fetch(DOMAIN_API_TESTER + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
             method: "GET",
             headers: {
                 'Accept': 'application/json',

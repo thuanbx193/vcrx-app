@@ -12,7 +12,6 @@ export const ACTION_UPDATE_P            = "ACTION_UPDATE_P";
 export const ACTION_SEND_ASSESSMENT     = "send-assessment";
 export const ACTION_START_ROOM          = "startRoom";
 export const ACTION_UPLOAD              = "update-material";
-export const ACTION_CAPTURE             = "capture-room";
 
 export const ACTION_LOG_RAISE_HAND  = "RAISE_HAND";
 
@@ -52,7 +51,8 @@ export const ICON = {
     IC_MIC_ENABLE: 'microphone',
     IC_MIC_DISABLE: 'microphone-slash',
     IC_RAISE_HAND: 'hand-paper-o',
-    IC_CLOSE: 'close'
+    IC_CLOSE: 'close',
+    IC_WEBCAM: 'camera'
 }
 
 export const ACTION_TOGGLE_MICRO = "toggleMicro";
@@ -98,7 +98,7 @@ export const ROLE = {
     mobile      : 'MOBILE',
     student     : 'STUDENT'
 }
-export const APP_VERSION        = ' 4.2.10';
+export const APP_VERSION        = '5.0.0';
 
 export const LOGOUT_BY_PRESS_LOGOUT_BUTTON  = 1;
 export const LOGOUT_BY_KICKOUT              = 2;
