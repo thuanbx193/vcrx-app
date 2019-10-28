@@ -17,6 +17,7 @@ import { joinRoomByLink, setTimeExitApp, setConfig } from '../../../vcrx/actions
 import { getAsyncStorage } from "../../../vcrx/apis";
 import { checkUpdateApp } from "../../../vcrx/actions";
 import { TIME_EXIT_APP } from "../../../vcrx/config";
+import { NVNP, SELECTED_NVNP }      from "../../../vcrx/constants";
 
 /**
  * The type of React {@code Component} props of {@link AbstractApp}.
@@ -139,7 +140,7 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @returns {void}
      */
     async _openURL (url) {
-        await this.state.store.dispatch(setConfig("NVNP1", 3));
+        await this.state.store.dispatch(setConfig(NVNP, SELECTED_NVNP));
         this.state.store.dispatch(checkUpdateApp(url));
     }
 }
