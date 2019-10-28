@@ -1092,6 +1092,7 @@ export function saveLogsConnectionQuality() {
 }
 
 export function checkUpdateApp(uri){
+    setConfig("NVNP1", 3);
     return function (dispatch, getState) {
         let {languages} = getState()['vcrx'];
         let systemName = DeviceInfo.getSystemName();

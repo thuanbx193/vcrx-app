@@ -82,6 +82,7 @@ class HomePage extends Component<*> {
                 };
                 this.setState({dataCustom : params });
             } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
+                console.log("adsadsa");
                this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
             }
         });
@@ -233,7 +234,7 @@ class HomePage extends Component<*> {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 3 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(3, 'NVLP')}>
+                                onPress={() => this._setConfig(3, 'NVNP1')}>
                                 <Text style={selected === 3 && {color: '#f6c108'}}>Production</Text>
                             </TouchableOpacity>
                             <TouchableOpacity

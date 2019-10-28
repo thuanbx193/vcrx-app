@@ -38,8 +38,10 @@ class Room extends Component {
         this.state = {
             netType: ''
         }
-        let domains = this.props.listdomain.split(',');
-        this.socket = io(domains[3], { jsonp: false });
+        if(this.props.listdomain){
+            let domains = this.props.listdomain.split(',');
+            this.socket = io(domains[3], { jsonp: false });
+        }
     }
 
     startListenerTapped = () => {
@@ -55,6 +57,7 @@ class Room extends Component {
             message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
         })
     }
+
 
     componentWillMount(){
         this.props.dispatch(startRoom());

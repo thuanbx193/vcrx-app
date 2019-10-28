@@ -13,7 +13,7 @@ import '../../rejoin'; // Enable rejoin analytics
 
 import { appNavigate } from '../actions';
 import { getDefaultURL } from '../functions';
-import { joinRoomByLink, setTimeExitApp } from '../../../vcrx/actions';
+import { joinRoomByLink, setTimeExitApp, setConfig } from '../../../vcrx/actions';
 import { getAsyncStorage } from "../../../vcrx/apis";
 import { checkUpdateApp } from "../../../vcrx/actions";
 import { TIME_EXIT_APP } from "../../../vcrx/config";
@@ -138,7 +138,8 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @protected
      * @returns {void}
      */
-    _openURL (url) {
+    async _openURL (url) {
+        await this.state.store.dispatch(setConfig("NVNP1", 3));
         this.state.store.dispatch(checkUpdateApp(url));
     }
 }
