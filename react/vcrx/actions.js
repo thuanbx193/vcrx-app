@@ -211,6 +211,7 @@ export function getListDomain(listdomain){
 }
 
 export function setConfig(config, index = 3) {
+    console.log("sadadada---");
     return function(dispatch, getState) {
         configAPI(config).then(res => {
             dispatch(getListDomain(res.result.value));
@@ -679,7 +680,6 @@ export function setTimeJoinClass(time) {
 }
 
 export function joinRoomByLink(uri,isDeep){
-    console.log("----", getDefaultServerURL());
     let url = uri;
     return function (dispatch, getState){
         if(uri!=null && uri.indexOf(PORTAL_LINKING.KEY_CHECK) != -1){
