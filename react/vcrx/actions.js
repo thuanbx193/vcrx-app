@@ -51,7 +51,9 @@ import {
     TIME_EXIT_APP,
     LINK_PLAYSTORE_VCRX,
     LINK_APPSTORE_VCRX,
-
+    setDomainLog,
+    getDefaultServerURL,
+    setDefultServerURL
 }                                   from './config';
 import {
     CHANGE_ROOM_INFO,
@@ -65,7 +67,8 @@ import {
     SET_SOCKET,
     TIME_JOIN_CLASS,
     DATA_CHANGE_MIC,
-    SET_TIME_EXIT
+    SET_TIME_EXIT,
+    GET_LIST_DOMAIN
 }                                   from './actionTypes';
 import { Base64 }                   from 'js-base64';
 import { appNavigate }              from './../features/app';
@@ -200,20 +203,32 @@ export function setTimeExitApp(timeExit) {
     };
 }
 
+export function getListDomain(listdomain){
+    return {
+        type        : GET_LIST_DOMAIN,
+        listdomain
+    }; 
+}
+
 export function setConfig(config, index = 3) {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         configAPI(config).then(res => {
+            dispatch(getListDomain(res.result.value));
             if(res.status){
                 let domains = res.result.value.split(',');
                 const params = {
                     DOMAIN_API: domains[1],
-                    DEFAULT_SERVER_URL: domains[0],
-                    DOMAIN_SOCKET: domains[2],
-                    DOMAIN_LOGS: domains[3],
+                    DEFAULT_SERVER_URL: domains[2],
+                    DOMAIN_SOCKET: domains[3],
+                    DOMAIN_LOGS: domains[4],
                     select: index
                 };
+                setDomainLog(domains[3]);
+                setDefultServerURL(domains[2]);
                 AsyncStorage.setItem(SET_CONFIG, JSON.stringify(params));
             }
+        }).catch(err => {
+            console.log("err", err);
         });
     }
 }
@@ -669,7 +684,7 @@ export function joinRoomByLink(uri,isDeep){
         if(uri!=null && uri.indexOf(PORTAL_LINKING.KEY_CHECK) != -1){
             uri = uri.replace("vcrxconnect","https");
             uri = decodeURI(uri);
-            if(uri != DEFAULT_SERVER_URL){
+            if(uri != getDefaultServerURL()){
                 var params = uri.split("/");
                 let userId = params[3];
                 let vcrxuserid = params[4];
@@ -1125,3 +1140,7 @@ export function checkUpdateApp(uri){
         })
     }
 }
+
+
+
+

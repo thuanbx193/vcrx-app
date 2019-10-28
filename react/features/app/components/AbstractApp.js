@@ -13,10 +13,11 @@ import '../../rejoin'; // Enable rejoin analytics
 
 import { appNavigate } from '../actions';
 import { getDefaultURL } from '../functions';
-import { joinRoomByLink, setTimeExitApp } from '../../../vcrx/actions';
+import { joinRoomByLink, setTimeExitApp, setConfig } from '../../../vcrx/actions';
 import { getAsyncStorage } from "../../../vcrx/apis";
 import { checkUpdateApp } from "../../../vcrx/actions";
 import { TIME_EXIT_APP } from "../../../vcrx/config";
+import { NVNP, SELECTED_NVNP }      from "../../../vcrx/constants";
 
 /**
  * The type of React {@code Component} props of {@link AbstractApp}.
@@ -138,7 +139,8 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @protected
      * @returns {void}
      */
-    _openURL (url) {
+    async _openURL (url) {
+        await this.state.store.dispatch(setConfig(NVNP, SELECTED_NVNP));
         this.state.store.dispatch(checkUpdateApp(url));
     }
 }

@@ -17,6 +17,7 @@ import {
     TextInput, Image, TouchableOpacity,
     StatusBar, AppState
 }                               from 'react-native';
+import NetInfo                  from "@react-native-community/netinfo";
 import { connect }              from 'react-redux';
 import styles                   from './styles';
 import {
@@ -27,11 +28,15 @@ import {
     setTimeExitApp,
     checkUpdateApp
 }                               from '../../actions';
-import {APP_VERSION, SET_CONFIG} from "../../constants";
+import {
+    APP_VERSION, SET_CONFIG, NVNP, SELECTED_NVNP
+}                               from "../../constants";
 import Orientation              from 'react-native-orientation';
 import Dialog                   from "react-native-dialog";
-import {getAsyncStorage} from "../../apis";
-import {setEnableLog, TIME_EXIT_APP} from "../../config";
+import {getAsyncStorage}        from "../../apis";
+import {
+    setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS, setDomainLog
+}                               from "../../config";
 
 class HomePage extends Component<*> {
 
@@ -42,10 +47,6 @@ class HomePage extends Component<*> {
             toggle      : false,
             selected    : 3,    
             dataCustom: {   
-                DOMAIN_LOGS        : '',
-                DOMAIN_API          : '',
-                DEFAULT_SERVER_URL  : '',
-                DOMAIN_SOCKET       : ''
             },
             appState: AppState.currentState
         };
@@ -71,11 +72,36 @@ class HomePage extends Component<*> {
             })
         })
         Orientation.lockToPortrait();
+        NetInfo.addEventListener(state => {
+            if (!state.isConnected && this.state.selected === 3){
+                let params = {
+                    DOMAIN_LOGS: DOMAIN_LOGS,
+                    DOMAIN_API: DOMAIN_API,
+                    DEFAULT_SERVER_URL: DEFAULT_SERVER_URL,
+                    DOMAIN_SOCKET: DOMAIN_SOCKET,
+                };
+                this.setState({dataCustom : params });
+            } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
+               this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
+            }
+        });
         AppState.addEventListener('change', this._handleAppStateChange);
     }
 
     componentWillUnmount() {
         AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    componentWillReceiveProps(nextProps){
+        let domains = nextProps.listdomain.split(',');
+        const params = {
+            DOMAIN_LOGS: domains[2],
+            DOMAIN_API: domains[1],
+            DEFAULT_SERVER_URL: domains[0],
+            DOMAIN_SOCKET: domains[3],
+        };
+        setDomainLog(domains[2]);
+        this.setState({dataCustom : params });
     }
 
     _handleAppStateChange = nextAppState => {
@@ -208,7 +234,7 @@ class HomePage extends Component<*> {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 3 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(3, 'NVLP')}>
+                                onPress={() => this._setConfig(SELECTED_NVNP, NVNP)}>
                                 <Text style={selected === 3 && {color: '#f6c108'}}>Production</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -263,7 +289,8 @@ export function _mapStateToProps(state: Object) {
         }
     }
     return {
-        _languages   : state['vcrx'].languages
+        _languages   : state['vcrx'].languages,
+        listdomain    : state['vcrx'].listdomain
     };
 }
 

@@ -22,7 +22,7 @@ import io                       from "socket.io-client/dist/socket.io.js";
 import NetInfo                  from "@react-native-community/netinfo";
 import CallDetectorManager      from 'react-native-call-detection'
 import VideoWarmUp              from '../../video-warmup/components/VideoWarmUp';
-import { DOMAIN_SOCKET }        from '../../../config';
+import { DOMAIN_SOCKET, getDomainLog }        from '../../../config';
 import {
     PORTAL_LINKING,
     CALL_INCOMING,
@@ -38,7 +38,11 @@ class Room extends Component {
         this.state = {
             netType: ''
         }
-        this.socket = io(DOMAIN_SOCKET, { jsonp: false });
+        if(this.props.listdomain){
+            let domains = this.props.listdomain.split(',');
+            this.socket = io(domains[3], { jsonp: false });
+        }
+        
     }
 
     startListenerTapped = () => {
@@ -54,6 +58,7 @@ class Room extends Component {
             message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
         })
     }
+
 
     componentWillMount(){
         this.props.dispatch(startRoom());
@@ -135,7 +140,8 @@ function _mapStateToProps(state) {
         indexLayout        : state['vcrx'].roomInfo.indexLayout,
         _chatVisible       : state['vcrx'].chatInfo.chatVisible,
         _userId            : state['vcrx'].userInfo.id,
-        _roomId            : state['vcrx'].roomInfo.idRoom
+        _roomId            : state['vcrx'].roomInfo.idRoom,
+        listdomain         : state['vcrx'].listdomain  
     };
 }
 
