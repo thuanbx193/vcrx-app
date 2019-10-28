@@ -234,7 +234,7 @@ class HomePage extends Component<*> {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 3 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(3, 'NVNP1')}>
+                                onPress={() => this._setConfig(SELECTED_NVNP, NVNP)}>
                                 <Text style={selected === 3 && {color: '#f6c108'}}>Production</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
