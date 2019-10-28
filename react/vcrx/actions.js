@@ -211,7 +211,6 @@ export function getListDomain(listdomain){
 }
 
 export function setConfig(config, index = 3) {
-    console.log("sadadada---");
     return function(dispatch, getState) {
         configAPI(config).then(res => {
             dispatch(getListDomain(res.result.value));
