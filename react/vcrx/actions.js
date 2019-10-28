@@ -51,7 +51,9 @@ import {
     TIME_EXIT_APP,
     LINK_PLAYSTORE_VCRX,
     LINK_APPSTORE_VCRX,
-
+    setDomainLog,
+    getDefaultServerURL,
+    setDefultServerURL
 }                                   from './config';
 import {
     CHANGE_ROOM_INFO,
@@ -216,11 +218,13 @@ export function setConfig(config, index = 3) {
                 let domains = res.result.value.split(',');
                 const params = {
                     DOMAIN_API: domains[1],
-                    DEFAULT_SERVER_URL: domains[0],
+                    DEFAULT_SERVER_URL: domains[2],
                     DOMAIN_SOCKET: domains[3],
-                    DOMAIN_LOGS: domains[2],
+                    DOMAIN_LOGS: domains[4],
                     select: index
                 };
+                setDomainLog(domains[3]);
+                setDefultServerURL(domains[2]);
                 AsyncStorage.setItem(SET_CONFIG, JSON.stringify(params));
             }
         }).catch(err => {
@@ -675,12 +679,13 @@ export function setTimeJoinClass(time) {
 }
 
 export function joinRoomByLink(uri,isDeep){
+    console.log("----", getDefaultServerURL());
     let url = uri;
     return function (dispatch, getState){
         if(uri!=null && uri.indexOf(PORTAL_LINKING.KEY_CHECK) != -1){
             uri = uri.replace("vcrxconnect","https");
             uri = decodeURI(uri);
-            if(uri != DEFAULT_SERVER_URL){
+            if(uri != getDefaultServerURL()){
                 var params = uri.split("/");
                 let userId = params[3];
                 let vcrxuserid = params[4];
@@ -1092,7 +1097,6 @@ export function saveLogsConnectionQuality() {
 }
 
 export function checkUpdateApp(uri){
-    setConfig("NVNP1", 3);
     return function (dispatch, getState) {
         let {languages} = getState()['vcrx'];
         let systemName = DeviceInfo.getSystemName();
@@ -1127,3 +1131,7 @@ export function checkUpdateApp(uri){
         })
     }
 }
+
+
+
+
