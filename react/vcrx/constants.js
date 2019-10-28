@@ -96,7 +96,8 @@ export const ROLE = {
     audit       : 'AUDIT',
     auditMobile : 'AUDIT-MOBILE',
     mobile      : 'MOBILE',
-    student     : 'STUDENT'
+    student     : 'STUDENT',
+    hv          : 'HV'
 }
 export const APP_VERSION        = '5.0.0';
 

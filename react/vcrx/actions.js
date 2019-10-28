@@ -696,6 +696,7 @@ export function joinRoomByLink(uri,isDeep){
                             "appVersion"       : DeviceInfo.getVersion(),
                             "systemVersion"    : DeviceInfo.getSystemVersion(),
                             "deviceName"       : DeviceInfo.getDeviceName(),
+                            "model"            : DeviceInfo.getModel(),
                             "deviceId"         : DeviceInfo.getDeviceId(),
                             "pin"              : batteryLevel,
                             "carrier"          : DeviceInfo.getCarrier(),
@@ -1056,6 +1057,9 @@ export function updateChatUsers(user){
 export function saveLogsConnectionQuality() {
     return (dispatch, getState) => {
         let participants = getState()['features/base/participants'];
+        let role         = getState()['vcrx'].userInfo.role === ROLE.mobile ? ROLE.hv : ROLE.audit;
+        let date         = new Date(parseInt(getState()['vcrx'].roomInfo.timeAvailable)*1000);
+        let hour         = date.getHours();
         let { userInfo, roomInfo } = getState()['vcrx'];
         if(participants.length > 1) {
             let connectionStats = getState()["features/base/conference"].conference.connectionQuality.getStats();
@@ -1072,7 +1076,9 @@ export function saveLogsConnectionQuality() {
                     packetLoss,
                     jvbRTT,
                     resolution,
-                    transport
+                    transport,
+                    role,
+                    hour
                 }
                 dispatch(saveLogInfo(data, CONNECTION_QUALITY));
             }
@@ -1111,7 +1117,11 @@ export function checkUpdateApp(uri){
                 dispatch(appNavigate(toURLString(uri)));
             }
         }).catch( e => {
-            dispatch(appNavigate(toURLString(uri)));
+            if (uri.indexOf("://mobileportal/") != -1 && !response.result){
+                dispatch(joinRoomByLink(uri, true));
+            } else {
+                dispatch(appNavigate(toURLString(uri)));
+            }
         })
     }
 }
