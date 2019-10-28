@@ -35,7 +35,7 @@ import Orientation              from 'react-native-orientation';
 import Dialog                   from "react-native-dialog";
 import {getAsyncStorage}        from "../../apis";
 import {
-    setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS
+    setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS, setDomainLog
 }                               from "../../config";
 
 class HomePage extends Component<*> {
@@ -82,7 +82,6 @@ class HomePage extends Component<*> {
                 };
                 this.setState({dataCustom : params });
             } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
-                console.log("adsadsa");
                this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
             }
         });
@@ -101,6 +100,7 @@ class HomePage extends Component<*> {
             DEFAULT_SERVER_URL: domains[0],
             DOMAIN_SOCKET: domains[3],
         };
+        setDomainLog(domains[2]);
         this.setState({dataCustom : params });
     }
 

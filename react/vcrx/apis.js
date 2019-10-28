@@ -16,7 +16,8 @@ import {
     API_ADD_LOG_ERROR,
     LINK_CONFIG,
     API_GET_USER_INFO,
-    getEnableLog
+    getEnableLog,
+    getDomainLog
 } from './config';
 import {TOKEN_LOG, SET_CONFIG, SYSTEM_LOG, LOG_CALL} from "./constants";
 import DeviceInfo from "react-native-device-info";
@@ -184,7 +185,7 @@ export function getLogChat(roomIds, token){
 
 export function setLogsAction(data) {
     return new Promise(function( resolve, reject){
-        fetch( DOMAIN_LOGS + '/v1/actionlogs', {
+        fetch( getDomainLog() + '/v1/actionlogs', {
             headers: {
                 'Content-Type': 'application/json',
                 "token" : TOKEN_LOG
@@ -213,7 +214,7 @@ export function addLogAction(roomId, participantId, logTypeId, data, token){
 
 export function setLogsErrorAction(data) {
     return new Promise(function( resolve, reject){
-        fetch( DOMAIN_LOGS + '/v1/errorlogs', {
+        fetch( getDomainLog() + '/v1/errorlogs', {
             headers: {
                 'Content-Type': 'application/json',
                 "token" : TOKEN_LOG
@@ -270,7 +271,7 @@ export function configAPI(key){
 
 export function setLogsInfo(data) {
     return new Promise(function( resolve, reject){
-        fetch( DOMAIN_LOGS + '/v1/infologs', {
+        fetch( getDomainLog() + '/v1/infologs', {
             headers: {
                 'Content-Type': 'application/json',
                 "token" : TOKEN_LOG
@@ -314,7 +315,7 @@ function saveLogCallApi( data, type, uri, result, timeResponse){
 
 export function setLogsCallApi(data) {
     return new Promise(function( resolve, reject){
-        fetch( DOMAIN_LOGS + '/v1/apilogs', {
+        fetch( getDomainLog() + '/v1/apilogs', {
             headers: {
                 'Content-Type': 'application/json',
                 "token" : TOKEN_LOG
@@ -352,3 +353,4 @@ export function checkUpdateAppAPI(currentVersion, systemName, customer){
         });
     });
 }
+

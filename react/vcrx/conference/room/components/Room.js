@@ -22,7 +22,7 @@ import io                       from "socket.io-client/dist/socket.io.js";
 import NetInfo                  from "@react-native-community/netinfo";
 import CallDetectorManager      from 'react-native-call-detection'
 import VideoWarmUp              from '../../video-warmup/components/VideoWarmUp';
-import { DOMAIN_SOCKET }        from '../../../config';
+import { DOMAIN_SOCKET, getDomainLog }        from '../../../config';
 import {
     PORTAL_LINKING,
     CALL_INCOMING,
@@ -42,6 +42,7 @@ class Room extends Component {
             let domains = this.props.listdomain.split(',');
             this.socket = io(domains[3], { jsonp: false });
         }
+        
     }
 
     startListenerTapped = () => {

@@ -1,9 +1,9 @@
 
 export const DOMAIN_API                     = "https://vcrxapi.topica.vn";
 export const DOMAIN_API_TESTER              = "https://vcrxapitester.topica.vn";
-export const DEFAULT_SERVER_URL             = "https://vcrxnvn.topica.vn";
+export var   DEFAULT_SERVER_URL             = "https://vcrxnvn.topica.vn";
 export const DOMAIN_SOCKET                  = "https://html5lms.topicanative.edu.vn/";
-export const DOMAIN_LOGS                    = "https://vcrxlogs.topica.vn";
+export var   DOMAIN_LOGS                    = "https://vcrxlogs.topica.vn";
 
 export const API_LOGIN_API                  = "/api/user/login";
 export const API_GET_TIME_FROM_SERVER       = "/api/gettimeserver";
@@ -15,8 +15,8 @@ export const API_GET_LOG_CHAT               = "/api/logchats/room/ids?roomIds=";
 export const API_ADD_LOG_ACTION             = "/api/logaction/add";
 export const API_ADD_LOG_ERROR              = "/api/warning/add";
 export const API_GET_USER_INFO              = '/api/user/';
-export const API_ADD_LOG_VCRX_CONNECT       = DOMAIN_LOGS + "/v1/actionlogs";
-export const API_ADD_LOG_ERROR_V4           = DOMAIN_LOGS + "/v1/errorlogs";
+export const API_ADD_LOG_VCRX_CONNECT       = getDomainLog() + "/v1/actionlogs";
+export const API_ADD_LOG_ERROR_V4           = getDomainLog() + "/v1/errorlogs";
 
 export const API_USERNAME   		        = "ADMIN";
 export const API_PASSWORD   				= 123456;
@@ -43,6 +43,22 @@ export function setEnableLog(value) {
 }
 export function getEnableLog() {
     return enableLog;
+}
+
+export function setDomainLog(value){
+    DOMAIN_LOGS = value;
+}
+
+export function getDomainLog(){
+    return DOMAIN_LOGS;
+}
+
+export function setDefultServerURL(value){
+    DEFAULT_SERVER_URL = value;
+}
+
+export function getDefaultServerURL(){
+    return DEFAULT_SERVER_URL;
 }
 
 export const TIME_EXIT_APP                  = 'TIME_EXIT_APP';
