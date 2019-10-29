@@ -822,7 +822,7 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
         dispatch(changeRoomInfo({timeStarted:0, showVideo: false, playVideo: false}));
         localParticipant.raiseHand = false;
         dispatch(participantUpdated(localParticipant));
-        dispatch(changeTabsChat('',0));
+        dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
         setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
         setAsyncStorage(TIME_EXIT_APP, JSON.stringify(Math.round(getState()['vcrx'].timeNow)));
         let dataLogout = {
@@ -896,7 +896,7 @@ export function kickUser(userId, action) {
             dispatch(changeRoomInfo({timeStarted:0, showVideo: false, playVideo: false}));
             localParticipant.raiseHand = false;
             dispatch(participantUpdated(localParticipant));
-            dispatch(changeTabsChat('',0));
+            dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
             setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
             let link = PORTAL_LINKING.OPEN + '/' + action;
             Linking.canOpenURL(link).then(supported => {
