@@ -3,7 +3,7 @@
 import { parseURLParams } from '../config';
 import { toState } from '../redux';
 
-import { DEFAULT_SERVER_URL } from './../../../vcrx/config';
+import { DEFAULT_SERVER_URL, getDefaultServerURL } from './../../../vcrx/config';
 
 /**
  * Returns the effective value of a configuration/preference/setting by applying
@@ -95,7 +95,7 @@ export function getPropertyValue(
 export function getServerURL(stateful: Object | Function) {
     const state = toState(stateful);
 
-    return state['features/base/settings'].serverURL || DEFAULT_SERVER_URL;
+    return state['features/base/settings'].serverURL || getDefaultServerURL();
 }
 
 /**

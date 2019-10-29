@@ -59,7 +59,6 @@ class Room extends Component {
         })
     }
 
-
     componentWillMount(){
         this.props.dispatch(startRoom());
         NetInfo.addEventListener(state => {

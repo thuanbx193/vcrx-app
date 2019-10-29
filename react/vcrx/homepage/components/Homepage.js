@@ -35,7 +35,7 @@ import Orientation              from 'react-native-orientation';
 import Dialog                   from "react-native-dialog";
 import {getAsyncStorage}        from "../../apis";
 import {
-    setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS, setDomainLog
+    setEnableLog, TIME_EXIT_APP, DOMAIN_API, DEFAULT_SERVER_URL, DOMAIN_SOCKET, DOMAIN_LOGS, setDomainLog, setDefultServerURL, setDomainAPI
 }                               from "../../config";
 
 class HomePage extends Component<*> {
@@ -95,12 +95,14 @@ class HomePage extends Component<*> {
     componentWillReceiveProps(nextProps){
         let domains = nextProps.listdomain.split(',');
         const params = {
-            DOMAIN_LOGS: domains[2],
+            DOMAIN_LOGS: domains[4],
             DOMAIN_API: domains[1],
-            DEFAULT_SERVER_URL: domains[0],
+            DEFAULT_SERVER_URL: domains[2],
             DOMAIN_SOCKET: domains[3],
         };
-        setDomainLog(domains[2]);
+        setDomainLog(domains[4]);
+        setDefultServerURL(domains[2]);
+        setDomainAPI(domains[1]);
         this.setState({dataCustom : params });
     }
 

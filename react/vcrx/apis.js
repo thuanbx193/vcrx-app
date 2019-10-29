@@ -17,7 +17,8 @@ import {
     LINK_CONFIG,
     API_GET_USER_INFO,
     getEnableLog,
-    getDomainLog
+    getDomainLog,
+    getDomainAPI
 } from './config';
 import {TOKEN_LOG, SET_CONFIG, SYSTEM_LOG, LOG_CALL} from "./constants";
 import DeviceInfo from "react-native-device-info";
@@ -29,7 +30,7 @@ function get(url, param = {}, type = "", token=""){
         getAsyncStorage(SET_CONFIG)
             .then(respon => {
                 let res = JSON.parse(respon);
-                let host = DOMAIN_API;
+                let host = getDomainAPI();
                 if(res !== null && res !== undefined && res !== '') {
                   host = res.DOMAIN_API
                 }
@@ -74,7 +75,7 @@ function post(url, param, type="", token=""){
         getAsyncStorage(SET_CONFIG)
             .then(respon => {
                 let res = JSON.parse(respon);
-                let host = DOMAIN_API;
+                let host = getDomainAPI();
                 if(res !== null && res !== undefined && res !== '') {
                     host = res.DOMAIN_API
                 }
