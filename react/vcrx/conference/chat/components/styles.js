@@ -7,10 +7,9 @@ let base = createStyleSheet({
         backgroundColor:'#DDDDDD'
     },
     chatHeadTitle:{
-        flex:1, margin: 2, 
+        flex:1,
         justifyContent: 'center', 
-        alignItems: 'center',
-        borderRightWidth: 1
+        alignItems: 'center'
     },
     chatHeadTitleView:{
         flexDirection:"row"

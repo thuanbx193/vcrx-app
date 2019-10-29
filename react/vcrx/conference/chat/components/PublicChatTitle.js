@@ -43,9 +43,9 @@ class PublicChatTitle extends React.Component{
 }
 
 function _mapStateToProps(state){
-    let bgTabs = {}
+    let bgTabs = {borderRightWidth: 0.4}
     if(state['vcrx'].chatInfo.tabs == CHAT_TABS_PUBLIC){
-        bgTabs = {backgroundColor:"#dbac69"};
+        bgTabs.backgroundColor = "#dbac69";
     }
     return {
         _languages      : state['vcrx'].languages,

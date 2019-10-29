@@ -39,9 +39,9 @@ class OptionChatTitle extends React.Component{
 }
 
 function _mapStateToProps(state){
-    let bgTabs = {}
+    let bgTabs = {borderLeftWidth: 0.4}
     if(state['vcrx'].chatInfo.tabs == CHAT_TABS_OPTION){
-        bgTabs = {backgroundColor:"#dbac69"};
+        bgTabs.backgroundColor = "#dbac69";
     }
     let totalNotify = state['vcrx'].chatInfo.notifies.private.reduce((t, n) => {
         return t += n.count;
