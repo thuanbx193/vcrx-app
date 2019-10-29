@@ -53,7 +53,8 @@ import {
     LINK_APPSTORE_VCRX,
     setDomainLog,
     getDefaultServerURL,
-    setDefultServerURL
+    setDefultServerURL,
+    setDomainAPI,
 }                                   from './config';
 import {
     CHANGE_ROOM_INFO,
@@ -223,8 +224,9 @@ export function setConfig(config, index = 3) {
                     DOMAIN_LOGS: domains[4],
                     select: index
                 };
-                setDomainLog(domains[3]);
+                setDomainLog(domains[4]);
                 setDefultServerURL(domains[2]);
+                setDomainAPI(domains[1]);
                 AsyncStorage.setItem(SET_CONFIG, JSON.stringify(params));
             }
         }).catch(err => {
@@ -740,6 +742,7 @@ export function joinRoomByLink(uri,isDeep){
                     uri: url,
                     isDeep: isDeep
                 };
+                let serverURL = getDefaultServerURL();
                 setAsyncStorage('dataInfo', JSON.stringify({roomId: roomId, userId: userId}));
                 dispatch(saveLogAction(dataAction, ACTION_LINKING_PORTAL_CONNECT));
                 dispatch(changeRoomInfo({idRoom:roomId, timeAvailable: params[7], idRoomVcrx: vcrxroomid}));
@@ -748,7 +751,7 @@ export function joinRoomByLink(uri,isDeep){
                         if(user.status ||1){
                             dispatch(changeUserInfo({tokenAPI:resLogin.result.accessToken}));
                             await dispatch(initRoom(vcrxroomid, resLogin.result.accessToken));
-                            dispatch(appNavigate(toURLString(DEFAULT_SERVER_URL + "/" + roomId.toString())));
+                            dispatch(appNavigate(toURLString(serverURL + "/" + roomId.toString())));
                         } else {
                             let link = PORTAL_LINKING.PARAM;
                             Linking.canOpenURL(link).then(supported => {

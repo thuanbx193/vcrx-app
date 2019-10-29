@@ -1,6 +1,6 @@
 
-export const DOMAIN_API                     = "https://vcrxapi.topica.vn";
-export const DOMAIN_API_TESTER              = "https://vcrxapitester.topica.vn";
+export var   DOMAIN_API                     = "https://vcrxapi.topica.vn";
+export var   DOMAIN_API_TESTER              = "https://vcrxapitester.topica.vn";
 export var   DEFAULT_SERVER_URL             = "https://vcrxnvn.topica.vn";
 export const DOMAIN_SOCKET                  = "https://html5lms.topicanative.edu.vn/";
 export var   DOMAIN_LOGS                    = "https://vcrxlogs.topica.vn";
@@ -59,6 +59,14 @@ export function setDefultServerURL(value){
 
 export function getDefaultServerURL(){
     return DEFAULT_SERVER_URL;
+}
+
+export function setDomainAPI(value){
+    DOMAIN_API = value;
+}
+
+export function getDomainAPI(){
+    return DOMAIN_API;
 }
 
 export const TIME_EXIT_APP                  = 'TIME_EXIT_APP';
