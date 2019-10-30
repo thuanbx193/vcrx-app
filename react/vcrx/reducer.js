@@ -38,7 +38,7 @@ let stateDefault = {
         indexLayout     : 0,
         idRoom          : 0,
         errorKey        : 0,
-        slide           : 'https://qlhl.topicanative.edu.vn/uploads/20191009/14.10_.2019_LS_Basic_Do_you_prefer_to_spend_or_save_money_Huyendt9_.pdf'
+        slide           : ''
     },
     chatInfo : {
         chatVisible: false,
