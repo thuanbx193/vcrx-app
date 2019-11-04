@@ -295,7 +295,7 @@ function _onPerformEndCallAction({ callUUID }) {
         // We arrive here when a call is ended by the system, for example, when
         // another incoming call is received and the user selects "End &
         // Accept".
-        delete conference.callUUID;
+        // delete conference.callUUID;
         // dispatch(appNavigate(undefined));
         dispatch(exitClass());
     }
