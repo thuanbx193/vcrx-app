@@ -901,7 +901,7 @@ export function kickUser(userId, action) {
             dispatch(participantUpdated(localParticipant));
             dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
             setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
-            let link = PORTAL_LINKING.OPEN + '/' + action;
+            let link = PORTAL_LINKING.OPEN + '/' + PORTAL_LINKING.KICK;
             Linking.canOpenURL(link).then(supported => {
                 if (!supported) {
                     Alert.alert(languages.topica.lms.login.title,
