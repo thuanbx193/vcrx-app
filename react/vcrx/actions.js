@@ -811,7 +811,7 @@ export function updateParticipant(conference){
 export function exitClass(typeLog = ACTION_LOG_OUT) {
     return function (dispatch, getState) {
         let typeLeaveRoom = LEAVE_PROACTIVE;
-        let { userInfo, chatInfo, socket, roomInfo } = getState()['vcrx'];
+        let { userInfo, chatInfo, socket, roomInfo, languages } = getState()['vcrx'];
         if (typeLog === ACTION_LOG_OUT){
             typeLeaveRoom = LEAVE_PROACTIVE
         } else {
