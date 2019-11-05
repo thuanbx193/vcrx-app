@@ -811,7 +811,7 @@ export function updateParticipant(conference){
 export function exitClass(typeLog = ACTION_LOG_OUT) {
     return function (dispatch, getState) {
         let typeLeaveRoom = LEAVE_PROACTIVE;
-        let { userInfo, chatInfo, socket, roomInfo } = getState()['vcrx'];
+        let { userInfo, chatInfo, socket, roomInfo, languages } = getState()['vcrx'];
         if (typeLog === ACTION_LOG_OUT){
             typeLeaveRoom = LEAVE_PROACTIVE
         } else {
@@ -838,24 +838,25 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
         let link = PORTAL_LINKING.LOGOUT;
         Linking.canOpenURL(link).then(supported => {
             if (!supported) {
-                Alert.alert(languages.topica.lms.login.title,
-                    languages.topica.homepage.no_portal,
-                    [   {
-                            text: languages.topica.homepage.install, onPress: () => {
-                                Platform.OS === 'android' ?
-                                Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                Linking.openURL(LINK_APPSTORE_PORTAL)
-                            }
-                        },
-                        {
-                          text: languages.topica.homepage.cancel, onPress: () => {
-                              dispatch(appNavigate(undefined));
-                              dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
-                          }
-                        }
-                    ],
-                    { cancelable: false }
-                );
+                dispatch(appNavigate(undefined));
+                // Alert.alert(languages.topica.lms.login.title,
+                //     languages.topica.homepage.no_portal,
+                //     [   {
+                //             text: languages.topica.homepage.install, onPress: () => {
+                //                 Platform.OS === 'android' ?
+                //                 Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+                //                 Linking.openURL(LINK_APPSTORE_PORTAL)
+                //             }
+                //         },
+                //         {
+                //           text: languages.topica.homepage.cancel, onPress: () => {
+                //               dispatch(appNavigate(undefined));
+                //               dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
+                //           }
+                //         }
+                //     ],
+                //     { cancelable: false }
+                // );
             } else {
                 dispatch(appNavigate(undefined));
                 return Linking.openURL(link);
@@ -901,7 +902,7 @@ export function kickUser(userId, action) {
             dispatch(participantUpdated(localParticipant));
             dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
             setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
-            let link = PORTAL_LINKING.OPEN + '/' + action;
+            let link = PORTAL_LINKING.OPEN + '/' + PORTAL_LINKING.KICK;
             Linking.canOpenURL(link).then(supported => {
                 if (!supported) {
                     Alert.alert(languages.topica.lms.login.title,
@@ -1135,7 +1136,7 @@ export function checkUpdateApp(uri){
                 dispatch(appNavigate(toURLString(uri)));
             }
         }).catch( e => {
-            if (uri.indexOf("://mobileportal/") != -1 && !response.result){
+            if (uri.indexOf("://mobileportal/") != -1){
                 dispatch(joinRoomByLink(uri, true));
             } else {
                 dispatch(appNavigate(toURLString(uri)));

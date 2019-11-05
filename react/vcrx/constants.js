@@ -140,5 +140,5 @@ export const LEAVE_KICK_CALL        = 'LEAVE_KICK_CALL';
 export const LEAVE_KICK_ETC         = 'LEAVE_KICK_ETC';
 
 export const ACCESS_MICRO           = 'ACCESS_MICRO';
-export const NVNP                   = 'NVNP1';
+export const NVNP                   = 'NVNP';
 export const SELECTED_NVNP          =  3;
