@@ -1135,7 +1135,7 @@ export function checkUpdateApp(uri){
                 dispatch(appNavigate(toURLString(uri)));
             }
         }).catch( e => {
-            if (uri.indexOf("://mobileportal/") != -1 && !response.result){
+            if (uri.indexOf("://mobileportal/") != -1){
                 dispatch(joinRoomByLink(uri, true));
             } else {
                 dispatch(appNavigate(toURLString(uri)));
