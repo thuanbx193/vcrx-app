@@ -290,14 +290,13 @@ function _conferenceWillJoin({ dispatch, getState }, next, action) {
 function _onPerformEndCallAction({ callUUID }) {
     const { dispatch, getState } = this; // eslint-disable-line no-invalid-this
     const conference = getCurrentConference(getState);
-
     if (conference && conference.callUUID === callUUID) {
         // We arrive here when a call is ended by the system, for example, when
         // another incoming call is received and the user selects "End &
         // Accept".
-        // delete conference.callUUID;
-        // dispatch(appNavigate(undefined));
-        dispatch(exitClass());
+        delete conference.callUUID;
+        dispatch(appNavigate(undefined));
+        // dispatch(exitClass());
     }
 }
 
