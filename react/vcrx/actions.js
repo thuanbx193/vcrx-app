@@ -838,24 +838,25 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
         let link = PORTAL_LINKING.LOGOUT;
         Linking.canOpenURL(link).then(supported => {
             if (!supported) {
-                Alert.alert(languages.topica.lms.login.title,
-                    languages.topica.homepage.no_portal,
-                    [   {
-                            text: languages.topica.homepage.install, onPress: () => {
-                                Platform.OS === 'android' ?
-                                Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                Linking.openURL(LINK_APPSTORE_PORTAL)
-                            }
-                        },
-                        {
-                          text: languages.topica.homepage.cancel, onPress: () => {
-                              dispatch(appNavigate(undefined));
-                              dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
-                          }
-                        }
-                    ],
-                    { cancelable: false }
-                );
+                dispatch(appNavigate(undefined));
+                // Alert.alert(languages.topica.lms.login.title,
+                //     languages.topica.homepage.no_portal,
+                //     [   {
+                //             text: languages.topica.homepage.install, onPress: () => {
+                //                 Platform.OS === 'android' ?
+                //                 Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+                //                 Linking.openURL(LINK_APPSTORE_PORTAL)
+                //             }
+                //         },
+                //         {
+                //           text: languages.topica.homepage.cancel, onPress: () => {
+                //               dispatch(appNavigate(undefined));
+                //               dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
+                //           }
+                //         }
+                //     ],
+                //     { cancelable: false }
+                // );
             } else {
                 dispatch(appNavigate(undefined));
                 return Linking.openURL(link);
