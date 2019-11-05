@@ -903,31 +903,32 @@ export function kickUser(userId, action) {
             dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
             setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
             let link = PORTAL_LINKING.OPEN + '/' + PORTAL_LINKING.KICK;
-            Linking.canOpenURL(link).then(supported => {
-                if (!supported) {
-                    Alert.alert(languages.topica.lms.login.title,
-                        languages.topica.homepage.no_portal,
-                        [   {
-                                text: languages.topica.homepage.install, onPress: () => {
-                                    Platform.OS === 'android' ?
-                                    Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                    Linking.openURL(LINK_APPSTORE_PORTAL)
-                                }
-                            },
-                            {
-                                text: languages.topica.homepage.cancel, onPress: () => {
-                                    dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
-                                    dispatch(appNavigate(undefined));
-                                }
-                            }
-                        ],
-                        { cancelable: false }
-                    );
-                } else {
-                    dispatch(appNavigate(undefined));
-                    return Linking.openURL(link);
-                }
-            }).catch(err => console.error('An error occurred', err));
+            dispatch(appNavigate(undefined));
+            // Linking.canOpenURL(link).then(supported => {
+            //     if (!supported) {
+            //         Alert.alert(languages.topica.lms.login.title,
+            //             languages.topica.homepage.no_portal,
+            //             [   {
+            //                     text: languages.topica.homepage.install, onPress: () => {
+            //                         Platform.OS === 'android' ?
+            //                         Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+            //                         Linking.openURL(LINK_APPSTORE_PORTAL)
+            //                     }
+            //                 },
+            //                 {
+            //                     text: languages.topica.homepage.cancel, onPress: () => {
+            //                         dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_OUT));
+            //                         dispatch(appNavigate(undefined));
+            //                     }
+            //                 }
+            //             ],
+            //             { cancelable: false }
+            //         );
+            //     } else {
+            //         dispatch(appNavigate(undefined));
+            //         return Linking.openURL(link);
+            //     }
+            // }).catch(err => console.error('An error occurred', err));
             setTimeout(() => {
                 if(Platform.OS === 'android'){
                     RNExitApp.exitApp();
