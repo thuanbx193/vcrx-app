@@ -1,11 +1,11 @@
-import React                from 'react';
-import { View }             from 'react-native';
-import UserListChat         from './UserListChat';
-import OptionChatTitle      from './OptionChatTitle';
-import UserChatTitle        from './UserChatTitle';
-import PublicChatTitle      from './PublicChatTitle';
-import ChatContent          from './ChatContent';
-import styles               from './styles';
+import React                from "react";
+import { View }             from "react-native";
+import UserListChat         from "./UserListChat";
+import OptionChatTitle      from "./OptionChatTitle";
+import UserChatTitle        from "./UserChatTitle";
+import PublicChatTitle      from "./PublicChatTitle";
+import ChatContent          from "./ChatContent";
+import styles               from "./styles";
 
 function Chat(){
     return(
@@ -18,7 +18,7 @@ function Chat(){
             <ChatContent />
             <UserListChat />
         </React.Fragment>
-    )
+    );
 }
 
 export default Chat;

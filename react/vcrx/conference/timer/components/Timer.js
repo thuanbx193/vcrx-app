@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect }          from 'react-redux';
-import styles               from './styles';
-import { View, Text }       from 'react-native';   
-import FontAwesome          from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from "react";
+import { connect }          from "react-redux";
+import styles               from "./styles";
+import { View, Text }       from "react-native";   
+import FontAwesome          from "react-native-vector-icons/FontAwesome";
 import { 
     getTimeServer, 
     updateTimeNow 
-}                           from '../../../actions';
+}                           from "../../../actions";
 
 class Timer extends Component{
     constructor(props) {
@@ -27,10 +27,10 @@ class Timer extends Component{
     render() {
         return (
             <View style={ styles.countDownView }>
-                <FontAwesome name='clock-o'  color={'gray'} style={ styles.countDownIcon } />
+                <FontAwesome name="clock-o"  color={"gray"} style={ styles.countDownIcon } />
                 <Text style={ styles.countDownContent }>{this.props.timeFormat}</Text>
             </View>
-        )
+        );
     }
 }
 
@@ -48,14 +48,14 @@ function formatTime(time) {
 function _mapStateToProps(state) {
     let time = 0;
     let timeFormat = "00:00:00";
-    if(state['vcrx'].roomInfo.timeStarted){
-        time = parseInt(state['vcrx'].timeNow) - parseInt(state['vcrx'].roomInfo.timeStarted);
+    if(state["vcrx"].roomInfo.timeStarted){
+        time = parseInt(state["vcrx"].timeNow) - parseInt(state["vcrx"].roomInfo.timeStarted);
         if(time > 0){
             timeFormat = formatTime(time);
         }
     }else{
-        if(state['vcrx'].timeNow < state['vcrx'].roomInfo.timeAvailable){
-            time = state['vcrx'].roomInfo.timeAvailable - parseInt(state['vcrx'].timeNow);
+        if(state["vcrx"].timeNow < state["vcrx"].roomInfo.timeAvailable){
+            time = state["vcrx"].roomInfo.timeAvailable - parseInt(state["vcrx"].timeNow);
             if(time > 0){
                 timeFormat = formatTime(time);
             }

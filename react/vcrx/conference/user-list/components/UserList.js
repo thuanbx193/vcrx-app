@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
     View, Text,
     FlatList
-}                           from 'react-native';
-import { connect }          from 'react-redux';
-import { translate }        from '../../../../features/base/i18n';
-import styles               from './styles';
-import FontAwesome          from 'react-native-vector-icons/FontAwesome';
+}                           from "react-native";
+import { connect }          from "react-redux";
+import { translate }        from "../../../../features/base/i18n";
+import styles               from "./styles";
+import FontAwesome          from "react-native-vector-icons/FontAwesome";
 import {saveLogAction, setDataChangeMic, toggleAudio} from "../../../actions";
 import {
     CONNECTTION_FAILD, ICON,
@@ -19,10 +19,10 @@ import {
 import {MEDIA_TYPE}         from "../../../../features/base/media/constants";
 import {
     getTrackByMediaTypeAndParticipant,
-}                           from '../../../../features/base/tracks';
-import {Base64}             from 'js-base64';
+}                           from "../../../../features/base/tracks";
+import {Base64}             from "js-base64";
 import {getParticipants} from "../../../../features/base/participants";
-import {ColorPalette} from '../../../../features/base/styles';
+import {ColorPalette} from "../../../../features/base/styles";
 
 class UserList  extends Component {
 
@@ -50,7 +50,7 @@ class UserList  extends Component {
         let auditStudents   = users.filter(this.findUser(KEY_ROLE_MOBILE, true));
         auditStudents       = auditStudents.filter(user => user.local == true);
 
-        mobileStudents = this.removeDuplicates(mobileStudents,'avatarID');
+        mobileStudents = this.removeDuplicates(mobileStudents,"avatarID");
         return userList.concat(teachers, assistants, pos, webStudents, mobileStudents, auditStudents );
     }
 
@@ -68,14 +68,14 @@ class UserList  extends Component {
         if(!this._getAudioTrack(id)){
             iconName = ICON.IC_MIC_ENABLE;
             iconStyle =  styles.audioButtonStylesIconNotMuted;
-            color = '#4C9AFF';
+            color = "#4C9AFF";
             if (this.props.dataMic.timeStart && local){
                 let dataMic = this.props.dataMic;
                 let data = {
                     userId: dataMic.userId,
                     roomId: this.props.idRoom,
-                    action: 'turn off',
-                    status: iconName === ICON.IC_MIC_ENABLE ? 'pass' : 'fail',
+                    action: "turn off",
+                    status: iconName === ICON.IC_MIC_ENABLE ? "pass" : "fail",
                     timeListen: new Date().getTime() - dataMic.timeStart
                 };
                 this.props.dispatch(setDataChangeMic({...dataMic, timeStart: 0}));
@@ -89,9 +89,9 @@ class UserList  extends Component {
             {role: KEY_ROLE_PO,         icon: ICON.IC_PO},
             {role: KEY_ROLE_STUDENT,    icon: ICON.IC_STUDENT},
             {role: KEY_ROLE_MOBILE,     icon: ICON.IC_MOBILE},
-            {role:'ALL',                icon: ICON.IC_ALL_USER}
+            {role:"ALL",                icon: ICON.IC_ALL_USER}
         ];
-        name = name.split('-');
+        name = name.split("-");
         let icon = iconList.find(icon => icon.role == name[0]).icon;
         if(name[0] == KEY_ROLE_MOBILE && audit) icon = ICON.IC_AUDIT;
         let displayName = name[0] !== KEY_ROLE_MOBILE ? name.slice(1,3).join("-") : Base64.decode(name.slice(1,3).join("-"));
@@ -106,14 +106,14 @@ class UserList  extends Component {
                 </View>
                 <Text numberOfLines={1} style={local ? styles.userListOwn: styles.userList} >{displayName}</Text>
                 { (role == KEY_ROLE_MOBILE || role == KEY_ROLE_STUDENT) && raiseHand &&
-                    <FontAwesome name= {ICON.IC_RAISE_HAND} size={14} color={'#0084ff'} style={styles.raiseHand}/>
+                    <FontAwesome name= {ICON.IC_RAISE_HAND} size={14} color={"#0084ff"} style={styles.raiseHand}/>
                 }
                 { (videoTrack && role === KEY_ROLE_TEACHER && !videoTrack.muted) &&
-                    <FontAwesome name= {ICON.IC_WEBCAM} size={14} color={'#DD0000'} style={styles.raiseHand}/>
+                    <FontAwesome name= {ICON.IC_WEBCAM} size={14} color={"#DD0000"} style={styles.raiseHand}/>
                 }
                 <FontAwesome color = {color} name={iconName} size = {14} onPress = {this._onToggleAudio(local)} style = {styles.icAudio}/>
             </View>
-        )
+        );
     }
 
     _keyExtractor = item => item.id.toString()
@@ -137,10 +137,10 @@ class UserList  extends Component {
 export function _mapStateToProps(state) {
     return {
         _participants       : getParticipants(state),
-        _languages          : state['vcrx'].languages,
-        _track              : state['features/base/tracks'],
-        dataMic             : state['vcrx'].dataMic,
-        idRoom              : state['vcrx'].roomInfo.idRoom
+        _languages          : state["vcrx"].languages,
+        _track              : state["features/base/tracks"],
+        dataMic             : state["vcrx"].dataMic,
+        idRoom              : state["vcrx"].roomInfo.idRoom
     };
 }
 export default translate(connect(_mapStateToProps)(UserList));

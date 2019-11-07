@@ -1,5 +1,5 @@
-import { Component }                    from 'react';
-import { getLocalParticipant }          from '../../../../features/base/participants';
+import { Component }                    from "react";
+import { getLocalParticipant }          from "../../../../features/base/participants";
 
 /**
  * Base (abstract) lưu trữ các function file slide.native.js sử dụng.
@@ -12,7 +12,7 @@ export class AbstractSlide extends Component<*, *> {
         super(props);
 
         this.state = {
-            color: '#000',
+            color: "#000",
             page: 1,
             scale: 1,
             numberOfPages: 0,
@@ -21,7 +21,7 @@ export class AbstractSlide extends Component<*, *> {
             animate : true,
             loadingNetWork : true,
             loadingComplete: false
-        }
+        };
 
         this.draw = this.draw.bind(this);
         this.drawLine = this.drawLine.bind(this);
@@ -49,7 +49,7 @@ export class AbstractSlide extends Component<*, *> {
         let w = this.state.widthCanvas/data.width;
         let h = this.state.heightCanvas/data.height;
         if(this.name){
-            const context = this.name.getContext('2d');
+            const context = this.name.getContext("2d");
 
             if(data.item.tool == "line"){
                 this.drawLine(data,w,h,context);
@@ -61,13 +61,13 @@ export class AbstractSlide extends Component<*, *> {
                 this.drawTriangle(data,w,h,context);
             }
             if(data.item.tool == "pencil"){
-                this.drawPencil(data,w,h,context)
+                this.drawPencil(data,w,h,context);
             }
             if(data.item.tool == "ellipse"){
-                this.drawEllipse(data,w,h,context)
+                this.drawEllipse(data,w,h,context);
             }
             if(data.item.tool == "clearreact"){
-                this.drawClearReact(data,w,h,context)
+                this.drawClearReact(data,w,h,context);
             }
             if(data.item.tool == "text"){
                 context.font=data.item.size*this.state.widthCanvas/data.widthCanvas+"px " +data.item.font;
@@ -99,12 +99,12 @@ export class AbstractSlide extends Component<*, *> {
         let starty = data.item.start.y*h;
 
         context.save();
-        context.lineJoin = 'round';
-        context.lineCap = 'round';
+        context.lineJoin = "round";
+        context.lineCap = "round";
         context.beginPath();
         context.lineWidth = data.item.size;
         context.strokeStyle = data.item.color;
-        context.globalCompositeOperation = 'source-over';
+        context.globalCompositeOperation = "source-over";
         context.moveTo(startx,starty);
         context.lineTo(endx,endy);
         context.closePath();
@@ -198,12 +198,12 @@ export class AbstractSlide extends Component<*, *> {
         startx = data.item.points[0].x*w;
         starty = data.item.points[0].y*h;
 
-        context.lineJoin = 'round';
-        context.lineCap = 'round';
+        context.lineJoin = "round";
+        context.lineCap = "round";
         context.beginPath();
         context.lineWidth = data.item.size;
         context.strokeStyle = data.item.color;
-        context.globalCompositeOperation = 'source-over';
+        context.globalCompositeOperation = "source-over";
         context.moveTo(startx, starty);
         for (i, j; i < j; i++) {
             x = data.item.points[i].x*w;
@@ -300,7 +300,7 @@ export class AbstractSlide extends Component<*, *> {
      * @returns
      */
     drawRefresh (data){
-        this.setState({ loadingNetWork : false})
+        this.setState({ loadingNetWork : false});
         let a = 0;
         let b = data.dataItem.length;
         for (a, b; a < b; a++) {
@@ -318,7 +318,7 @@ export class AbstractSlide extends Component<*, *> {
      */
     clearRect(){
         if(this.name){
-            const context = this.name.getContext('2d');
+            const context = this.name.getContext("2d");
             context.clearRect(0,0,5000,5000);
         }
 
@@ -327,13 +327,13 @@ export class AbstractSlide extends Component<*, *> {
 
 export function _mapStateToProps(state: Object) {
     return {
-        _linkSlide                  : state['vcrx'].roomInfo.slide,
-        _userInfo                   : state['vcrx'].userInfo,
-        _roomId                     : state['features/base/conference'].room,
-        _indexLayout                : state['vcrx'].roomInfo.indexLayout,
-        _roomVcrx                   : state['vcrx'].roomInfo.idRoomVcrx,
-        _token                      : state['vcrx'].userInfo.tokenAPI,
-        _languages                  : state['vcrx'].languages,
+        _linkSlide                  : state["vcrx"].roomInfo.slide,
+        _userInfo                   : state["vcrx"].userInfo,
+        _roomId                     : state["features/base/conference"].room,
+        _indexLayout                : state["vcrx"].roomInfo.indexLayout,
+        _roomVcrx                   : state["vcrx"].roomInfo.idRoomVcrx,
+        _token                      : state["vcrx"].userInfo.tokenAPI,
+        _languages                  : state["vcrx"].languages,
         _idLocalParticipant         : getLocalParticipant(state).id
     };
 }

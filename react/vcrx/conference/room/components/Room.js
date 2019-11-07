@@ -1,15 +1,15 @@
-import React, { Component }     from 'react';
-import { connect }              from 'react-redux';
-import {View, Text, Linking, Platform, AppState} from 'react-native';
-import { Header }               from '../../header';
-import { AssessmentStudents }   from '../../assessment-students';
-import  WarningBox              from '../../warning/components/WarningBox';
+import React, { Component }     from "react";
+import { connect }              from "react-redux";
+import {View, AppState}         from "react-native";
+import { Header }               from "../../header";
+import { AssessmentStudents }   from "../../assessment-students";
+import  WarningBox              from "../../warning/components/WarningBox";
 import {
     LayoutDefault,
     LayoutSecond,
     LayoutThird,
     LayoutFourth
-}                               from './Layout';
+}                               from "./Layout";
 import {
     kickUser,
     startRoom,
@@ -17,29 +17,28 @@ import {
     changeRoomInfo,
     setSocket,
     saveLogInfo
-}                               from '../../../actions';
+}                               from "../../../actions";
 import io                       from "socket.io-client/dist/socket.io.js";
 import NetInfo                  from "@react-native-community/netinfo";
-import CallDetectorManager      from 'react-native-call-detection'
-import VideoWarmUp              from '../../video-warmup/components/VideoWarmUp';
-import { DOMAIN_SOCKET, getDomainLog }        from '../../../config';
+import CallDetectorManager      from "react-native-call-detection";
+import VideoWarmUp              from "../../video-warmup/components/VideoWarmUp";
 import {
     PORTAL_LINKING,
     CALL_INCOMING,
     LOGOUT_BY_PRESS_HOME_BUTTON,
     ACCESS_MICRO, MOBILE_SYSTEM
 }                               from "../../../constants";
-import { Connection }           from '../../connection';
-import Permissions              from 'react-native-permissions';
+import { Connection }           from "../../connection";
+import Permissions              from "react-native-permissions";
 
 class Room extends Component {
     constructor(props){
         super(props);
         this.state = {
-            netType: ''
-        }
+            netType: ""
+        };
         if(this.props.listdomain){
-            let domains = this.props.listdomain.split(',');
+            let domains = this.props.listdomain.split(",");
             this.socket = io(domains[3], { jsonp: false });
         }
         
@@ -54,21 +53,21 @@ class Room extends Component {
         false,
         ()=>{},
         {
-            title: 'Phone State Permission',
-            message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
-        })
+            title: "Phone State Permission",
+            message: "This app needs access to your phone state in order to react and/or to adapt to incoming calls."
+        });
     }
 
     componentWillMount(){
         this.props.dispatch(startRoom());
         NetInfo.addEventListener(state => {
-            if (!state.isConnected || (this.state.netType != '' && this.state.netType != state.type)){
-                if (state.type == 'cellular' || state.type == 'wifi'){
+            if (!state.isConnected || (this.state.netType != "" && this.state.netType != state.type)){
+                if (state.type == "cellular" || state.type == "wifi"){
                     this.setState({netType : state.type});
                 }
-                this.props.dispatch(kickUser('local', PORTAL_LINKING.NETWORK));
+                this.props.dispatch(kickUser("local", PORTAL_LINKING.NETWORK));
             } else {
-                if (state.type == 'cellular' || state.type == 'wifi'){
+                if (state.type == "cellular" || state.type == "wifi"){
                     this.setState({netType : state.type});
                 }
             }
@@ -77,30 +76,30 @@ class Room extends Component {
     }
 
     componentDidMount() {
-        AppState.addEventListener('change', this._handleAppStateChange);
+        AppState.addEventListener("change", this._handleAppStateChange);
         this.props.dispatch(setSocket(this.socket));
-        Permissions.check('microphone').then(response => {
+        Permissions.check("microphone").then(response => {
             let data = {
                 userId  : this.props._userId,
                 roomId  : this.props._roomId,
                 system  : MOBILE_SYSTEM,
-                status  : response === 'authorized' ? true : false
-            }
+                status  : response === "authorized" ? true : false
+            };
             this.props.dispatch(saveLogInfo(data, ACCESS_MICRO));
         });
     }
     componentWillUnmount() {
-        AppState.removeEventListener('change', this._handleAppStateChange);
+        AppState.removeEventListener("change", this._handleAppStateChange);
     }
 
     _handleAppStateChange = (nextAppState) => {
-        if(nextAppState == 'active'){
+        if(nextAppState == "active"){
             this.props.dispatch(changeRoomInfo({playVideo: true}));
         }
-        if(nextAppState == 'inactive'){
+        if(nextAppState == "inactive"){
             this.props.dispatch(changeRoomInfo({playVideo: false}));
         }
-        if(nextAppState == 'background'){
+        if(nextAppState == "background"){
             this.props.dispatch(exitClass(LOGOUT_BY_PRESS_HOME_BUTTON));
         }
     }
@@ -130,17 +129,17 @@ class Room extends Component {
                     <WarningBox socket={this.socket} />
                 </View>
             </View>
-        )
+        );
     }
 }
 
 function _mapStateToProps(state) {
     return {
-        indexLayout        : state['vcrx'].roomInfo.indexLayout,
-        _chatVisible       : state['vcrx'].chatInfo.chatVisible,
-        _userId            : state['vcrx'].userInfo.id,
-        _roomId            : state['vcrx'].roomInfo.idRoom,
-        listdomain         : state['vcrx'].listdomain  
+        indexLayout        : state["vcrx"].roomInfo.indexLayout,
+        _chatVisible       : state["vcrx"].chatInfo.chatVisible,
+        _userId            : state["vcrx"].userInfo.id,
+        _roomId            : state["vcrx"].roomInfo.idRoom,
+        listdomain         : state["vcrx"].listdomain  
     };
 }
 

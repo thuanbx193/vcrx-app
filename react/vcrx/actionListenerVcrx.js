@@ -1,4 +1,4 @@
-import { Keyboard }                 from 'react-native'
+import { Keyboard }                 from "react-native";
 import {
     VIDEO_WARMUP,
     ACTION_VIDEO,
@@ -10,11 +10,11 @@ import {
     ACTION_START_ROOM,
     PORTAL_LINKING,
     ACTION_UPLOAD
-}                                   from './constants';
+}                                   from "./constants";
 import {
     participantUpdated,
     getLocalParticipant
-}                                   from './../features/base/participants';
+}                                   from "./../features/base/participants";
 import {
     kickDuplicateUser,
     kickUser,
@@ -26,9 +26,9 @@ import {
     handleUploadMaterial,
     changeAssessment,
     updateChatUsers
-} from './actions';
-import { JitsiConferenceEvents }    from './../features/base/lib-jitsi-meet';
-const Entities = require('html-entities').XmlEntities;
+} from "./actions";
+import { JitsiConferenceEvents }    from "./../features/base/lib-jitsi-meet";
+const Entities = require("html-entities").XmlEntities;
 const entities = new Entities();
 
 export function _addVcrxListeners(conference, dispatch) {
@@ -68,14 +68,14 @@ export function _addVcrxListeners(conference, dispatch) {
                     dispatch(participantUpdated({id, raiseHand: d.data}));
                     break;
                 case P_KEY.audit:
-                    dispatch(participantUpdated({id, audit: d.data}))
+                    dispatch(participantUpdated({id, audit: d.data}));
             }
         });
     conference.addCommandListener(
         ACTION_TOGGLE_MICRO,
         (data, id) => {
             let d = JSON.parse(data.value);
-            dispatch(toggleMicro(d))
+            dispatch(toggleMicro(d));
         });
     conference.addCommandListener(
         ACTION_KICK,

@@ -1,21 +1,21 @@
-import React                                from 'react';
-import { connect }                          from 'react-redux';
-import styles                               from './styles';
+import React                                from "react";
+import { connect }                          from "react-redux";
+import styles                               from "./styles";
 import {
     View, Platform,
     TouchableOpacity
-}                                           from 'react-native';
-import {ICON}                               from './../../../constants';
-import IconFontAwesome                      from 'react-native-vector-icons/FontAwesome';
-import VideoPlayer                          from 'react-native-video-controls';
-import { changeRoomInfo }                   from '../../../actions';
+}                                           from "react-native";
+import {ICON}                               from "./../../../constants";
+import IconFontAwesome                      from "react-native-vector-icons/FontAwesome";
+import VideoPlayer                          from "react-native-video-controls";
+import { changeRoomInfo }                   from "../../../actions";
 
 class VideoWarmUp extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             currentTime: 0
-        }
+        };
     }
 
     closeVideo = () => {
@@ -28,7 +28,7 @@ class VideoWarmUp extends React.Component{
 
     render(){
         if(!this.props.showVideo){
-            return(<View />)
+            return(<View />);
         }
         return(
             <View style={styles.videoBoxVisible}>
@@ -48,19 +48,19 @@ class VideoWarmUp extends React.Component{
                         currentTime = {Platform.OS === "android" ? this.state.currentTime : 0}
                         onProgress={this.onProgress}
                         paused = {!this.props.playVideo}
-                        source={{ uri: this.props.video.replace('http://','https://') }}
+                        source={{ uri: this.props.video.replace("http://","https://") }}
                     />
                 </View>
             </View>
-        )
+        );
     }
 }
 
 function _mapStateToProps(state) {
     return {
-        video               : state['vcrx'].roomInfo.video,
-        showVideo           : state['vcrx'].roomInfo.showVideo,
-        playVideo           : state['vcrx'].roomInfo.playVideo
+        video               : state["vcrx"].roomInfo.video,
+        showVideo           : state["vcrx"].roomInfo.showVideo,
+        playVideo           : state["vcrx"].roomInfo.playVideo
     };
 }
 

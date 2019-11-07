@@ -1,17 +1,17 @@
-import React            from 'react';
-import { connect }      from 'react-redux';
+import React            from "react";
+import { connect }      from "react-redux";
 import {
     Text, View,
     TouchableHighlight
-}                       from 'react-native';
-import styles           from './styles';
+}                       from "react-native";
+import styles           from "./styles";
 import { 
     changeTabsChat,
     handleReadMessage
-}                       from '../../../actions';
+}                       from "../../../actions";
 import {
     CHAT_TABS_PRIVATE
-}                       from './../../../constants';
+}                       from "./../../../constants";
 
 class UserChatTitle extends React.Component{
     constructor(props){
@@ -25,7 +25,7 @@ class UserChatTitle extends React.Component{
 
     render(){
         if(!this.props.isShow){
-            return(<View/>)
+            return(<View/>);
         }
         return(
             <TouchableHighlight 
@@ -35,21 +35,21 @@ class UserChatTitle extends React.Component{
                     <Text numberOfLines={1} style={styles.chatHeadTitleViewText}>{this.props.toFullname}</Text>
                 </View>
             </TouchableHighlight>
-        )
+        );
     }
 }
 
 function _mapStateToProps(state){
     let bgTabs = {};
-    if(state['vcrx'].chatInfo.tabs == CHAT_TABS_PRIVATE){
+    if(state["vcrx"].chatInfo.tabs == CHAT_TABS_PRIVATE){
         bgTabs = {backgroundColor:"#dbac69"};
     }
     return {
-        toFullname  : state['vcrx'].chatInfo.toFullname,
-        toUserId        : state['vcrx'].chatInfo.toUserId,
+        toFullname  : state["vcrx"].chatInfo.toFullname,
+        toUserId    : state["vcrx"].chatInfo.toUserId,
         bgTabs, 
-        isShow      : (state['vcrx'].chatInfo.toFullname != "")
-    }
+        isShow      : (state["vcrx"].chatInfo.toFullname != "")
+    };
 }
 
-export default connect(_mapStateToProps)(UserChatTitle)
+export default connect(_mapStateToProps)(UserChatTitle);

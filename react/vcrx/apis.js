@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 import {
     DOMAIN_API,
     DOMAIN_API_TESTER,
@@ -19,7 +19,7 @@ import {
     getEnableLog,
     getDomainLog,
     getDomainAPI
-} from './config';
+} from "./config";
 import {TOKEN_LOG, SET_CONFIG, SYSTEM_LOG, LOG_CALL} from "./constants";
 import DeviceInfo from "react-native-device-info";
 
@@ -31,18 +31,18 @@ function get(url, param = {}, type = "", token=""){
             .then(respon => {
                 let res = JSON.parse(respon);
                 let host = getDomainAPI();
-                if(res !== null && res !== undefined && res !== '') {
-                  host = res.DOMAIN_API
+                if(res !== null && res !== undefined && res !== "") {
+                    host = res.DOMAIN_API;
                 }
                 fetch( host+url , {
                     method: "GET",
                     headers: {
-                        'Access-Control-Allow-Origin':'*',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin":"*",
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
                         "Authorization" : "Bearer "+token
                     },
-                    mode: 'cors'
+                    mode: "cors"
                 }).then(function(response) {
                     if(response.status == 200){
                         return response.json();
@@ -64,7 +64,7 @@ function get(url, param = {}, type = "", token=""){
 
                 });
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     });
 }
 
@@ -76,14 +76,14 @@ function post(url, param, type="", token=""){
             .then(respon => {
                 let res = JSON.parse(respon);
                 let host = getDomainAPI();
-                if(res !== null && res !== undefined && res !== '') {
-                    host = res.DOMAIN_API
+                if(res !== null && res !== undefined && res !== "") {
+                    host = res.DOMAIN_API;
                 }
                 fetch( host+url , {
                     method: "POST",
                     headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
                         "Authorization" : "Bearer "+token
                     },
                     body: JSON.stringify( param )
@@ -107,19 +107,19 @@ function post(url, param, type="", token=""){
                     }
                 });
             })
-            .catch(err => console.log(err))
-        });
+            .catch(err => console.log(err));}
+    );
 }
 
 export function getAsyncStorage(key){
     return new Promise(function(resolve,reject){
         AsyncStorage.getItem(key)
-        .then((rs)=> {
-            resolve(rs);
-        })
-        .catch(err=>{
-            reject({});
-        });
+            .then((rs)=> {
+                resolve(rs);
+            })
+            .catch(err=>{
+                reject({});
+            });
     });
 }
 
@@ -127,14 +127,14 @@ export function loginAPICore(){
     let param = {
         username: API_USERNAME,
         password: API_PASSWORD
-    }
+    };
     return post(API_LOGIN_API, param, LOG_CALL.API_LOGIN);
 }
 
 export function setAsyncStorage(key, data){
     return new Promise(function(resolve, reject){
         AsyncStorage.setItem(key, data);
-    })
+    });
 }
 
 export function getTimeFromServer(token){
@@ -144,7 +144,7 @@ export function getTimeFromServer(token){
 export function getRoomInfo(idRoomVcrx, token){
     let param = {
         idRoomVcrx: idRoomVcrx
-    }
+    };
     return get(API_GET_ROOM_INFO+idRoomVcrx, param, LOG_CALL.API_ROOM_INFO, token);
 }
 
@@ -180,18 +180,18 @@ export function setLogChat(roomId, fromParticipantId,toParticipantId,message,tok
 export function getLogChat(roomIds, token){
     let param = {
         idRoomVcrx: roomIds
-    }
+    };
     return get(API_GET_LOG_CHAT + roomIds, param, LOG_CALL.API_LOGCHATS, token);
 }
 
 export function setLogsAction(data) {
     return new Promise(function( resolve, reject){
-        fetch( getDomainLog() + '/v1/actionlogs', {
+        fetch( getDomainLog() + "/v1/actionlogs", {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 "token" : TOKEN_LOG
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(data)
         })
             .then((res) => {
@@ -215,12 +215,12 @@ export function addLogAction(roomId, participantId, logTypeId, data, token){
 
 export function setLogsErrorAction(data) {
     return new Promise(function( resolve, reject){
-        fetch( getDomainLog() + '/v1/errorlogs', {
+        fetch( getDomainLog() + "/v1/errorlogs", {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 "token" : TOKEN_LOG
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(data)
         })
             .then((res) => {
@@ -241,7 +241,7 @@ export function addLogError(roomId, participantId, userId, roomIdLMS, title, mes
         "title"             : title,
         "message"           : message,
         "device"            : DeviceInfo.getSystemName(),
-        "userRoleLMS"       : 'HV'
+        "userRoleLMS"       : "HV"
     };
     return post(API_ADD_LOG_ERROR, param, LOG_CALL.API_LOGERROR_ADD, token);
 }
@@ -255,8 +255,8 @@ export function configAPI(key){
         fetch(LINK_CONFIG+key, {
             method: "GET",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             },
         }).then((response) => {
             if(response.status == 200){
@@ -272,12 +272,12 @@ export function configAPI(key){
 
 export function setLogsInfo(data) {
     return new Promise(function( resolve, reject){
-        fetch( getDomainLog() + '/v1/infologs', {
+        fetch( getDomainLog() + "/v1/infologs", {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 "token" : TOKEN_LOG
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(data)
         })
             .then((res) => {
@@ -291,7 +291,7 @@ export function setLogsInfo(data) {
 
 function saveLogCallApi( data, type, uri, result, timeResponse){
     if (getEnableLog()){
-        getAsyncStorage('dataInfo').then(res =>{
+        getAsyncStorage("dataInfo").then(res =>{
             let result = JSON.parse(res);
             let dataCallApi = {
                 timeCreated: new Date().getTime(),
@@ -300,14 +300,14 @@ function saveLogCallApi( data, type, uri, result, timeResponse){
                     type: type,
                     data,
                     uri,
-                    userId: type !== 'API_LOGIN' ? result.userId : null,
-                    roomId: type !== 'API_LOGIN' ? result.roomId : null,
+                    userId: type !== "API_LOGIN" ? result.userId : null,
+                    roomId: type !== "API_LOGIN" ? result.roomId : null,
                     result,
                     timeResponse
                 }
             };
-            if ((type !== 'API_LOGINOUT_ADD' && data.action === 'out') || type!== 'API_LOGACTION') {
-                dataCallApi.data.data = {...dataCallApi.data.data, idRoom: result.roomId}
+            if ((type !== "API_LOGINOUT_ADD" && data.action === "out") || type!== "API_LOGACTION") {
+                dataCallApi.data.data = {...dataCallApi.data.data, idRoom: result.roomId};
             }
             setLogsCallApi(dataCallApi);
         });
@@ -316,12 +316,12 @@ function saveLogCallApi( data, type, uri, result, timeResponse){
 
 export function setLogsCallApi(data) {
     return new Promise(function( resolve, reject){
-        fetch( getDomainLog() + '/v1/apilogs', {
+        fetch( getDomainLog() + "/v1/apilogs", {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
                 "token" : TOKEN_LOG
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(data)
         })
             .then((res) => {
@@ -335,23 +335,24 @@ export function setLogsCallApi(data) {
 
 export function checkUpdateAppAPI(currentVersion, systemName, customer){
     return new Promise((resolve,reject) => {
-        fetch(DOMAIN_API_TESTER + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , {
-            method: "GET",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(res => {
-            if(res.status == true){
-                resolve (res);
-            }else{
-                resolve ({});
-            }
-        }).catch(err=>{
-            reject({});
-        });
+        fetch(DOMAIN_API_TESTER + "/api/version/check?system="+systemName + "&version=" + currentVersion + "&customer=" + customer , 
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => response.json())
+            .then(res => {
+                if(res.status == true){
+                    resolve (res);
+                }else{
+                    resolve ({});
+                }
+            }).catch(err=>{
+                reject({});
+            });
     });
 }
 

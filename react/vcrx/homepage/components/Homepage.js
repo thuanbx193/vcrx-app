@@ -81,9 +81,8 @@ class HomePage extends Component<*> {
                     DOMAIN_SOCKET: DOMAIN_SOCKET,
                 };
                 this.setState({dataCustom : params });
-            } else 
-            if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
-               this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
+            } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
+                this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
             }
         });
         AppState.addEventListener("change", this._handleAppStateChange);
@@ -129,22 +128,22 @@ class HomePage extends Component<*> {
             this.setState({
                 selected: select
             }, () => {
-                this.props.dispatch(setConfig(env, select))
-            })
+                this.props.dispatch(setConfig(env, select));
+            });
         }
     }
 
     changeValuePass = (text) => {
         this.setState({
             passSecrect: text
-        })
+        });
     }
 
     handleCancel = () => {
         this.setState({
             dialogPass   : false,
             passSecrect     : ""
-        })
+        });
     }
 
     handleSuccess = () => {
@@ -153,7 +152,7 @@ class HomePage extends Component<*> {
                 toggle      : true,
                 dialogPass  : false,
                 passSecrect : ""
-            })
+            });
     }
 
     changeValueCustom = (text, key) => {
@@ -161,17 +160,17 @@ class HomePage extends Component<*> {
         data = {...data, [key]: text};
         this.setState({
             dataCustom: data
-        })
+        });
     }
 
     _onHandleSuccessCustom = () => {
         let data = this.state.dataCustom;
         if(data.DOMAIN_LOGS && data.DOMAIN_API && data.DEFAULT_SERVER_URL && data.DOMAIN_SOCKET){
-            let _data = [data.DOMAIN_LOGS, data.DOMAIN_API, data.DEFAULT_SERVER_URL, data.DOMAIN_SOCKET]
+            let _data = [data.DOMAIN_LOGS, data.DOMAIN_API, data.DEFAULT_SERVER_URL, data.DOMAIN_SOCKET];
             setCustomConfig(_data);
             this.setState({
                 dialogCustom    : false
-            })
+            });
         } else {
             alert("Data không hợp lệ!");
         }
@@ -183,14 +182,14 @@ class HomePage extends Component<*> {
             DOMAIN_API          : "",
             DEFAULT_SERVER_URL  : "",
             DOMAIN_SOCKET       : ""
-        }
+        };
         this.setState({
             selected        : 3,
             dialogCustom    : false,
             dataCustom      : data
         }, () => {
             this.props.dispatch(setConfig("NTLP"));
-        })
+        });
     }
 
     render() {
@@ -214,16 +213,16 @@ class HomePage extends Component<*> {
                         </TouchableHighlight>
                     </View>
                     <TouchableHighlight
-                            style = {styles.buttonPortal}
-                            onPress =  {this._openPortal}>
-                            <Text>{this.props._languages.topica.homepage.open_portal}</Text>
-                        </TouchableHighlight>
+                        style = {styles.buttonPortal}
+                        onPress =  {this._openPortal}>
+                        <Text>{this.props._languages.topica.homepage.open_portal}</Text>
+                    </TouchableHighlight>
                     <TouchableOpacity
                         activeOpacity={1}
                         style = {styles.longpressWrapper}
                         onLongPress={() => this._openEnv()}
                         delayLongPress={2000} style={styles.longpressWrapper}>
-                    {this.state.toggle === true &&
+                        {this.state.toggle === true &&
                         <React.Fragment>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 1 && styles.longpressSelected]}
@@ -246,30 +245,30 @@ class HomePage extends Component<*> {
                                 <Text style={selected === 4 && {color: "#f6c108"}}>Custom</Text>
                             </TouchableOpacity>
                         </React.Fragment>
-                    }
+                        }
                     </TouchableOpacity>
                     <Dialog.Container visible={dialogPass}>
                         <Dialog.Title>Password:</Dialog.Title>
                         <Dialog.Input value={passSecrect}
-                                      onChangeText={this.changeValuePass}
-                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}/>
+                            onChangeText={this.changeValuePass}
+                            wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}/>
                         <Dialog.Button label="Cancel" onPress={this.handleCancel} />
                         <Dialog.Button label="Ok" onPress={this.handleSuccess} />
                     </Dialog.Container>
                     <Dialog.Container visible={dialogCustom}>
                         <Dialog.Title>Custom:</Dialog.Title>
                         <Dialog.Input value={DOMAIN_API}
-                                      onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_API")}
-                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
-                                      placeholder={"DOMAIN_API"}/>
+                            onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_API")}
+                            wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                            placeholder={"DOMAIN_API"}/>
                         <Dialog.Input value={DEFAULT_SERVER_URL}
-                                      onChangeText={(value)=>this.changeValueCustom(value, "DEFAULT_SERVER_URL")}
-                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
-                                      placeholder={"DEFAULT_SERVER_URL"}/>
+                            onChangeText={(value)=>this.changeValueCustom(value, "DEFAULT_SERVER_URL")}
+                            wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                            placeholder={"DEFAULT_SERVER_URL"}/>
                         <Dialog.Input value={DOMAIN_SOCKET}
-                                      onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_SOCKET")}
-                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
-                                      placeholder={"DOMAIN_SOCKET"}/>
+                            onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_SOCKET")}
+                            wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                            placeholder={"DOMAIN_SOCKET"}/>
                         <Dialog.Input 
                             value={ DOMAIN_LOGS }
                             onChangeText = { (value)=>this.changeValueCustom(value, "DOMAIN_LOGS") }

@@ -1,22 +1,22 @@
-import React, { Component }     from 'react';
+import React, { Component }     from "react";
 import {
     View, Text,
     Image,
     StatusBar
-}                               from 'react-native';
-import { connect }              from 'react-redux';
+}                               from "react-native";
+import { connect }              from "react-redux";
 import {
     getLocalParticipant
-}                               from '../../../../features/base/participants';
-import { toggleAudio }          from './../../../actions';
+}                               from "../../../../features/base/participants";
+import { toggleAudio }          from "./../../../actions";
 import {
     getTrackByMediaTypeAndParticipant,
-}                               from '../../../../features/base/tracks';
+}                               from "../../../../features/base/tracks";
 import {
     MEDIA_TYPE
-}                               from '../../../../features/base/media';
-import { AudioMuteButton }      from '../../../../features/toolbox';
-import styles                   from './styles';
+}                               from "../../../../features/base/media";
+import { AudioMuteButton }      from "../../../../features/toolbox";
+import styles                   from "./styles";
 
 class Header  extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class Header  extends Component {
                     onClick = { this._onToggleAudio }
                     styles = { audioButtonStyles }
                 />
-            )
+            );
         }
     }
 
@@ -44,26 +44,26 @@ class Header  extends Component {
     render() {
         return (
             <React.Fragment>
-              <View style={styles.header}>
-                <StatusBar hidden = {true}/>
-                <View style={styles.headerGradient}>
-                    <View style={this.props._styleIconMic}>
-                        {this._renderLocalAudio()}
+                <View style={styles.header}>
+                    <StatusBar hidden = {true}/>
+                    <View style={styles.headerGradient}>
+                        <View style={this.props._styleIconMic}>
+                            {this._renderLocalAudio()}
+                        </View>
+                        <Image
+                            style={styles.headerLogo}
+                            source={require("./../../../images/logo_app_header.jpg")}
+                        />
+                        <Text style={styles.roomIdHeader}>{`${this.props._languages.topica.lms.header.room}: ${this.props._roomId}`}</Text>
                     </View>
-                    <Image
-                        style={styles.headerLogo}
-                        source={require('./../../../images/logo_app_header.jpg')}
-                    />
-                    <Text style={styles.roomIdHeader}>{`${this.props._languages.topica.lms.header.room}: ${this.props._roomId}`}</Text>
-                </View>
-              </View>             
+                </View>             
             </React.Fragment>
         );
     }
 }
 
 export function _mapStateToProps(state) {
-    let _track              = state['features/base/tracks'];
+    let _track              = state["features/base/tracks"];
     let _participantLocal   = getLocalParticipant(state);
 
     let audioTrackLocal     = getTrackByMediaTypeAndParticipant(_track, MEDIA_TYPE.AUDIO, _participantLocal.id);
@@ -80,9 +80,9 @@ export function _mapStateToProps(state) {
     return {
         _styleIconMic,
         _styleAudioBtn,
-        _roomId                     : state['features/base/conference'].room,
+        _roomId                     : state["features/base/conference"].room,
         _idLocalParticipant         : _participantLocal.id,
-        _languages                  : state['vcrx'].languages
+        _languages                  : state["vcrx"].languages
     };
 }
 
