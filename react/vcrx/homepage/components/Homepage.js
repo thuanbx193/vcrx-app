@@ -11,15 +11,15 @@
  ******************************************************************************/
 /* @flow */
 
-import React, { Component }     from 'react';
+import React, { Component }     from "react";
 import {
     View, Text,TouchableHighlight,
     TextInput, Image, TouchableOpacity,
     StatusBar, AppState
-}                               from 'react-native';
+}                               from "react-native";
 import NetInfo                  from "@react-native-community/netinfo";
-import { connect }              from 'react-redux';
-import styles                   from './styles';
+import { connect }              from "react-redux";
+import styles                   from "./styles";
 import {
     joinRoomByLink,
     handleOpenPortal,
@@ -27,11 +27,11 @@ import {
     setCustomConfig,
     setTimeExitApp,
     checkUpdateApp
-}                               from '../../actions';
+}                               from "../../actions";
 import {
     APP_VERSION, SET_CONFIG, NVNP, SELECTED_NVNP
 }                               from "../../constants";
-import Orientation              from 'react-native-orientation';
+import Orientation              from "react-native-orientation";
 import Dialog                   from "react-native-dialog";
 import {getAsyncStorage}        from "../../apis";
 import {
@@ -43,7 +43,7 @@ class HomePage extends Component<*> {
     constructor(props) {
         super(props);
         this.state = {
-            text        : '',
+            text        : "",
             toggle      : false,
             selected    : 3,    
             dataCustom: {   
@@ -69,8 +69,8 @@ class HomePage extends Component<*> {
             let res = JSON.parse(respon);
             this.setState({
                 selected: res.select ? res.select : 3
-            })
-        })
+            });
+        });
         Orientation.lockToPortrait();
         NetInfo.addEventListener(state => {
             if (!state.isConnected && this.state.selected === 3){
@@ -81,19 +81,20 @@ class HomePage extends Component<*> {
                     DOMAIN_SOCKET: DOMAIN_SOCKET,
                 };
                 this.setState({dataCustom : params });
-            } else if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
+            } else 
+            if (state.isConnected && this.state.selected === 3 && Object.keys(this.state.dataCustom).length === 0){
                this.props.dispatch(setConfig(NVNP, SELECTED_NVNP));
             }
         });
-        AppState.addEventListener('change', this._handleAppStateChange);
+        AppState.addEventListener("change", this._handleAppStateChange);
     }
 
     componentWillUnmount() {
-        AppState.removeEventListener('change', this._handleAppStateChange);
+        AppState.removeEventListener("change", this._handleAppStateChange);
     }
 
     componentWillReceiveProps(nextProps){
-        let domains = nextProps.listdomain.split(',');
+        let domains = nextProps.listdomain.split(",");
         const params = {
             DOMAIN_LOGS: domains[4],
             DOMAIN_API: domains[1],
@@ -115,7 +116,7 @@ class HomePage extends Component<*> {
     _openEnv = () => {
         this.setState({
             dialogPass: true
-        })
+        });
     }
 
     _setConfig = (select, env) => {
@@ -123,7 +124,7 @@ class HomePage extends Component<*> {
             this.setState({
                 selected: 4,
                 dialogCustom: true
-            })
+            });
         } else {
             this.setState({
                 selected: select
@@ -142,16 +143,16 @@ class HomePage extends Component<*> {
     handleCancel = () => {
         this.setState({
             dialogPass   : false,
-            passSecrect     : ''
+            passSecrect     : ""
         })
     }
 
     handleSuccess = () => {
-        if (this.state.passSecrect === '1')
+        if (this.state.passSecrect === "1")
             this.setState({
                 toggle      : true,
                 dialogPass  : false,
-                passSecrect : ''
+                passSecrect : ""
             })
     }
 
@@ -163,7 +164,7 @@ class HomePage extends Component<*> {
         })
     }
 
-    handleSuccessCustom = () => {
+    _onHandleSuccessCustom = () => {
         let data = this.state.dataCustom;
         if(data.DOMAIN_LOGS && data.DOMAIN_API && data.DEFAULT_SERVER_URL && data.DOMAIN_SOCKET){
             let _data = [data.DOMAIN_LOGS, data.DOMAIN_API, data.DEFAULT_SERVER_URL, data.DOMAIN_SOCKET]
@@ -172,23 +173,23 @@ class HomePage extends Component<*> {
                 dialogCustom    : false
             })
         } else {
-            alert('Data không hợp lệ!');
+            alert("Data không hợp lệ!");
         }
     }
 
-    handleCancelCustom = () => {
+    _onHandleCancelCustom = () => {
         let data = {
-            DOMAIN_LOGS        : '',
-            DOMAIN_API          : '',
-            DEFAULT_SERVER_URL  : '',
-            DOMAIN_SOCKET       : ''
+            DOMAIN_LOGS        : "",
+            DOMAIN_API          : "",
+            DEFAULT_SERVER_URL  : "",
+            DOMAIN_SOCKET       : ""
         }
         this.setState({
             selected        : 3,
             dialogCustom    : false,
             dataCustom      : data
         }, () => {
-            this.props.dispatch(setConfig('NTLP'));
+            this.props.dispatch(setConfig("NTLP"));
         })
     }
 
@@ -199,13 +200,13 @@ class HomePage extends Component<*> {
             <React.Fragment>
                 <StatusBar hidden={true} />
                 <Text style={styles.inforAppVerText}>{APP_VERSION}</Text>
-                <Image style={styles.backgroundImg} source={require('../../images/brg_login.jpg')} />
+                <Image style={styles.backgroundImg} source={require("../../images/brg_login.jpg")} />
                 <View style={styles.main}>
                     <View style={styles.linkContainer}>
                         <TextInput
                             style={styles.linkBox}
                             onChangeText={(text) => this.setState({text})}
-                            placeholder = {'Enter URL'}/>
+                            placeholder = {"Enter URL"}/>
                         <TouchableHighlight
                             style = {styles.buttonJoin}
                             onPress = {this._openURL}>
@@ -226,23 +227,23 @@ class HomePage extends Component<*> {
                         <React.Fragment>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 1 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(1, 'NVNT')}>
-                                <Text style={selected === 1 && {color: '#f6c108'}}>Test</Text>
+                                onPress={() => this._setConfig(1, "NVNT")}>
+                                <Text style={selected === 1 && {color: "#f6c108"}}>Test</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 2 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(2, 'NVNS')}>
-                                <Text style={selected === 2 && {color: '#f6c108'}}>Staging</Text>
+                                onPress={() => this._setConfig(2, "NVNS")}>
+                                <Text style={selected === 2 && {color: "#f6c108"}}>Staging</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 3 && styles.longpressSelected]}
                                 onPress={() => this._setConfig(SELECTED_NVNP, NVNP)}>
-                                <Text style={selected === 3 && {color: '#f6c108'}}>Production</Text>
+                                <Text style={selected === 3 && {color: "#f6c108"}}>Production</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style = {[styles.longpressButton, selected === 4 && styles.longpressSelected]}
-                                onPress={() => this._setConfig(4, 'CUSTOM')}>
-                                <Text style={selected === 4 && {color: '#f6c108'}}>Custom</Text>
+                                onPress={() => this._setConfig(4, "CUSTOM")}>
+                                <Text style={selected === 4 && {color: "#f6c108"}}>Custom</Text>
                             </TouchableOpacity>
                         </React.Fragment>
                     }
@@ -251,30 +252,35 @@ class HomePage extends Component<*> {
                         <Dialog.Title>Password:</Dialog.Title>
                         <Dialog.Input value={passSecrect}
                                       onChangeText={this.changeValuePass}
-                                      wrapperStyle={{backgroundColor: 'rgba(0, 0, 0, 0.1)'}}/>
+                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}/>
                         <Dialog.Button label="Cancel" onPress={this.handleCancel} />
                         <Dialog.Button label="Ok" onPress={this.handleSuccess} />
                     </Dialog.Container>
                     <Dialog.Container visible={dialogCustom}>
                         <Dialog.Title>Custom:</Dialog.Title>
                         <Dialog.Input value={DOMAIN_API}
-                                      onChangeText={(value)=>this.changeValueCustom(value, 'DOMAIN_API')}
-                                      wrapperStyle={{backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
-                                      placeholder={'DOMAIN_API'}/>
+                                      onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_API")}
+                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                                      placeholder={"DOMAIN_API"}/>
                         <Dialog.Input value={DEFAULT_SERVER_URL}
-                                      onChangeText={(value)=>this.changeValueCustom(value, 'DEFAULT_SERVER_URL')}
-                                      wrapperStyle={{backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
-                                      placeholder={'DEFAULT_SERVER_URL'}/>
+                                      onChangeText={(value)=>this.changeValueCustom(value, "DEFAULT_SERVER_URL")}
+                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                                      placeholder={"DEFAULT_SERVER_URL"}/>
                         <Dialog.Input value={DOMAIN_SOCKET}
-                                      onChangeText={(value)=>this.changeValueCustom(value, 'DOMAIN_SOCKET')}
-                                      wrapperStyle={{backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
-                                      placeholder={'DOMAIN_SOCKET'}/>
-                        <Dialog.Input value={DOMAIN_LOGS}
-                                      onChangeText={(value)=>this.changeValueCustom(value, 'DOMAIN_LOGS')}
-                                      wrapperStyle={{backgroundColor: 'rgba(0, 0, 0, 0.1)'}}
-                                      placeholder={'DOMAIN_LOGS'}/>
-                        <Dialog.Button label="Cancel" onPress={this.handleCancelCustom} />
-                        <Dialog.Button label="Ok" onPress={this.handleSuccessCustom} />
+                                      onChangeText={(value)=>this.changeValueCustom(value, "DOMAIN_SOCKET")}
+                                      wrapperStyle={{backgroundColor: "rgba(0, 0, 0, 0.1)"}}
+                                      placeholder={"DOMAIN_SOCKET"}/>
+                        <Dialog.Input 
+                            value={ DOMAIN_LOGS }
+                            onChangeText = { (value)=>this.changeValueCustom(value, "DOMAIN_LOGS") }
+                            wrapperStyle = { {backgroundColor: "rgba(0, 0, 0, 0.1)"} }
+                            placeholder = { "DOMAIN_LOGS" } />
+                        <Dialog.Button 
+                            label = { "Cancel" } 
+                            onPress = { this._onHandleCancelCustom } />
+                        <Dialog.Button 
+                            label = { "Ok" } 
+                            onPress = { this._onHandleSuccessCustom } />
                     </Dialog.Container>
                 </View>
             </React.Fragment>
@@ -283,16 +289,16 @@ class HomePage extends Component<*> {
 }
 
 export function _mapStateToProps(state: Object) {
-    if (state['features/base/config'].enableLog !== undefined){
-        if (state['features/base/config'].enableLog){
-            setEnableLog(true)
+    if (state["features/base/config"].enableLog !== undefined){
+        if (state["features/base/config"].enableLog){
+            setEnableLog(true);
         } else {
-            setEnableLog(false)
+            setEnableLog(false);
         }
     }
     return {
-        _languages   : state['vcrx'].languages,
-        listdomain    : state['vcrx'].listdomain
+        _languages   : state["vcrx"].languages,
+        listdomain   : state["vcrx"].listdomain
     };
 }
 

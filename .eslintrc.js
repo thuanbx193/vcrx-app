@@ -4,6 +4,9 @@ module.exports = {
         "sourceType": "module",
         "ecmaVersion": 6
     },
+    "plugins": [
+        "react"
+    ],
     "rules": {
         "indent": [
             2,
