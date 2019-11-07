@@ -1,5 +1,5 @@
-import { Alert, Linking, Platform }  from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { Alert, Linking, Platform }  from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
     ACTION_UPDATE_P,
     P_KEY,
@@ -55,7 +55,7 @@ import {
     getDefaultServerURL,
     setDefultServerURL,
     setDomainAPI,
-}                                   from './config';
+}                                   from "./config";
 import {
     CHANGE_ROOM_INFO,
     CHANGE_TABS_CHAT,
@@ -70,17 +70,17 @@ import {
     DATA_CHANGE_MIC,
     SET_TIME_EXIT,
     GET_LIST_DOMAIN
-}                                   from './actionTypes';
-import { Base64 }                   from 'js-base64';
-import { appNavigate }              from './../features/app';
+}                                   from "./actionTypes";
+import { Base64 }                   from "js-base64";
+import { appNavigate }              from "./../features/app";
 import {toURLString}                from "./../features/base/util";
 import {
     getTrackByMediaTypeAndParticipant,
-}                                   from './../features/base/tracks';
+}                                   from "./../features/base/tracks";
 import {
     setAudioMuted,
     setVideoMuted
-}                                   from './../features/base/media';
+}                                   from "./../features/base/media";
 import {
     MEDIA_TYPE,
     VIDEO_MUTISM_AUTHORITY
@@ -88,7 +88,7 @@ import {
 import {
     getLocalParticipant,
     participantUpdated
-}                                   from './../features/base/participants';
+}                                   from "./../features/base/participants";
 import {
     setLogsAction,
     setLogInOut,
@@ -108,10 +108,10 @@ import {
     setLogsErrorAction,
     checkUpdateAppAPI
 }                                   from "./apis";
-import RNExitApp                    from 'react-native-exit-app';
-import DeviceInfo                   from 'react-native-device-info';
+import RNExitApp                    from "react-native-exit-app";
+import DeviceInfo                   from "react-native-device-info";
 
-const Entities = require('html-entities').XmlEntities;
+const Entities = require("html-entities").XmlEntities;
 const entities = new Entities();
 
 
@@ -124,49 +124,49 @@ export function setDataChangeMic(dataMic){
     return{
         type: DATA_CHANGE_MIC,
         dataMic
-    }
+    };
 }
 
 export function saveLogAction(data,type){
     return function(dispatch,getState) {
-        if (getState()['features/base/config'].enableLog){
+        if (getState()["features/base/config"].enableLog){
             let datas = {
                 system: SYSTEM_LOG,
                 timeCreated: Math.round(new Date().getTime()/1000),
                 type,
                 data
-            }
+            };
             setLogsAction(datas);
         }
-    }
+    };
 }
 
 export function saveLogInfo(data, type) {
     return function(dispatch,getState) {
-        if (getState()['features/base/config'].enableLog) {
+        if (getState()["features/base/config"].enableLog) {
             let datas = {
                 system: SYSTEM_LOG,
                 timeCreated: Math.round(new Date().getTime()/1000),
                 type,
                 data
-            }
+            };
             setLogsInfo(datas);
         }
-    }
+    };
 }
 
 export function saveLogError(data, type){
     return function(dispatch,getState) {
-        if (getState()['features/base/config'].enableLog) {
+        if (getState()["features/base/config"].enableLog) {
             let datas = {
                 system: SYSTEM_LOG,
                 timeCreated: Math.round(new Date().getTime()/1000),
                 type,
                 data
-            }
+            };
             setLogsErrorAction(datas);
         }
-    }
+    };
 }
 
 export function changeUserInfo(userInfo){
@@ -187,7 +187,7 @@ export function changeAssessment(assessmentStudent){
     return{
         type: CHANGE_ASSESSMENT,
         assessmentStudent
-    }
+    };
 }
 
 function setTimeNow(timeNow) {
@@ -216,7 +216,7 @@ export function setConfig(config, index = 3) {
         configAPI(config).then(res => {
             dispatch(getListDomain(res.result.value));
             if(res.status){
-                let domains = res.result.value.split(',');
+                let domains = res.result.value.split(",");
                 const params = {
                     DOMAIN_API: domains[1],
                     DEFAULT_SERVER_URL: domains[2],
@@ -232,7 +232,7 @@ export function setConfig(config, index = 3) {
         }).catch(err => {
             console.log("err", err);
         });
-    }
+    };
 }
 
 export function setCustomConfig(data, index = 3) {
@@ -245,24 +245,24 @@ export function setCustomConfig(data, index = 3) {
             select: index
         };
         AsyncStorage.setItem(SET_CONFIG, JSON.stringify(params));
-    }
+    };
 }
 
 export function getTimeServer(){
     return function(dispatch,getState) {
-        let { userInfo } = getState()['vcrx'];
+        let { userInfo } = getState()["vcrx"];
         getTimeFromServer(userInfo.tokenAPI).then((rsTimeNow)=>{
             if(rsTimeNow.status){
                 dispatch(setTimeNow(rsTimeNow.result / 1000));
             }
         });
-    }
+    };
 }
 
 export function updateTimeNow() {
     return function (dispatch, getState){
-        dispatch(setTimeNow(getState()['vcrx'].timeNow + 1));
-    }
+        dispatch(setTimeNow(getState()["vcrx"].timeNow + 1));
+    };
 }
 
 export function setLanguage(languages){
@@ -281,24 +281,24 @@ export function setSocket(socket){
 
 function handleSetLogInOut(role, actionType) {
     return function (dispatch, getState) {
-        let { userInfo, roomInfo } = getState()['vcrx'];
+        let { userInfo, roomInfo } = getState()["vcrx"];
         if(role == ROLE.audit) {
             setLogInOut(roomInfo.idRoomVcrx, actionType, userInfo.participantid, userInfo.tokenAPI, ROLE.auditMobile);
         } else {
             setLogInOut(roomInfo.idRoomVcrx, actionType, userInfo.participantid, userInfo.tokenAPI, ROLE.mobile);
         }
-    }
+    };
 }
 
 export function raiseHand(status = false){
     return function (dispatch,getState){
-        let { conference }              = getState()['features/base/conference'];
-        let { roomInfo, userInfo,languages }      = getState()['vcrx'];
+        let { conference }              = getState()["features/base/conference"];
+        let { roomInfo, userInfo,languages }      = getState()["vcrx"];
         if (PERMISSION.disableRaiseHand.indexOf(userInfo.role) == -1){
             if(status){
                 conference.sendCommand(ACTION_UPDATE_P, {value: JSON.stringify({field: P_KEY.raiseHand, data: false})});
             }else{
-                let _track              = getState()['features/base/tracks'];
+                let _track              = getState()["features/base/tracks"];
                 let _participantLocal   = getLocalParticipant(getState());
                 let audioTrackLocal     = getTrackByMediaTypeAndParticipant(_track, MEDIA_TYPE.AUDIO, _participantLocal.id);
                 let _audioMutedLocal    = !audioTrackLocal || audioTrackLocal.muted;
@@ -311,19 +311,19 @@ export function raiseHand(status = false){
                     "roomId"    : roomInfo.idRoom,
                     "state"     : !localParticipant.raiseHand,
                     "system"    : MOBILE_SYSTEM
-                }
+                };
                 dispatch(saveLogAction(data,ACTION_LOG_RAISE_HAND));
                 conference.sendCommand(ACTION_UPDATE_P, {value: JSON.stringify({field: P_KEY.raiseHand, data: !localParticipant.raiseHand})});
             }
         } else {
             Alert.alert(languages.topica.vcrx.error.notification,languages.topica.vcrx.error.limited_role);
         }
-    }
+    };
 }
 
 export function startRoom(){
     return function (dispatch, getState){
-        let {userInfo, roomInfo} = getState()['vcrx'];
+        let {userInfo, roomInfo} = getState()["vcrx"];
         let localParticipant     = getLocalParticipant(getState);
 
         if(userInfo.role == ROLE.audit) {
@@ -343,14 +343,14 @@ export function startRoom(){
         dispatch(handleSetLogInOut(userInfo.role, KEY_ACTION_IN));
         setTimeout(() => {
             dispatch(handleGetMessage());
-        }, 5000)
-    }
+        }, 5000);
+    };
 }
 
 export function handleLayout(indexLayout){
     return function(dispatch){
         dispatch(changeRoomInfo({indexLayout}));
-    }
+    };
 }
 
 
@@ -363,19 +363,19 @@ export function toggleMicro(data){
             }
             dispatch(setAudioMuted(!data.status, true));
         }
-    }
+    };
 }
 
 export function toggleAudio(local=true){
     return function (dispatch,getState){
-        let { languages, userInfo } = getState()['vcrx'];
+        let { languages, userInfo } = getState()["vcrx"];
         let dataMic = {
             timeStart   : new Date().getTime(),
             userId      : userInfo.id,
             isMuted     : true
         };
         if ( PERMISSION.disableMic.indexOf(userInfo.role) == -1){
-            let _track              = getState()['features/base/tracks'];
+            let _track              = getState()["features/base/tracks"];
             let _participantLocal   = getLocalParticipant(getState());
 
             let audioTrackLocal     = getTrackByMediaTypeAndParticipant(_track, MEDIA_TYPE.AUDIO, _participantLocal.id);
@@ -389,7 +389,7 @@ export function toggleAudio(local=true){
         } else {
             Alert.alert(languages.topica.vcrx.error.notification,languages.topica.vcrx.error.limited_role);
         }
-    }
+    };
 }
 
 export function changeTabsChat(tabs, toId, toFullname){
@@ -403,7 +403,7 @@ export function changeTabsChat(tabs, toId, toFullname){
         toId,
         toFullname,
         toUserId
-    }
+    };
 }
 
 export function logout() {
@@ -425,19 +425,19 @@ export function changeChatInfo(chatInfo){
 export function toggleChatVisible(chatVisible){
     return function (dispatch){
         dispatch(changeChatInfo({chatVisible}));
-    }
+    };
 }
 
 export function sendChat(messages){
     return function (dispatch, getState){
-        let {chatInfo, userInfo, roomInfo, timeJoin} = getState()['vcrx'];
-        let { conference }       = getState()['features/base/conference']
+        let {chatInfo, userInfo, roomInfo, timeJoin} = getState()["vcrx"];
+        let { conference }       = getState()["features/base/conference"];
         let userId      = userInfo.id.toString();
         let userName    = userInfo.firstname + " " + userInfo.lastname;
         let message     = messages.find(p => p.user._id == userInfo.id).text;
         let d           = new Date();
         let utc         = d.getTime() + (d.getTimezoneOffset() * 60000);
-        let timestamp   = getState()['vcrx'].timeNow;
+        let timestamp   = getState()["vcrx"].timeNow;
         let messageCustom;
         if(chatInfo.tabs == CHAT_TABS_PUBLIC){
             messageCustom = {
@@ -445,7 +445,7 @@ export function sendChat(messages){
                 userName,
                 message,
                 timestamp
-            }
+            };
         }else{
             messageCustom = {
                 userId,
@@ -455,16 +455,16 @@ export function sendChat(messages){
                 chatFrom: userId,
                 chatTo: chatInfo.toId,
                 timestamp
-            }
+            };
         }
         setLogChat(roomInfo.idRoomVcrx, userInfo.id, chatInfo.toId, message, userInfo.tokenAPI);
         conference.sendTextMessage(JSON.stringify(messageCustom));
-    }
+    };
 }
 
 export function handleGetMessage(){
     return function (dispatch, getState){
-        let {roomInfo, userInfo, chatInfo } = getState()['vcrx'];
+        let {roomInfo, userInfo, chatInfo } = getState()["vcrx"];
         let nottifyPrivate = [];
         let notifyPublic = 0;
         let messages = [];
@@ -497,8 +497,8 @@ export function handleGetMessage(){
                             chatFrom: message.fromParticiantId,
                             chatType: message.toParticiantId != CHAT_ID_PUBLIC ? CHAT_TYPE_PRIVATE: CHAT_TYPE_PUBLIC,
                             chatTo:  message.toParticiantId
-                        })
-                    })
+                        });
+                    });
                     setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: roomInfo.idRoomVcrx, data: {public: notifyPublic, private: nottifyPrivate}}));
                     dispatch(changeChatInfo({chats: messages, notifies: {public: notifyPublic, private: nottifyPrivate}}));
                 } else {
@@ -530,20 +530,20 @@ export function handleGetMessage(){
                             chatFrom: message.fromParticiantId,
                             chatType: message.toParticiantId != CHAT_ID_PUBLIC ? CHAT_TYPE_PRIVATE: CHAT_TYPE_PUBLIC,
                             chatTo:  message.toParticiantId
-                        })
-                    })
-                    notify.timestamp = Math.round(getState()['vcrx'].timeNow);
+                        });
+                    });
+                    notify.timestamp = Math.round(getState()["vcrx"].timeNow);
                     setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify(notify));
                     dispatch(changeChatInfo({chats: messages, notifies: notify.data}));
                 }
-            })
-        })
-    }
+            });
+        });
+    };
 }
 
 export function handleReadMessage(fromIdUser, tabs){
     return function (dispatch, getState){
-        let {chatInfo, roomInfo} = getState()['vcrx'];
+        let {chatInfo, roomInfo} = getState()["vcrx"];
         let notify = chatInfo.notifies;
         let index = notify.private.findIndex(notify => notify.from == fromIdUser);
         if(tabs === CHAT_TABS_PUBLIC){
@@ -555,13 +555,13 @@ export function handleReadMessage(fromIdUser, tabs){
         }
         dispatch(changeChatInfo({notifies: notify}));
         setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: roomInfo.idRoomVcrx, data: notify}));
-    }
+    };
 }
 
 export function handleSetMessage(body, timestamp){
     return function (dispatch, getState){
-        if(getState()['vcrx'].timeJoin < timestamp || getState()['vcrx'].timeExit < timestamp){
-            let {chatInfo, userInfo, roomInfo} = getState()['vcrx'];
+        if(getState()["vcrx"].timeJoin < timestamp || getState()["vcrx"].timeExit < timestamp){
+            let {chatInfo, userInfo, roomInfo} = getState()["vcrx"];
             let notify = chatInfo.notifies;
             let chatFrom = parseInt(body.chatFrom ? body.chatFrom : body.userId);
             let message = {
@@ -575,7 +575,7 @@ export function handleSetMessage(body, timestamp){
                 chatFrom,
                 chatType: body.chatType ? body.chatType : CHAT_TYPE_PUBLIC,
                 chatTo:  body.chatTo ? parseInt(body.chatTo) : CHAT_ID_PUBLIC
-            }
+            };
             chatInfo.chats.push(message);
             let index = notify.private.findIndex(notify => notify.from === chatFrom && message.chatTo !== CHAT_ID_PUBLIC);
             if(message.chatFrom == userInfo.id || chatInfo.toId == message.chatFrom && chatInfo.chatVisible && message.chatTo == userInfo.id || chatInfo.tabs === CHAT_TABS_PUBLIC && chatInfo.toId === message.chatTo){
@@ -595,7 +595,7 @@ export function handleSetMessage(body, timestamp){
             dispatch(changeChatInfo({chats: chatInfo.chats, notifies: notify}));
             setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: roomInfo.idRoomVcrx, data: notify}));
         }
-    }
+    };
 }
 
 export function initRoom(idRoomVcrx, tokenAPI){
@@ -603,15 +603,15 @@ export function initRoom(idRoomVcrx, tokenAPI){
         getRoomInfo(idRoomVcrx, tokenAPI ).then((rsRoomInfo)=>{
             if (rsRoomInfo){
                 let time = setInterval(()=>{
-                    if(Math.round(getState()['vcrx'].timeNow)){
-                        let timeJoin = Math.round(getState()['vcrx'].timeNow);
+                    if(Math.round(getState()["vcrx"].timeNow)){
+                        let timeJoin = Math.round(getState()["vcrx"].timeNow);
                         dispatch(setTimeJoinClass(timeJoin));
                         clearInterval(time);
                     }
-                }, 1000)
+                }, 1000);
 
                 let material = rsRoomInfo.result.material;
-                if(typeof material !== 'undefined' && material.length > 0){
+                if(typeof material !== "undefined" && material.length > 0){
                     let slide = material.find(m => m.type == KEY_M_PDF);
                     let video = material.find(m => m.type == KEY_M_VIDEO);
                     if (slide != undefined){
@@ -633,22 +633,23 @@ export function initRoom(idRoomVcrx, tokenAPI){
                 });
                 setTimeout(() => {
                     dispatch(handleGetMessage());
-                }, 5000)
+                }, 5000);
             } else {
                 let link = PORTAL_LINKING.PARAM;
                 Linking.canOpenURL(link).then(supported => {
                     if (!supported) {
                         Alert.alert(languages.topica.lms.login.title,
                             languages.topica.homepage.no_portal,
-                            [   {
+                            [   
+                                {
                                     text: languages.topica.homepage.install, onPress: () => {
-                                        Platform.OS === 'android' ?
-                                        Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                        Linking.openURL(LINK_APPSTORE_PORTAL)
+                                        Platform.OS === "android" ?
+                                            Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+                                            Linking.openURL(LINK_APPSTORE_PORTAL);
                                     }
                                 },
                                 {
-                                    text: languages.topica.homepage.cancel, style: 'cancel'
+                                    text: languages.topica.homepage.cancel, style: "cancel"
                                 }
                             ],
                             { cancelable: false }
@@ -656,15 +657,15 @@ export function initRoom(idRoomVcrx, tokenAPI){
                     } else {
                         return Linking.openURL(link);
                     }
-                }).catch(err => console.error('An error occurred', err));
+                }).catch(err => console.error("An error occurred", err));
                 setTimeout(() => {
-                    if(Platform.OS === 'android'){
+                    if(Platform.OS === "android"){
                         RNExitApp.exitApp();
                     }
-                }, 500)
+                }, 500);
             }
         });
-    }
+    };
 }
 
 export function changeTimeJoinClass(timeJoin){
@@ -676,8 +677,8 @@ export function changeTimeJoinClass(timeJoin){
 
 export function setTimeJoinClass(time) {
     return function (dispatch) {
-        dispatch(changeTimeJoinClass(time))
-    }
+        dispatch(changeTimeJoinClass(time));
+    };
 }
 
 export function joinRoomByLink(uri,isDeep){
@@ -744,7 +745,7 @@ export function joinRoomByLink(uri,isDeep){
                     isDeep: isDeep
                 };
                 let serverURL = getDefaultServerURL();
-                setAsyncStorage('dataInfo', JSON.stringify({roomId: roomId, userId: userId}));
+                setAsyncStorage("dataInfo", JSON.stringify({roomId: roomId, userId: userId}));
                 dispatch(saveLogAction(dataAction, ACTION_LINKING_PORTAL_CONNECT));
                 dispatch(changeRoomInfo({idRoom:roomId, timeAvailable: params[7], idRoomVcrx: vcrxroomid}));
                 loginAPICore().then(resLogin => {
@@ -759,15 +760,16 @@ export function joinRoomByLink(uri,isDeep){
                                 if (!supported) {
                                     Alert.alert(languages.topica.lms.login.title,
                                         languages.topica.homepage.no_portal,
-                                        [   {
+                                        [   
+                                            {
                                                 text: languages.topica.homepage.install, onPress: () => {
-                                                    Platform.OS === 'android' ?
-                                                    Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                                    Linking.openURL(LINK_APPSTORE_PORTAL)
+                                                    Platform.OS === "android" ?
+                                                        Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+                                                        Linking.openURL(LINK_APPSTORE_PORTAL);
                                                 }
                                             },
                                             {
-                                                text: languages.topica.homepage.cancel, style: 'cancel'
+                                                text: languages.topica.homepage.cancel, style: "cancel"
                                             }
                                         ],
                                         { cancelable: false }
@@ -775,47 +777,46 @@ export function joinRoomByLink(uri,isDeep){
                                 } else {
                                     return Linking.openURL(link);
                                 }
-                            }).catch(err => console.error('An error occurred', err));
+                            }).catch(err => console.error("An error occurred", err));
                             setTimeout(() => {
-                                if(Platform.OS === 'android'){
+                                if(Platform.OS === "android"){
                                     RNExitApp.exitApp();
                                 }
-                            }, 500)
+                            }, 500);
                         }
-                    })
-                })
+                    });
+                });
             }
         } else {
             if (!isDeep){
-                Alert.alert('Thông báo','Đường dẫn nhập vào không hợp lệ');
+                Alert.alert("Thông báo","Đường dẫn nhập vào không hợp lệ");
             } else {
                 dispatch(appNavigate(toURLString(uri)));
             }
         }
-    }
-
+    };
 }
 
 export function updateParticipant(conference){
     return function (dispatch,getState){
-        let { userInfo }       = getState()['vcrx'];
+        let { userInfo }       = getState()["vcrx"];
         conference.sendCommand(
             ACTION_UPDATE_P, {value: JSON.stringify({field: P_KEY.userInfo, data: {role: KEY_ROLE_MOBILE,id: userInfo.id, fullname: userInfo.firstname + " " +userInfo.lastname, device: `${Platform.OS}`}})});
 
         if(userInfo.role == ROLE.audit) {
             conference.sendCommand(ACTION_UPDATE_P, { value: JSON.stringify({ field: P_KEY.audit, data: true })});
         }
-    }
+    };
 }
 
 export function exitClass(typeLog = ACTION_LOG_OUT) {
     return function (dispatch, getState) {
         let typeLeaveRoom = LEAVE_PROACTIVE;
-        let { userInfo, chatInfo, socket, roomInfo, languages } = getState()['vcrx'];
+        let { userInfo, chatInfo, socket, roomInfo, languages } = getState()["vcrx"];
         if (typeLog === ACTION_LOG_OUT){
-            typeLeaveRoom = LEAVE_PROACTIVE
+            typeLeaveRoom = LEAVE_PROACTIVE;
         } else {
-            typeLeaveRoom = LEAVE_KICK_ETC
+            typeLeaveRoom = LEAVE_KICK_ETC;
         }
         socket.disconnect();
         let localParticipant = getLocalParticipant(getState);
@@ -826,14 +827,14 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
         localParticipant.raiseHand = false;
         dispatch(participantUpdated(localParticipant));
         dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
-        setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
-        setAsyncStorage(TIME_EXIT_APP, JSON.stringify(Math.round(getState()['vcrx'].timeNow)));
+        setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()["vcrx"].roomInfo.idRoomVcrx, data: notify}));
+        setAsyncStorage(TIME_EXIT_APP, JSON.stringify(Math.round(getState()["vcrx"].timeNow)));
         let dataLogout = {
             userId  : userInfo.id,
             roomId  : roomInfo.idRoom,
             device  : MOBILE_SYSTEM,
             type    : typeLeaveRoom
-        }
+        };
         dispatch(saveLogAction(dataLogout, ACTION_LOG_OUT));
         let link = PORTAL_LINKING.LOGOUT;
         Linking.canOpenURL(link).then(supported => {
@@ -843,7 +844,7 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
                 //     languages.topica.homepage.no_portal,
                 //     [   {
                 //             text: languages.topica.homepage.install, onPress: () => {
-                //                 Platform.OS === 'android' ?
+                //                 Platform.OS === "android" ?
                 //                 Linking.openURL(LINK_PLAYSTORE_PORTAL) :
                 //                 Linking.openURL(LINK_APPSTORE_PORTAL)
                 //             }
@@ -861,18 +862,18 @@ export function exitClass(typeLog = ACTION_LOG_OUT) {
                 dispatch(appNavigate(undefined));
                 return Linking.openURL(link);
             }
-        }).catch(err => console.error('An error occurred', err));
+        }).catch(err => console.error("An error occurred", err));
         setTimeout(() => {
-            if(Platform.OS === 'android'){
+            if(Platform.OS === "android"){
                 RNExitApp.exitApp();
             }
-        }, 500)
-    }
+        }, 500);
+    };
 }
 
 export function kickUser(userId, action) {
     return function (dispatch,getState){
-        let { userInfo, languages, chatInfo, socket, roomInfo } = getState()['vcrx'];
+        let { userInfo, languages, chatInfo, socket, roomInfo } = getState()["vcrx"];
         let localParticipant = getLocalParticipant(getState);
         if (userId === localParticipant.id || userId === "local") {
             let typeLog = ACTION_LOG_OUT;
@@ -881,7 +882,7 @@ export function kickUser(userId, action) {
             }else if (action === PORTAL_LINKING.CALL){
                 typeLog = LEAVE_KICK_CALL;
             } else if (action === PORTAL_LINKING.NETWORK){
-                typeLog = LEAVE_KICK_LOSTCONNECT
+                typeLog = LEAVE_KICK_LOSTCONNECT;
             } else {
                 typeLog = LEAVE_KICK_PO;
             }
@@ -890,7 +891,7 @@ export function kickUser(userId, action) {
                 roomId  : roomInfo.idRoom,
                 device  : MOBILE_SYSTEM,
                 type    : typeLog
-            }
+            };
             dispatch(saveLogAction(dataLogout, ACTION_LOG_OUT));
             socket.disconnect();
             let notify = chatInfo.notifies;
@@ -901,8 +902,8 @@ export function kickUser(userId, action) {
             localParticipant.raiseHand = false;
             dispatch(participantUpdated(localParticipant));
             dispatch(changeTabsChat(CHAT_TABS_PUBLIC, 0));
-            setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()['vcrx'].roomInfo.idRoomVcrx, data: notify}));
-            let link = PORTAL_LINKING.OPEN + '/' + PORTAL_LINKING.KICK;
+            setAsyncStorage(NOTIFY_CHAT_STORAGE, JSON.stringify({id: getState()["vcrx"].roomInfo.idRoomVcrx, data: notify}));
+            let link = PORTAL_LINKING.OPEN + "/" + PORTAL_LINKING.KICK;
             dispatch(appNavigate(undefined));
             Linking.canOpenURL(link).then(supported => {
                 if (!supported) {
@@ -911,7 +912,7 @@ export function kickUser(userId, action) {
                     //     languages.topica.homepage.no_portal,
                     //     [   {
                     //             text: languages.topica.homepage.install, onPress: () => {
-                    //                 Platform.OS === 'android' ?
+                    //                 Platform.OS === "android" ?
                     //                 Linking.openURL(LINK_PLAYSTORE_PORTAL) :
                     //                 Linking.openURL(LINK_APPSTORE_PORTAL)
                     //             }
@@ -929,29 +930,29 @@ export function kickUser(userId, action) {
                     dispatch(appNavigate(undefined));
                     return Linking.openURL(link);
                 }
-            }).catch(err => console.error('An error occurred', err));
+            }).catch(err => console.error("An error occurred", err));
             setTimeout(() => {
-                if(Platform.OS === 'android'){
+                if(Platform.OS === "android"){
                     RNExitApp.exitApp();
                 }
-            }, 2000)
+            }, 2000);
         }
-    }
+    };
 }
 
 export function kickDuplicateUser(conference) {
     return function (dispatch, getState) {
-        let paticipants = getState()['features/base/participants'];
-        let userInfo    = getState()['vcrx'].userInfo;
+        let paticipants = getState()["features/base/participants"];
+        let userInfo    = getState()["vcrx"].userInfo;
         paticipants.filter(function (user) {
             let displayName ;
             (user.name && user.email) && user.name.split("-")[0] === KEY_ROLE_MOBILE
-                ? displayName = Base64.decode(user.name.slice(3)) : displayName = user.name.slice(3)
+                ? displayName = Base64.decode(user.name.slice(3)) : displayName = user.name.slice(3);
             let strTemp = displayName.split("-");
             let userId  = strTemp[strTemp.length-1];
             userId == userInfo.id && !user.local && conference.sendCommandOnce(ACTION_KICK, { value : user.id, attributes: {action: DUPLICATE_USER}});
         });
-    }
+    };
 }
 
 
@@ -962,10 +963,10 @@ export function sendAssessment(data) {
         if (data.value && userList.includes(localParticipant.id)) {
             let response = JSON.parse(data.value);
             let assessmentData = response.listAssessmentStudent;
-            let assessmentInfo = assessmentData.map((e) => [e.displayName, e.pronunciation, e.vocabulary, e.grammar])
+            let assessmentInfo = assessmentData.map((e) => [e.displayName, e.pronunciation, e.vocabulary, e.grammar]);
             dispatch(changeAssessment({show: true, data: assessmentInfo}));
         }
-    }
+    };
 }
 
 export function handleUploadMaterial(data) {
@@ -978,28 +979,30 @@ export function handleUploadMaterial(data) {
                     dispatch(changeRoomInfo({slide: slides.link, video: videos.link}));
                 }
             }
-        })
-    }
+        });
+    };
 }
 
 export function handleOpenPortal() {
     return function (dispatch, getState) {
-        let { languages } = getState()['vcrx'];
+        let { languages } = getState()["vcrx"];
         let link = PORTAL_LINKING.OPEN;
         Linking.canOpenURL(link).then(supported => {
             if (!supported) {
                 Alert.alert(languages.topica.lms.login.title,
                     languages.topica.homepage.no_portal,
-                    [   {
-                            text: languages.topica.homepage.install, onPress: () => {
-                                Platform.OS === 'android' ?
-                                Linking.openURL(LINK_PLAYSTORE_PORTAL) :
-                                Linking.openURL(LINK_APPSTORE_PORTAL)
+                    [   
+                        {
+                            text: languages.topica.homepage.install, onPress: () => 
+                            {
+                                Platform.OS === "android" ?
+                                    Linking.openURL(LINK_PLAYSTORE_PORTAL) :
+                                    Linking.openURL(LINK_APPSTORE_PORTAL);
                             }
                         },
                         {
                             text: languages.topica.homepage.cancel, onPress: () => {},
-                            style: 'cancel',
+                            style: "cancel",
                         }
                     ],
                     { cancelable: false }
@@ -1007,48 +1010,48 @@ export function handleOpenPortal() {
             } else {
                 Linking.openURL(link);
                 setTimeout(()=>{
-                    if(Platform.OS === 'android'){
+                    if(Platform.OS === "android"){
                         RNExitApp.exitApp();
                     }
                 }, 500);
             }
-        }).catch(err => console.error('An error occurred', err));
-    }
+        }).catch(err => console.error("An error occurred", err));
+    };
 }
 
 export function handleAddLogSlide(title, message){
     return function (dispatch, getState) {
-        let { roomInfo, userInfo } = getState()['vcrx'];
-        addLogError(roomInfo.idRoomVcrx, userInfo.participantid, userInfo.id, parseInt(roomInfo.idRoom), 'Lỗi slide '+title, message, userInfo.tokenAPI);
-    }
+        let { roomInfo, userInfo } = getState()["vcrx"];
+        addLogError(roomInfo.idRoomVcrx, userInfo.participantid, userInfo.id, parseInt(roomInfo.idRoom), "Lỗi slide "+title, message, userInfo.tokenAPI);
+    };
 }
 
 export function changeLanguage(key){
     return function(dispatch){
         let languages;
         switch (key) {
-            case 'en':
-                languages = require('./lang/en.json');
+            case "en":
+                languages = require("./lang/en.json");
                 break;
-            case 'vi':
-                languages = require('./lang/vi.json');
+            case "vi":
+                languages = require("./lang/vi.json");
                 break;
             default:
-                languages = require('./lang/vi.json');
+                languages = require("./lang/vi.json");
         }
         dispatch(setLanguage(languages));
-    }
+    };
 }
 
 export function handleWarning(key){
     return function(dispatch){
         dispatch(changeRoomInfo({errorKey:key}));
-    }
+    };
 }
 
 export function handleSendWarning(title, message, socket){
     return function(dispatch, getState){
-        let { roomInfo, userInfo, languages } = getState()['vcrx'];
+        let { roomInfo, userInfo, languages } = getState()["vcrx"];
         addLogError(roomInfo.idRoomVcrx, userInfo.participantid, userInfo.id, parseInt(roomInfo.idRoom), title, message, userInfo.tokenAPI)
             .then((res)=>{
                 if(res.status == true){
@@ -1060,28 +1063,28 @@ export function handleSendWarning(title, message, socket){
                 }
             });
         dispatch(handleWarning(0));
-    }
+    };
 }
 
 export function updateChatUsers(user){
     return (dispatch, getState) => {
-        let { chatInfo } = getState()['vcrx'];
+        let { chatInfo } = getState()["vcrx"];
         let { users } = chatInfo;
         let isset = users.findIndex(u=>u.id == user.id);
         if(isset == -1){
             users.push(user);
             dispatch(changeChatInfo({ users }));
         }
-    }
+    };
 }
 
 export function saveLogsConnectionQuality() {
     return (dispatch, getState) => {
-        let participants = getState()['features/base/participants'];
-        let role         = getState()['vcrx'].userInfo.role === ROLE.mobile ? ROLE.hv : ROLE.audit;
-        let date         = new Date(parseInt(getState()['vcrx'].roomInfo.timeAvailable)*1000);
+        let participants = getState()["features/base/participants"];
+        let role         = getState()["vcrx"].userInfo.role === ROLE.mobile ? ROLE.hv : ROLE.audit;
+        let date         = new Date(parseInt(getState()["vcrx"].roomInfo.timeAvailable)*1000);
         let hour         = date.getHours();
-        let { userInfo, roomInfo } = getState()['vcrx'];
+        let { userInfo, roomInfo } = getState()["vcrx"];
         if(participants.length > 1) {
             let connectionStats = getState()["features/base/conference"].conference.connectionQuality.getStats();
             let { bitrate, bandwidth, connectionQuality, packetLoss, jvbRTT, resolution, transport } = connectionStats;
@@ -1100,34 +1103,33 @@ export function saveLogsConnectionQuality() {
                     transport,
                     role,
                     hour
-                }
+                };
                 dispatch(saveLogInfo(data, CONNECTION_QUALITY));
             }
         }
-    }
+    };
 }
 
 export function checkUpdateApp(uri){
     return function (dispatch, getState) {
-        let {languages} = getState()['vcrx'];
+        let {languages} = getState()["vcrx"];
         let systemName = DeviceInfo.getSystemName();
         let currentVersion = DeviceInfo.getVersion();
         let url = systemName == "Android" ? LINK_PLAYSTORE_VCRX: LINK_APPSTORE_VCRX;
         checkUpdateAppAPI(currentVersion, systemName, SYSTEM).then((response)=>{
-            if(response.hasOwnProperty('result') && response.result){
+            if(response.hasOwnProperty("result") && response.result){
                 Alert.alert(
                     languages.topica.lms.login.title,
                     languages.topica.lms.login.notify + languages.topica.lms.login.please,
                     [
                         {text: languages.topica.lms.login.confirm_update, onPress: () => {Linking.canOpenURL(url)
-                        .then((supported) => {
-                        if (!supported) {
-                            console.log("Can't handle url: " + url);
-                        } else {
-                            return Linking.openURL(url);
-                        }
-                        })
-                        .catch((err) => console.error('An error occurred', err));},}
+                            .then((supported) => {
+                                if (!supported) {
+                                    console.log("Can't handle url: " + url);
+                                } else {
+                                    return Linking.openURL(url);
+                                }
+                            }).catch((err) => console.error("An error occurred", err));},}
                     ],
                     { cancelable: false }
                 );
@@ -1143,10 +1145,6 @@ export function checkUpdateApp(uri){
             } else {
                 dispatch(appNavigate(toURLString(uri)));
             }
-        })
-    }
+        });
+    };
 }
-
-
-
-

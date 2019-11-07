@@ -1,18 +1,18 @@
-import React            from 'react';
-import { connect }      from 'react-redux';
-import styles           from './styles';
+import React            from "react";
+import { connect }      from "react-redux";
+import styles           from "./styles";
 import {
     Text, View,
     TouchableHighlight
-}                       from 'react-native';
+}                       from "react-native";
 import {
     changeTabsChat,
     handleReadMessage
-}                       from '../../../actions';
+}                       from "../../../actions";
 import {
     CHAT_TABS_PUBLIC,
     CHAT_ID_PUBLIC
-}                       from './../../../constants';
+}                       from "./../../../constants";
 
 class PublicChatTitle extends React.Component{
     constructor(props){
@@ -29,7 +29,7 @@ class PublicChatTitle extends React.Component{
             <TouchableHighlight
                 onPress = {()=>this._changeTabsChat( CHAT_TABS_PUBLIC, CHAT_ID_PUBLIC, null )}
                 style ={[styles.chatHeadTitle,this.props.bgTabs]}
-                >
+            >
                 <View style={styles.chatHeadTitleView}>
                     <Text style={styles.chatHeadTitleViewText}>{this.props._languages.topica.vcrx.chat.public}</Text>
                     {
@@ -38,20 +38,20 @@ class PublicChatTitle extends React.Component{
                     }
                 </View>
             </TouchableHighlight>
-        )
+        );
     }
 }
 
 function _mapStateToProps(state){
-    let bgTabs = {borderRightWidth: 0.4}
-    if(state['vcrx'].chatInfo.tabs == CHAT_TABS_PUBLIC){
+    let bgTabs = {borderRightWidth: 0.4};
+    if(state["vcrx"].chatInfo.tabs == CHAT_TABS_PUBLIC){
         bgTabs.backgroundColor = "#dbac69";
     }
     return {
-        _languages      : state['vcrx'].languages,
-        totalNotify     : state['vcrx'].chatInfo.notifies.public,
+        _languages      : state["vcrx"].languages,
+        totalNotify     : state["vcrx"].chatInfo.notifies.public,
         bgTabs
-    }
+    };
 }
 
-export default connect(_mapStateToProps)(PublicChatTitle)
+export default connect(_mapStateToProps)(PublicChatTitle);

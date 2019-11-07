@@ -14,21 +14,21 @@
 
 import {  View,TextInput,
     TouchableHighlight, Text, Keyboard
-}                                       from 'react-native';
-import React, { Component }             from 'react';
-import { connect }                      from 'react-redux';
-import styles                           from './styles';
+}                                       from "react-native";
+import React, { Component }             from "react";
+import { connect }                      from "react-redux";
+import styles                           from "./styles";
 import { 
     handleWarning, 
     handleSendWarning 
-}                                       from '../../../actions';
+}                                       from "../../../actions";
 
 class WarningBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: '',
-            title:''
+            message: "",
+            title:""
         };
     }
 
@@ -37,7 +37,7 @@ class WarningBox extends Component {
     }
 
     render() {
-        let title = '';
+        let title = "";
         if (this.props._errorBoxKey == 1){
             title = this.props._languages.topica.vcrx.error.video;
         } else if (this.props._errorBoxKey == 2){
@@ -57,7 +57,7 @@ class WarningBox extends Component {
                                 placeholder = {this.props._languages.topica.vcrx.error.enter_title}
                                 multiline = {false}
                                 onChangeText={this._onTitleChange}
-                                underlineColorAndroid={'transparent'}
+                                underlineColorAndroid={"transparent"}
                                 value={this.state.title}
                             />
                         }
@@ -67,7 +67,7 @@ class WarningBox extends Component {
                             multiline = {true}
                             numberOfLines = {4}
                             onChangeText={this._onMessageChange}
-                            underlineColorAndroid={'transparent'}
+                            underlineColorAndroid={"transparent"}
                             value={this.state.message}
                         />
                         {
@@ -76,25 +76,25 @@ class WarningBox extends Component {
                         }
                         <View style = {styles.boxSubmit}>
                             <TouchableHighlight
-                                accessibilityLabel={'Tap to Send.'}
+                                accessibilityLabel={"Tap to Send."}
                                 onPress={this._onNotifyOtherWarning}
                                 style={styles.sendBtn}
-                                underlayColor='transparent'>
+                                underlayColor="transparent">
                                 <Text style={styles.sendBtnSub}>{this.props._languages.topica.vcrx.error.send}</Text>
                             </TouchableHighlight>
                         </View>
                         <TouchableHighlight
-                            accessibilityLabel={'Close popup'}
+                            accessibilityLabel={"Close popup"}
                             onPress={this.closePopup}
                             style={styles.closeBtn}
-                            underlayColor='transparent'>
+                            underlayColor="transparent">
                             <Text style={styles.closeBtnText}>X</Text>
                         </TouchableHighlight>
                     </View>
                 </View>
-            )
+            );
         } else {
-            return(<View />)
+            return(<View />);
         }
     }
 
@@ -107,9 +107,9 @@ class WarningBox extends Component {
         } else if (this.props._errorBoxKey == 3){
             title = this.props._languages.topica.vcrx.error.slide;
         }
-        if (title.replace(/^\s+/, '').replace(/\s+$/, '') != ''){
+        if (title.replace(/^\s+/, "").replace(/\s+$/, "") != ""){
             this.props.dispatch(handleSendWarning(title, this.state.message, this.props.socket));
-            this.setState({message:'', title:''});
+            this.setState({message:"", title:""});
             this.setState({showNotify:false}); 
         } else {
             this.setState({showNotify:true});
@@ -119,7 +119,7 @@ class WarningBox extends Component {
     closePopup  = () => {
         Keyboard.dismiss();
         this.props.dispatch(handleWarning(0));
-        this.setState({showNotify:false, title:'', message:''});
+        this.setState({showNotify:false, title:"", message:""});
     }
 
 
@@ -135,8 +135,8 @@ class WarningBox extends Component {
 
 export function _mapStateToProps(state: Object) {
     return {
-        _languages   : state['vcrx'].languages,
-        _errorBoxKey : state['vcrx'].roomInfo.errorKey,
+        _languages   : state["vcrx"].languages,
+        _errorBoxKey : state["vcrx"].roomInfo.errorKey,
     };
 }
 

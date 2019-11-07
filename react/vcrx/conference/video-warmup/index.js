@@ -1,1 +1,1 @@
-export { default as VideoWarmUp } from './components/VideoWarmUp';
+export { default as VideoWarmUp } from "./components/VideoWarmUp";

@@ -4,33 +4,33 @@
     TimeCreated: 01/07/2019
     TimeModified: 01/07/2019
 */
-import React, { Component }                 from 'react';
-import { connect }                          from 'react-redux';
-import { TouchableOpacity, Text, View, Alert }     from 'react-native';
-import ModalDropdown                        from 'react-native-modal-dropdown';
-import FontAwesome                          from 'react-native-vector-icons/FontAwesome';
-import styles                               from './styles';
-import { handleWarning }                    from '../../../actions';
-import { PERMISSION }                       from '../../../config';
+import React, { Component }                 from "react";
+import { connect }                          from "react-redux";
+import { TouchableOpacity, Text, View, Alert }     from "react-native";
+import ModalDropdown                        from "react-native-modal-dropdown";
+import FontAwesome                          from "react-native-vector-icons/FontAwesome";
+import styles                               from "./styles";
+import { handleWarning }                    from "../../../actions";
+import { PERMISSION }                       from "../../../config";
 
 class WarningBtn extends Component {
     constructor(props) {
         super(props);
         this.state = {
             role: true
-        }
+        };
     }
 
-    _dropdown_layout_willShow() {
+    _dropdownLayoutWillShow() {
         this.setState({
             styleMenuLayout: [styles.styleMenuEnable, (this.props.styleMenuBtn || {})]
-        })
+        });
     }
 
-    _dropdown_layout_willHide() {
+    _dropdownLayoutWillHide() {
         this.setState({
             styleMenuLayout: [styles.styleMenuDisable, (this.props.styleMenuBtn || {})]
-        })
+        });
     }
 
     _onSelectWarning = (index, name) => {
@@ -41,7 +41,7 @@ class WarningBtn extends Component {
     warningValue = datas => {
         const result = datas.map((item, key) => (
             <Text>{item}</Text>
-        ))
+        ));
         return result;
     }
 
@@ -71,29 +71,29 @@ class WarningBtn extends Component {
                         animated={false}
                         options={this.warningValue(errorValue)}
                         onSelect={(index, data) => this._onSelectWarning(index)}
-                        onDropdownWillShow={() => this._dropdown_layout_willShow()}
-                        onDropdownWillHide={() => this._dropdown_layout_willHide()}
+                        onDropdownWillShow={() => this._dropdownLayoutWillShow()}
+                        onDropdownWillHide={() => this._dropdownLayoutWillHide()}
                     >
                         <View style={styles.styleMenuDisable}>
-                            <FontAwesome name='warning' style={styles.fontAwesomeWarning} />
+                            <FontAwesome name="warning" style={styles.fontAwesomeWarning} />
                         </View>
                     </ModalDropdown>
                 }
                 { !this.state.role &&
                     <View style={styles.styleMenuDisable}>
-                        <FontAwesome name='warning' style={styles.fontAwesomeWarning} />
+                        <FontAwesome name="warning" style={styles.fontAwesomeWarning} />
                     </View>
                 }
             </TouchableOpacity>
-        )
+        );
     }
 }
 
 function _mapStateToProps(state) {
     return {
-        _languages: state['vcrx'].languages,
-        _userInfo : state['vcrx'].userInfo
-    }
+        _languages: state["vcrx"].languages,
+        _userInfo : state["vcrx"].userInfo
+    };
 }
 
 export default connect(_mapStateToProps)(WarningBtn);

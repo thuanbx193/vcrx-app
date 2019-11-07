@@ -1,2 +1,2 @@
-export * from './actions';
-import './reducer';
+export * from "./actions";
+import "./reducer";

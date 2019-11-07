@@ -1,4 +1,4 @@
-import { ReducerRegistry }          from '../features/base/redux';
+import { ReducerRegistry }          from "../features/base/redux";
 import {
     CHANGE_USER_INFO,
     CHANGE_ROOM_INFO,
@@ -12,8 +12,8 @@ import {
     DATA_CHANGE_MIC,
     SET_TIME_EXIT,
     GET_LIST_DOMAIN
-}                                   from './actionTypes';
-var languagesDefault = require('./lang/vi.json');
+}                                   from "./actionTypes";
+var languagesDefault = require("./lang/vi.json");
 let d = new Date();
 let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 let timeJoin= new Date(utc + (3600000 * 7)).getTime();
@@ -38,7 +38,7 @@ let stateDefault = {
         indexLayout     : 0,
         idRoom          : 0,
         errorKey        : 0,
-        slide           : ''
+        slide           : ""
     },
     chatInfo : {
         chatVisible: false,
@@ -59,23 +59,23 @@ let stateDefault = {
     },
     timeNow: 0,
     config: {
-        DOMAIN_LMS40: '',
-        API_VCRX: '',
-        DOMAIN_VCR: '',
-        API_SOCKET: ''
+        DOMAIN_LMS40: "",
+        API_VCRX: "",
+        DOMAIN_VCR: "",
+        API_SOCKET: ""
     },
     timeJoin : timeJoin,
     timeExit: 0,
     socket: function(){}
-}
+};
 
-ReducerRegistry.register('vcrx', (state = stateDefault, action) => {
+ReducerRegistry.register("vcrx", (state = stateDefault, action) => {
     switch(action.type){
         case DATA_CHANGE_MIC:
             return {
                 ...state,
                 dataMic: action.dataMic
-            }
+            };
         case CHANGE_ROOM_INFO:
             return {
                 ...state,
@@ -90,7 +90,7 @@ ReducerRegistry.register('vcrx', (state = stateDefault, action) => {
             return{
                 ...state,
                 languages: action.languages
-            }
+            };
         case CHANGE_TABS_CHAT:
             return {
                 ...state,
@@ -101,27 +101,27 @@ ReducerRegistry.register('vcrx', (state = stateDefault, action) => {
                     toFullname: (action.toFullname ? action.toFullname : state.chatInfo.toFullname),
                     toUserId: (action.toFullname ? action.toUserId : state.chatInfo.toUserId),
                 }
-            }
+            };
         case CHANGE_CHAT_INFO:
             return {
                 ...state,
                 chatInfo: {...state.chatInfo, ...action.chatInfo}
-            }
+            };
         case CHANGE_ASSESSMENT:
             return{
                 ...state,
                 assessmentStudent: action.assessmentStudent
-            }
+            };
         case SET_TIME_NOW:
             return {
                 ...state,
                 timeNow: action.timeNow
-            }
+            };
         case SET_SOCKET:
             return {
                 ...state,
                 socket: action.socket
-            }
+            };
         case TIME_JOIN_CLASS:
             return {
                 ...state,

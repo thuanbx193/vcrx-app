@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
-import { saveLogsConnectionQuality } from '../../../actions';
+import React, { Component }             from "react";
+import { connect }                      from "react-redux";
+import { View }                         from "react-native";
+import { saveLogsConnectionQuality }    from "../../../actions";
 
 class Connection extends Component {
 
     componentDidMount() {
         this.speedTest = setInterval(() => {
             this.props.dispatch(saveLogsConnectionQuality());
-        }, 5000)
+        }, 5000);
     }
 
     componentWillUnmount() {
@@ -18,12 +18,12 @@ class Connection extends Component {
     render() {
         return (
             <View></View>
-        )
+        );
     }
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {};
 }
 
 export default connect(mapStateToProps)(Connection);
