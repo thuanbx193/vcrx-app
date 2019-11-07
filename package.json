@@ -163,13 +163,10 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "eslint react/vcrx",
+    "eslint": "eslint react/vcrx",
     "postinstall": "jetify",
     "validate": "npm ls"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "browser": {
     "jQuery-Impromptu": "jQuery-Impromptu/src/jquery-impromptu.js"
   }
