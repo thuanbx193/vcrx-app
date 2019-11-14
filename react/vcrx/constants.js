@@ -99,7 +99,7 @@ export const ROLE = {
     student     : "STUDENT",
     hv          : "HV"
 };
-export const APP_VERSION        = "5.1.1";
+export const APP_VERSION        = "5.1.2";
 
 export const LOGOUT_BY_PRESS_LOGOUT_BUTTON  = 1;
 export const LOGOUT_BY_KICKOUT              = 2;
