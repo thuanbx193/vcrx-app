@@ -103,5 +103,13 @@ export default createStyleSheet({
         flex: 10,
         backgroundColor: "rgba(255,255,255,0.6)",
         borderRadius: 5
-    }
+    },
+    cameraLogo: {
+        height: 30,
+        width: 70,
+        resizeMode: "contain",
+        right: 0,
+        top: 10,
+        position: 'absolute',
+    },
 });
