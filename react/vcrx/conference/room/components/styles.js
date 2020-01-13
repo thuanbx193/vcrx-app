@@ -105,11 +105,19 @@ export default createStyleSheet({
         borderRadius: 5
     },
     cameraLogo: {
-        height: 30,
+        height: 20,
+        width: 65,
+        resizeMode: "contain",
+    },
+    viewCameraLogo :{
+        height: 20,
         width: 70,
         resizeMode: "contain",
-        right: 0,
+        right: 5,
         top: 10,
+        borderRadius: 5,
         position: 'absolute',
-    },
+        backgroundColor: '#f5f5f53d',
+        alignItems: 'center'
+    }
 });

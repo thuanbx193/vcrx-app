@@ -18,10 +18,12 @@ const LayoutDefault = ( props ) => {
                 <Timer />
                 <View style={styles.largeVideo} >
                     <LargeVideo />
-                    <Image
-                        style={styles.cameraLogo}
-                        source={require("./../../../images/logo_native_vietnam.png")}
-                    />
+                    <View style={styles.viewCameraLogo}>
+                        <Image
+                            style={styles.cameraLogo}
+                            source={require("./../../../images/logo_native_vietnam.png")}
+                        />
+                    </View>
                 </View>
             </View>
             <View style={styles.rightApp}>
