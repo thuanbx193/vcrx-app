@@ -1,7 +1,7 @@
 import React        from "react";
 import styles       from "./styles";
 import {
-    View
+    View, Image
 }                   from "react-native";
 import { Timer }    from "../../timer";
 import { UserList } from "../../user-list";
@@ -18,6 +18,12 @@ const LayoutDefault = ( props ) => {
                 <Timer />
                 <View style={styles.largeVideo} >
                     <LargeVideo />
+                    <View style={styles.viewCameraLogo}>
+                        <Image
+                            style={styles.cameraLogo}
+                            source={require("./../../../images/logo_native_vietnam.png")}
+                        />
+                    </View>
                 </View>
             </View>
             <View style={styles.rightApp}>
